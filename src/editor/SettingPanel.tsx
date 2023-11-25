@@ -52,8 +52,6 @@ export const SettingsPanel = () => {
         {selected.isDeletable ? (
           // @ts-ignore
           <button
-            // variant="contained"
-            // color="default"
             onClick={() => {
               actions.delete(selected.id);
             }}
