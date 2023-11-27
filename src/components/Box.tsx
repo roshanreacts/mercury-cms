@@ -4,16 +4,81 @@ import { useNode } from "@craftjs/core";
 import SettingsWrapper from "@/editor/SettingsCopmposer";
 
 type BoxProps = {
-  p?: string;
-  m?: string;
-  bgColor?: string;
+  display?: string;
+  flexDirection?: string;
+  justifyContent?: string;
+  alignItems?: string;
+  flexWrap?: string;
+  gap?: string;
+  placeItems?: string;
+  backgroundColor?: string;
+  width?: string;
+  minWidth?: string;
+  maxWidth?: string;
+  height?: string;
+  minHeight?: string;
+  maxHeight?: string;
+  pl?: string;
+  pr?: string;
+  pb?: string;
+  pt?: string;
+  mr?: string;
+  mt?: string;
+  ml?: string;
+  mb?: string;
+  overflowX?: string;
+  overflowY?: string;
+  borderRadius?: number;
+  textAlign?: string;
+  position?: string;
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  zIndex?: string;
+  gridTemplateColumns?: string;
+  [x: string]: any;
   children?: React.ReactNode;
 };
 
 const StyledBox = styled.div<BoxProps>`
-  padding: ${(props: BoxProps) => props.p};
-  margin: ${(props: BoxProps) => props.m};
-  background-color: ${(props: BoxProps) => props.bgColor};
+  background: ${(props) => props.backgroundColor};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  min-width: ${(props) => props.minWidth};
+  max-width: ${(props) => props.maxWidth};
+  min-height: ${(props) => props.minHeight};
+  max-height: ${(props) => props.maxHeight};
+  text-align: ${(props) => props.textAlign};
+  padding-left: ${(props) => props.pl};
+  padding-right: ${(props) => props.pr};
+  padding-bottom: ${(props) => props.pb};
+  padding-top: ${(props) => props.pt};
+  margin-right: ${(props) => props.mr};
+  margin-top: ${(props) => props.mt};
+  margin-left: ${(props) => props.ml};
+  margin-bottom: ${(props) => props.mb};
+  overflow-x: ${(props) => props.overflowX};
+  overflow-y: ${(props) => props.overflowY};
+  border-radius: ${(props) => props.borderRadius}px;
+  position: ${(props) => props.position};
+  top: ${(props) => props.top};
+  left: ${(props) => props.left};
+  right: ${(props) => props.right};
+  bottom: ${(props) => props.bottom};
+  z-index: ${(props) => props.zIndex};
+
+  ${(props) =>
+    props.display &&
+    `display: ${props.display};
+    flex-direction: ${props.flexDirection};
+    justify-content: ${props.justifyContent};
+    align-items: ${props.alignItems};
+    flex-wrap: ${props.flexWrap};
+    gap: ${props.gap};
+    place-items: ${props.placeItems};
+    grid-template-columns: ${props.gridTemplateColumns};
+  `}
 `;
 
 const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
@@ -35,6 +100,7 @@ const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
 
     setEditable(false);
   }, [selected]);
+
   return (
     <div
       {...props}
@@ -46,35 +112,10 @@ const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
   );
 };
 
-export const BoxDefaultProps = {
+export const BoxDefaultProps: BoxProps = {
   p: "30px",
+  // Add default values for other BoxProps here
 };
-
-// export const BoxSettings = () => {
-//   const {
-//     actions: { setProp },
-//     props,
-//   } = useNode((node) => ({
-//     props: node.data.props,
-//   }));
-
-//   return (
-//     <div>
-//       <form>
-//         <fieldset
-//           id="size"
-//           onChange={(e: any) =>
-//             setProp((props: any) => (props.size = e.target.value))
-//           }
-//         >
-//           <label>Width</label>
-//           <input type="radio" value="small" name="size" />
-//           <input type="radio" value="large" name="size" />
-//         </fieldset>
-//       </form>
-//     </div>
-//   );
-// };
 
 const BoxSettings = () => {
   const {
