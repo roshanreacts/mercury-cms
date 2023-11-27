@@ -11,6 +11,7 @@ import { isEmpty } from "lodash";
 import "./models";
 import "./profiles";
 import "./hooks";
+import "../../../plugins";
 
 mercury.connect(process.env.DB_URL || "mongodb://localhost:27017/mercury");
 

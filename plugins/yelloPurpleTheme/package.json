@@ -1,0 +1,15 @@
+{
+  "name": "yelloPurplePackage",
+  "version": "1.0.0",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "exports": {
+    ".": "./index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
