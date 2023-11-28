@@ -14,7 +14,7 @@ const resolver = {
 
 export const Editor = () => {
   return (
-    <div style={{ height: "100vh", width: "95vw", overflowY: "scroll" }}>
+    <div style={{ height: "100vh", width: "97vw", overflowY: "scroll" }}>
       <CraftEditor
         enabled
         resolver={resolver}

@@ -144,7 +144,7 @@ const BoxSettings = () => {
           type: "text",
           label: "Margin",
         },
-        bgColor: {
+        backgroundColor: {
           type: "color",
           label: "Background Color",
         },
