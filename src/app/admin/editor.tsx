@@ -14,24 +14,35 @@ const resolver = {
 
 export const Editor = () => {
   return (
-    <CraftEditor
-      enabled
-      resolver={resolver}
-      indicator={{
-        success: "#2d9d78", // green
-        error: "#e34850", // red
-      }}
-    >
-      <Frame>
-        <Element is={Box} canvas p="120px">
-          <Box bgColor="white" p="50px" m="20px">
-            <Text text="Hello World!" fontSize="35px" color="red" />
-            <Button text="Click Me" />
-          </Box>
-        </Element>
-      </Frame>
-      <Toolbox />
-      <SettingsPanel />
-    </CraftEditor>
+    <div style={{ height: "95vh", width: "95vw", overflow: "hidden" }}>
+      <CraftEditor
+        enabled
+        resolver={resolver}
+        indicator={{
+          success: "#2d9d78", // green
+          error: "#e34850", // red
+        }}
+      >
+        <div style={{ display: "flex", height: "100%" }}>
+          <div style={{ width: "200px", backgroundColor: "#e8e8e8", padding: "20px" }}>
+            <Toolbox />
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+            <Frame>
+              <Element is={Box} canvas p="120px">
+                <Box backgroundColor="white" p="50px" m="20px">
+                  <Text text="Hello World!" fontSize="35px" color="red" />
+                  <Button text="Click Me" />
+                </Box>
+              </Element>
+            </Frame>
+          </div>
+          <div style={{ width: "auto", backgroundColor: "#e8e8e8", padding: "20px" }}>
+            <h4>Setting Panel</h4>
+            <SettingsPanel />
+          </div>
+        </div>
+      </CraftEditor>
+    </div>
   );
 };
