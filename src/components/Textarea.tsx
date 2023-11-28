@@ -3,34 +3,14 @@ import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
 import SettingsWrapper from "@/editor/SettingsCopmposer";
 
-type BoxProps = {
-  display?: string;
-  flexDirection?: string;
-  justifyContent?: string;
-  alignItems?: string;
-  flexWrap?: string;
-  gap?: string;
-  placeItems?: string;
+type TextAreaProps = {
   backgroundColor?: string;
   width?: string;
-  minWidth?: string;
-  maxWidth?: string;
   height?: string;
   minHeight?: string;
   maxHeight?: string;
-  pl?: string;
-  p?: string;
-  pr?: string;
-  pb?: string;
-  pt?: string;
-  mr?: string;
-  m?: string;
-  mt?: string;
-  ml?: string;
-  mb?: string;
-  overflow?: string;
-  overflowX?: string;
-  overflowY?: string;
+  padding?: string;
+  margin?: string;
   borderRadius?: number;
   border?: number;
   textAlign?: string;
@@ -40,33 +20,22 @@ type BoxProps = {
   right?: string;
   bottom?: string;
   zIndex?: string;
-  gridTemplateColumns?: string;
+  rows?: number;
+  cols?: number;
+  resize?: string;
   [x: string]: any;
   children?: React.ReactNode;
 };
 
-const StyledBox = styled.div<BoxProps>`
+const StyledTextArea = styled.textarea<TextAreaProps>`
   background: ${(props) => props.backgroundColor};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-  min-width: ${(props) => props.minWidth};
-  max-width: ${(props) => props.maxWidth};
   min-height: ${(props) => props.minHeight};
   max-height: ${(props) => props.maxHeight};
   text-align: ${(props) => props.textAlign};
-  padding: ${(props) => props.p};
-  padding-left: ${(props) => props.pl};
-  padding-right: ${(props) => props.pr};
-  padding-bottom: ${(props) => props.pb};
-  padding-top: ${(props) => props.pt};
-  margin-right: ${(props) => props.mr};
-  margin: ${(props) => props.m};
-  margin-top: ${(props) => props.mt};
-  margin-left: ${(props) => props.ml};
-  margin-bottom: ${(props) => props.mb};
-  overflow: ${(props) => props.overflow};
-  overflow-x: ${(props) => props.overflowX};
-  overflow-y: ${(props) => props.overflowY};
+  padding: ${(props) => props.padding};
+  margin: ${(props) => props.margin};
   border-radius: ${(props) => props.borderRadius}px;
   border: ${(props) => props.border}px;
   position: ${(props) => props.position};
@@ -75,6 +44,7 @@ const StyledBox = styled.div<BoxProps>`
   right: ${(props) => props.right};
   bottom: ${(props) => props.bottom};
   z-index: ${(props) => props.zIndex};
+  resize: ${(props) => props.resize};
 
   ${(props) =>
     props.display &&
@@ -89,14 +59,13 @@ const StyledBox = styled.div<BoxProps>`
   `}
 `;
 
-const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
+const TextArea: React.FC<TextAreaProps> = ({ children, ...props }: any) => {
   const {
     connectors: { connect, drag },
     selected,
     actions: { setProp },
   } = useNode((state) => ({
     selected: state.events.selected,
-    dragged: state.events.dragged,
   }));
 
   const [editable, setEditable] = useState(false);
@@ -115,17 +84,21 @@ const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
       ref={(ref: any) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
     >
-      <StyledBox {...props}>{children}</StyledBox>
+      <StyledTextArea {...props}>{children}</StyledTextArea>
     </div>
   );
 };
 
-export const BoxDefaultProps: BoxProps = {
-  p: "30px",
-  // Add default values for other BoxProps here
+export const TextAreaDefaultProps: TextAreaProps = {
+  rows: 4,
+  cols: 50,
+  padding: "10px",
+  borderRadius: 4,
+  resize: "vertical",
+  // Add default values for other TextAreaProps here
 };
 
-const BoxSettings = () => {
+const TextAreaSettings = () => {
   const {
     actions: { setProp },
     props,
@@ -136,11 +109,11 @@ const BoxSettings = () => {
   return (
     <SettingsWrapper
       settings={{
-        p: {
+        padding: {
           type: "text",
           label: "Padding",
         },
-        m: {
+        margin: {
           type: "text",
           label: "Margin",
         },
@@ -154,11 +127,11 @@ const BoxSettings = () => {
   );
 };
 
-Box.craft = {
-  props: BoxDefaultProps,
+TextArea.craft = {
+  props: TextAreaDefaultProps,
   related: {
-    settings: BoxSettings,
+    settings: TextAreaSettings,
   },
 };
 
-export default Box;
+export default TextArea;
