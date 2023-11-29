@@ -80,7 +80,7 @@ const StyledBox = styled.div<BoxProps>`
 
   ${(props) =>
     props.display &&
-      `display: ${props.display};
+    `display: ${props.display};
       flex-direction: ${props.flexDirection};
       justify-content: ${props.justifyContent};
       align-items: ${props.alignItems};
@@ -88,9 +88,12 @@ const StyledBox = styled.div<BoxProps>`
       gap: ${props.gap};
       place-items: ${props.placeItems};
       grid-template-columns: ${props.gridTemplateColumns};
-      ${props.isSelected && `border: 4px dotted red;`}
      `
   }
+  ${(props) =>
+    props.isSelected && "border: 4px dotted red;"
+  }
+
 `;
 
 const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
