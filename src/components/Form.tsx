@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
-import SettingsWrapper from "@/editor/SettingsComposer";
+import SettingsWrapper from "@/editor/SettingsCopmposer";
 
-type BoxProps = {
+type FormProps = {
   display?: string;
   flexDirection?: string;
   justifyContent?: string;
@@ -46,7 +46,7 @@ type BoxProps = {
   children?: React.ReactNode;
 };
 
-const StyledBox = styled.div<BoxProps>`
+const StyledForm = styled.form<FormProps>`
   background: ${(props) => props.backgroundColor};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -68,8 +68,8 @@ const StyledBox = styled.div<BoxProps>`
   overflow: ${(props) => props.overflow};
   overflow-x: ${(props) => props.overflowX};
   overflow-y: ${(props) => props.overflowY};
-  border-radius: ${(props) => props.borderRadius};
-  border: ${(props) => props.border};
+  border-radius: ${(props) => props.borderRadius}px;
+  border: ${(props) => props.border}px;
   position: ${(props) => props.position};
   top: ${(props) => props.top};
   left: ${(props) => props.left};
@@ -77,25 +77,21 @@ const StyledBox = styled.div<BoxProps>`
   bottom: ${(props) => props.bottom};
   z-index: ${(props) => props.zIndex};
   color: ${(props) => props.color};
-  isSelected: ${(props) => props.isSelected};
 
   ${(props) =>
-    // props.display &&
-    //   `display: ${props.display};
-    //   flex-direction: ${props.flexDirection};
-    //   justify-content: ${props.justifyContent};
-    //   align-items: ${props.alignItems};
-    //   flex-wrap: ${props.flexWrap};
-    //   gap: ${props.gap};
-    //   place-items: ${props.placeItems};
-    //   grid-template-columns: ${props.gridTemplateColumns};
-    // `
-
-    props.isSelected && `border: 4px dotted red;`
-  }
+    props.display &&
+    `display: ${props.display};
+    flex-direction: ${props.flexDirection};
+    justify-content: ${props.justifyContent};
+    align-items: ${props.alignItems};
+    flex-wrap: ${props.flexWrap};
+    gap: ${props.gap};
+    place-items: ${props.placeItems};
+    grid-template-columns: ${props.gridTemplateColumns};
+  `}
 `;
 
-const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
+const Form: React.FC<FormProps> = ({ children, ...props }: any) => {
   const {
     connectors: { connect, drag },
     selected,
@@ -109,30 +105,28 @@ const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
 
   useEffect(() => {
     if (selected) {
-      setProp((props: any) => props.isSelected = true)
       return;
     }
 
-    setProp((props: any) => props.isSelected = false)
     setEditable(false);
   }, [selected]);
 
   return (
-    <div
+    <form
       {...props}
       ref={(ref: any) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
     >
-      <StyledBox {...props}>{children}</StyledBox>
-    </div>
+      <StyledForm {...props}>{children}</StyledForm>
+    </form>
   );
 };
 
-export const BoxDefaultProps: BoxProps = {
-  isSelected: true
+export const FormDefaultProps: FormProps = {
+
 };
 
-const BoxSettings = () => {
+const FormSettings = () => {
   const {
     actions: { setProp },
     props,
@@ -318,14 +312,17 @@ const BoxSettings = () => {
   );
 };
 
-Box.craft = {
-  props: BoxDefaultProps,
+Form.craft = {
+  props: FormDefaultProps,
   related: {
-    settings: BoxSettings,
+    settings: FormSettings,
     rules: {
       canDrag: () => true,
+      canDrop: (node: any) => {
+        return node.data.displayName === "Box";
+      }
     },
   },
 };
 
-export default Box;
+export default Form;

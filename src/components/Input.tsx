@@ -13,7 +13,7 @@ type InputProps = {
   border?: string;
   borderRadius?: number;
   color?: string;
-  type?:string;
+  type?: string;
   textAlign?: string;
   placeholder?: string;
   value?: string;
@@ -145,6 +145,11 @@ Input.craft = {
   related: {
     settings: InputSettings,
   },
+  rules: {
+    canDrop: (node: any) => {
+      return node.data.displayName === "Form";
+    }
+  }
 };
 
 export default Input;
