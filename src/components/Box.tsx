@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
-import SettingsWrapper from "@/editor/SettingsCopmposer";
+import SettingsWrapper from "@/editor/SettingsComposer";
 
 type BoxProps = {
   display?: string;
@@ -68,8 +68,8 @@ const StyledBox = styled.div<BoxProps>`
   overflow: ${(props) => props.overflow};
   overflow-x: ${(props) => props.overflowX};
   overflow-y: ${(props) => props.overflowY};
-  border-radius: ${(props) => props.borderRadius}px;
-  border: ${(props) => props.border}px;
+  border-radius: ${(props) => props.borderRadius};
+  border: ${(props) => props.border};
   position: ${(props) => props.position};
   top: ${(props) => props.top};
   left: ${(props) => props.left};

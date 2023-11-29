@@ -73,7 +73,7 @@ export const Toolbox = () => {
 
       <ToolboxButton
         ref={(ref: any) =>
-          connectors.create(ref, <Text text={"Hi"} fontSize="20px" />)
+          connectors.create(ref, <Text text="Here"/>)
         }
         data-cy="toolbox-button"
       >

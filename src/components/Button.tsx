@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
-import SettingsWrapper from "@/editor/SettingsCopmposer";
+import SettingsWrapper from "@/editor/SettingsComposer";
 
 type ButtonProps = {
   text?: string;
@@ -66,7 +66,7 @@ const Button: React.FC<ButtonProps> = ({
     >
       <StyledButton
       ref={connect}
-        onClick={props.onClick && props.onClick}
+        onClick={props.onClick}
         {...props}
       >
         {props.text}

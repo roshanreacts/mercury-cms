@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
-import SettingsWrapper from "@/editor/SettingsCopmposer";
+import SettingsWrapper from "@/editor/SettingsComposer";
 
 type DropdownProps = {
   options: string[];
