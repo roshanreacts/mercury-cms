@@ -132,6 +132,11 @@ TextArea.craft = {
   related: {
     settings: TextAreaSettings,
   },
+  rules: {
+    canDrop: (node: any) => {
+      return node.data.displayName === "Form";
+    }
+  }
 };
 
 export default TextArea;

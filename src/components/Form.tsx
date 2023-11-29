@@ -318,6 +318,9 @@ Form.craft = {
     settings: FormSettings,
     rules: {
       canDrag: () => true,
+      canDrop: (node: any) => {
+        return node.data.displayName === "Box";
+      }
     },
   },
 };
