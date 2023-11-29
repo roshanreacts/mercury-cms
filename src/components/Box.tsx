@@ -77,21 +77,19 @@ const StyledBox = styled.div<BoxProps>`
   bottom: ${(props) => props.bottom};
   z-index: ${(props) => props.zIndex};
   color: ${(props) => props.color};
-  isSelected: ${(props) => props.isSelected};
 
   ${(props) =>
-    // props.display &&
-    //   `display: ${props.display};
-    //   flex-direction: ${props.flexDirection};
-    //   justify-content: ${props.justifyContent};
-    //   align-items: ${props.alignItems};
-    //   flex-wrap: ${props.flexWrap};
-    //   gap: ${props.gap};
-    //   place-items: ${props.placeItems};
-    //   grid-template-columns: ${props.gridTemplateColumns};
-    // `
-
-    props.isSelected && `border: 4px dotted red;`
+    props.display &&
+      `display: ${props.display};
+      flex-direction: ${props.flexDirection};
+      justify-content: ${props.justifyContent};
+      align-items: ${props.alignItems};
+      flex-wrap: ${props.flexWrap};
+      gap: ${props.gap};
+      place-items: ${props.placeItems};
+      grid-template-columns: ${props.gridTemplateColumns};
+      ${props.isSelected && `border: 4px dotted red;`}
+     `
   }
 `;
 
