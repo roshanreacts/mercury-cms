@@ -316,6 +316,9 @@ Box.craft = {
   props: BoxDefaultProps,
   related: {
     settings: BoxSettings,
+    rules: {
+      canDrag: () => true,
+    },
   },
 };
 
