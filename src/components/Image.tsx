@@ -63,16 +63,15 @@ const Image: React.FC<ImageProps> = ({ ...props }: any) => {
             onClick={() => selected && setEditable(true)}
         >
             <StyledImage
-                ref={connect}
                 {...props}
-                src={props.src}
-                alt={props.alt}
             />
         </div>
     );
 };
 
-export const ImageDefaultProps: ImageProps = {};
+export const ImageDefaultProps: ImageProps = {
+    src: "https://picsum.photos/200"
+};
 
 const ImageSettings = () => {
     const {

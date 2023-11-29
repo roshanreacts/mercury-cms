@@ -9,6 +9,7 @@ import List from "@/components/List";
 import Button from "@/components/Button";
 import { Toolbox } from "@/editor/Toolbox";
 import { SettingsPanel } from "@/editor/SettingPanel";
+import Image from "@/components/Image";
 
 const resolver = {
   Input,
@@ -18,6 +19,7 @@ const resolver = {
   Text,
   Button,
   Dropdown,
+  Image
 };
 
 export const Editor = () => {
@@ -27,7 +29,7 @@ export const Editor = () => {
     console.log(query.serialize())
     return <a onClick={() => console.log(query.serialize())}>Get JSON</a>
   }
-  
+
   return (
     <div style={{ height: "100vh", width: "97vw", overflowY: "scroll" }}>
       <CraftEditor
