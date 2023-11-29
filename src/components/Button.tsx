@@ -1,22 +1,44 @@
-"use client";
-import { useNode } from "@craftjs/core";
+"use client"
 import React, { useEffect, useState } from "react";
+import styled from "@emotion/styled";
+import { useNode } from "@craftjs/core";
+import SettingsWrapper from "@/editor/SettingsCopmposer";
 
-export const Button = ({
-  size,
-  variant,
-  color,
-  text,
-  onClick,
-  ...props
-}: {
-  size?: any;
-  variant?: string;
-  color?: string;
+type ButtonProps = {
   text?: string;
   onClick?: any;
-  props?: any;
-}) => {
+  padding?: string;
+  background?: string;
+  color?: string;
+  borderRadius?: string;
+  fontSize?: string;
+  fontWeight?: string;
+  border?: string;
+  cursor?: string;
+  transition?: string;
+  hoverBackground?: string;
+  [x:string]: any;
+};
+
+const StyledButton = styled.button<ButtonProps>`
+  padding: ${(props) => props?.padding || "12px"};
+  background: ${(props) => props?.background || "green"};
+  color: ${(props) => props?.color || "white"};
+  border: ${(props) => props?.border || "none"};
+  border-radius: ${(props) => props?.borderRadius || "4px"};
+  cursor: ${(props) => props?.cursor || "pointer"};
+  font-size: ${(props) => props?.fontSize || "14px"};
+  font-weight: ${(props) => props?.fontWeight || "bold"};
+  transition: ${(props) => props?.transition || "background 0.3s ease"};
+
+  &:hover {
+    background: ${(props) => props?.hoverBackground || "darkgreen"};
+  }
+`;
+
+const Button: React.FC<ButtonProps> = ({
+  ...props
+}: any) => {
   const {
     connectors: { connect, drag },
     selected,
@@ -35,68 +57,37 @@ export const Button = ({
 
     setEditable(false);
   }, [selected]);
+
   return (
     <div
       {...props}
       ref={(ref: any) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
     >
-      <CustomButton
-        ref={connect}
-        style={{ margin: "5px" }}
-        size={size}
-        onClick={onClick}
+      <StyledButton
+      ref={connect}
+        onClick={props.onClick && props.onClick}
         {...props}
       >
-        {text}
-      </CustomButton>
+        {props.text}
+      </StyledButton>
     </div>
   );
 };
 
-export const CustomButton = React.forwardRef(
-  ({
-    ref,
-    style,
-    children,
-    size,
-    onClick,
-    ...props
-  }: {
-    ref?: React.Ref<HTMLButtonElement>;
-    style?: any;
-    children?: any;
-    size?: any;
-    onClick?: any;
-  }) => {
-    return (
-      <button
-        ref={ref}
-        {...props}
-        type="button"
-        style={{
-          padding: `${
-            size === "small"
-              ? "4px"
-              : size === "medium"
-              ? "6px"
-              : size === "large"
-              ? "14px"
-              : "4px"
-          }`,
-          background: "green",
-          zIndex: "9999",
-          ...style,
-        }}
-        onClick={(e: any) => {
-          onClick && onClick();
-        }}
-      >
-        {children}
-      </button>
-    );
-  }
-);
+export const ButtonDefaultProps: ButtonProps = {
+  text: "Click me",
+  padding: "12px",
+  background: "green",
+  color: "white",
+  borderRadius: "4px",
+  fontSize: "14px",
+  fontWeight: "bold",
+  border: "none",
+  cursor: "pointer",
+  transition: "background 0.3s ease",
+  hoverBackground: "darkgreen",
+};
 
 export const ButtonSettings = () => {
   const {
@@ -107,29 +98,56 @@ export const ButtonSettings = () => {
   }));
 
   return (
-    <div>
-      <form>
-        <fieldset
-          id="size"
-          onChange={(e: any) =>
-            setProp((props: any) => (props.size = e.target.value))
-          }
-        >
-          <label>Size</label>
-          <input type="radio" value="small" name="size" />
-          <input type="radio" value="medium" name="size" />
-          <input type="radio" value="large" name="size" />
-        </fieldset>
-      </form>
-    </div>
+    <SettingsWrapper
+      settings={{
+        text: {
+          type: "text",
+          label: "Button Text",
+        },
+        padding: {
+          type: "text",
+          label: "Padding",
+        },
+        background: {
+          type: "color",
+          label: "Background Color",
+        },
+        color: {
+          type: "color",
+          label: "Text Color",
+        },
+        borderRadius: {
+          type: "text",
+          label: "Border Radius",
+        },
+        fontSize: {
+          type: "text",
+          label: "Font Size",
+        },
+        fontWeight: {
+          type: "text",
+          label: "Font Weight",
+        },
+        border: {
+          type: "text",
+          label: "Border",
+        },
+        cursor: {
+          type: "text",
+          label: "Cursor",
+        },
+        transition: {
+          type: "text",
+          label: "Transition",
+        },
+        hoverBackground: {
+          type: "color",
+          label: "Hover Background Color",
+        },
+      }}
+      setProp={setProp}
+    />
   );
-};
-
-export const ButtonDefaultProps = {
-  size: "small",
-  // variant: 'contained',
-  // color: 'primary',
-  text: "Click me",
 };
 
 Button.craft = {
@@ -138,3 +156,55 @@ Button.craft = {
     settings: ButtonSettings,
   },
 };
+
+export default Button;
+
+
+// "use client"
+// import React, { useEffect, useState } from "react";
+// import styled from "@emotion/styled";
+// import { useNode } from "@craftjs/core";
+// import SettingsWrapper from "@/editor/SettingsCopmposer";
+
+
+// export const Button = ({ text, ...props }: { text: string, props?: any }) => {
+//   const {
+//     connectors: { connect, drag },
+//     selected,
+//     actions: { setProp },
+//   } = useNode((state: any) => {
+//     return {
+//       selected: state.events.selected,
+//       dragged: state.events.dragged,
+//     };
+//   })
+
+//   const [editable, setEditable] = useState(false);
+
+//   useEffect(() => {
+//     if (selected) {
+//       return;
+//     }
+//     setEditable(false);
+
+//   }, [selected]);
+
+//   return (
+//     <div {...props}
+//     ref={(ref: any) => connect(drag(ref))}
+//     onClick={() => selected && setEditable(true)}>
+      
+//     </div>
+//   )
+
+// }
+
+// const CustomButton = 
+
+// export const ButtonDefaultProps = {
+//   text: "Default"
+// }
+
+// Button.craft = {
+//   props: ButtonDefaultProps,
+// }

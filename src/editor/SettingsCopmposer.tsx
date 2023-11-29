@@ -1,28 +1,117 @@
-import React from "react";
-import { SketchPicker } from "react-color";
+import styled from "@emotion/styled";
+import React, { useState } from "react";
+import { ChromePicker, SketchPicker } from "react-color";
 type SettingsComposerProps = {
   type: "text" | "number" | "select" | "boolean" | "color";
   onChange?: (color: any) => void;
+  options?: string[]
 };
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  margin: auto;
+`;
+
+const StyledFieldset = styled.fieldset`
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+`;
+
+const StyledLabel = styled.label`
+  font-size: 12px;
+  margin-bottom: 5px;
+`;
+
 
 const SettingsComposer: React.FC<SettingsComposerProps> = ({
   type,
+  options,
   ...props
 }) => {
+
+  const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
+  const [colorChip, setColorChip] = useState<any>({
+    r: '241',
+    g: '112',
+    b: '19',
+    a: '1',
+  });
+  const handleChange = (color: any) => {
+    setColorChip({ ...color.rgb })
+    console.log(color.rgb, "rgb");
+
+    props.onChange && props.onChange(`rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`)
+  };
+
+  const handleClick = () => {
+    setDisplayColorPicker(!displayColorPicker)
+  };
+
+  const handleClose = () => {
+    setDisplayColorPicker(false)
+  };
+
+
+
   switch (type) {
     case "text":
-      return <input type="text" {...props} />;
+      return <input type="text" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)}/>;
     case "number":
-      return <input type="number" {...props} />;
+      return <input type="number" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)}/>;
     case "select":
-      return <select>{/* Add options for the select field here */}</select>;
+      return <select onChange={(e) => props.onChange && props.onChange(e.target.value)}>
+        {options?.map((option, index) => (
+          <option key={index} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>;
     case "boolean":
-      return <input type="checkbox" {...props} />;
+      return <input type="checkbox" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)}/>;
     case "color":
+
       return (
-        <SketchPicker
-          onChange={(color) => props.onChange && props.onChange(color.hex)}
-        />
+        <>
+          <div style={{
+            padding: '5px',
+            background: '#fff',
+            borderRadius: '1px',
+            boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+            display: 'inline-block',
+            cursor: 'pointer',
+          }} onClick={handleClick}>
+            <div style={{
+              width: '36px',
+              height: '14px',
+              borderRadius: '2px',
+              background: `rgba(${colorChip.r}, ${colorChip.g}, ${colorChip.b}, ${colorChip.a})`,
+            }} />
+          </div>
+          {
+            displayColorPicker ? <div style={{
+              position: 'absolute',
+              zIndex: '2'
+            }}>
+              <div style={{
+                position: 'fixed',
+                top: '0px',
+                right: '0px',
+                bottom: '0px',
+                left: '0px',
+              }}
+                onClick={handleClose} />
+              <ChromePicker color={colorChip} onChange={handleChange} />
+            </div> : null
+          }
+        </>
+
+        // <SketchPicker
+        //   onChange={(color) => props.onChange && props.onChange(color.hex)}
+        // />
       );
     default:
       return null;
@@ -34,6 +123,7 @@ type SettingsWrapperProps = {
     [x: string]: {
       type: SettingsComposerProps["type"];
       label: string;
+      options?: string[];
     };
   };
   setProp: (cb: any, throttleRate?: number | undefined) => void;
@@ -44,24 +134,23 @@ const SettingsWrapper: React.FC<SettingsWrapperProps> = ({
   setProp,
 }: SettingsWrapperProps) => {
   return (
-    <form>
-      {Object.keys(settings).map((key) => {
-        return (
-          <fieldset
-            id="size"
-            onChange={(e: any) =>
-              setProp((props: any) => (props[key] = e.target.value))
+    <StyledForm>
+      {Object.keys(settings).map((key) => (
+        <StyledFieldset key={key}>
+          <StyledLabel>{settings[key].label}</StyledLabel>
+          <SettingsComposer
+            type={settings[key].type}
+            options={settings[key]?.options ? settings[key].options : undefined}
+            onChange={(e: any) => {
+              console.log(key, "event");
+
+              setProp((props: any) => (props[key] = e))
             }
-          >
-            <label>{key}</label>
-            <SettingsComposer
-              type={settings[key].type}
-              onChange={(e: any) => setProp((props: any) => (props[key] = e))}
-            />
-          </fieldset>
-        );
-      })}
-    </form>
+            }
+          />
+        </StyledFieldset>
+      ))}
+    </StyledForm>
   );
 };
 

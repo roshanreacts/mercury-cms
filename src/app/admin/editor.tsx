@@ -1,12 +1,12 @@
 "use client";
-import { Editor as CraftEditor, Frame, Element } from "@craftjs/core";
+import { Editor as CraftEditor, Frame, Element, useEditor } from "@craftjs/core";
 import Box from "@/components/Box";
 import Text from "@/components/Text";
 import Input from "@/components/Input";
 import Dropdown from "@/components/Dropdown";
 import TextArea from "@/components/Textarea";
 import List from "@/components/List";
-import { Button } from "@/components/Button";
+import Button from "@/components/Button";
 import { Toolbox } from "@/editor/Toolbox";
 import { SettingsPanel } from "@/editor/SettingPanel";
 
@@ -21,38 +21,45 @@ const resolver = {
 };
 
 export const Editor = () => {
+
+  const SaveButton = () => {
+    const { query } = useEditor();
+    console.log(query.serialize())
+    return <a onClick={() => console.log(query.serialize())}>Get JSON</a>
+  }
+  
   return (
     <div style={{ height: "100vh", width: "97vw", overflowY: "scroll" }}>
       <CraftEditor
         enabled
         resolver={resolver}
         indicator={{
-          success: "#2d9d78", // green
-          error: "#e34850", // red
+          success: "#2d9d78",
+          error: "#e34850",
         }}
       >
-        <div style={{ display: "flex", height: "100%" }}>
-          <div style={{ width: "200px", backgroundColor: "#e8e8e8", padding: "20px" }}>
+        <div style={{ display: "flex", height: "100%", flexWrap: "wrap" }}>
+          <div style={{ width: "auto", minWidth: "150px", backgroundColor: "#282c34", padding: "20px" }}>
             <Toolbox />
           </div>
           <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+            <button onClick={SaveButton}>Save State</button>
             <Frame>
-              <Element is={Box} canvas p="120px">
+              <Element is={Box} canvas height="100vh" width="auto" backgroundColor="#f7f7f7" overflowY="scroll">
                 <Box backgroundColor="white" p="50px" m="20px">
                   <Text text="Hello World!" fontSize="35px" color="red" />
                   <Button text="Click Me" />
-                  
-                  <Input value="text"/>
+
+                  <Input value="text" />
                 </Box>
               </Element>
             </Frame>
           </div>
-          <div style={{ width: "auto", backgroundColor: "#e8e8e8", padding: "20px" }}>
-            <h4>Setting Panel</h4>
+          <div style={{ width: "auto", minWidth: "150px", backgroundColor: "#282c34", padding: "20px" }}>
             <SettingsPanel />
           </div>
         </div>
-      </CraftEditor>
-    </div>
+      </CraftEditor >
+    </div >
   );
 };

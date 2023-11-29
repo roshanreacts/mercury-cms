@@ -41,6 +41,7 @@ type BoxProps = {
   bottom?: string;
   zIndex?: string;
   gridTemplateColumns?: string;
+  color?: string;
   [x: string]: any;
   children?: React.ReactNode;
 };
@@ -75,6 +76,7 @@ const StyledBox = styled.div<BoxProps>`
   right: ${(props) => props.right};
   bottom: ${(props) => props.bottom};
   z-index: ${(props) => props.zIndex};
+  color: ${(props) => props.color};
 
   ${(props) =>
     props.display &&
@@ -121,8 +123,7 @@ const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
 };
 
 export const BoxDefaultProps: BoxProps = {
-  p: "30px",
-  // Add default values for other BoxProps here
+
 };
 
 const BoxSettings = () => {
@@ -136,17 +137,174 @@ const BoxSettings = () => {
   return (
     <SettingsWrapper
       settings={{
+        display: {
+          type: "select",
+          label: "Display",
+          options: ["block", "inline", "flex", "grid", "inline-block", "none"],
+        },
+        flexDirection: {
+          type: "select",
+          label: "Flex Direction",
+          options: ["row", "row-reverse", "column", "column-reverse"],
+        },
+        justifyContent: {
+          type: "select",
+          label: "Justify Content",
+          options: [
+            "flex-start",
+            "flex-end",
+            "center",
+            "space-between",
+            "space-around",
+            "space-evenly",
+          ],
+        },
+        alignItems: {
+          type: "select",
+          label: "Align Items",
+          options: ["flex-start", "flex-end", "center", "baseline", "stretch"],
+        },
+        flexWrap: {
+          type: "select",
+          label: "Flex Wrap",
+          options: ["nowrap", "wrap", "wrap-reverse"],
+        },
+        gap: {
+          type: "text",
+          label: "Gap",
+        },
+        placeItems: {
+          type: "text",
+          label: "Place Items",
+        },
+        backgroundColor: {
+          type: "color",
+          label: "Background Color",
+        },
+        color: {
+          type: "color",
+          label: "Text Color",
+        },
+        width: {
+          type: "text",
+          label: "Width",
+        },
+        minWidth: {
+          type: "text",
+          label: "Min Width",
+        },
+        maxWidth: {
+          type: "text",
+          label: "Max Width",
+        },
+        height: {
+          type: "text",
+          label: "Height",
+        },
+        minHeight: {
+          type: "text",
+          label: "Min Height",
+        },
+        maxHeight: {
+          type: "text",
+          label: "Max Height",
+        },
+        pl: {
+          type: "text",
+          label: "Padding Left",
+        },
         p: {
           type: "text",
           label: "Padding",
+        },
+        pr: {
+          type: "text",
+          label: "Padding Right",
+        },
+        pb: {
+          type: "text",
+          label: "Padding Bottom",
+        },
+        pt: {
+          type: "text",
+          label: "Padding Top",
+        },
+        mr: {
+          type: "text",
+          label: "Margin Right",
         },
         m: {
           type: "text",
           label: "Margin",
         },
-        backgroundColor: {
-          type: "color",
-          label: "Background Color",
+        mt: {
+          type: "text",
+          label: "Margin Top",
+        },
+        ml: {
+          type: "text",
+          label: "Margin Left",
+        },
+        mb: {
+          type: "text",
+          label: "Margin Bottom",
+        },
+        overflow: {
+          type: "select",
+          label: "Overflow",
+          options: ["visible", "hidden", "scroll", "auto"],
+        },
+        overflowX: {
+          type: "select",
+          label: "Overflow X",
+          options: ["visible", "hidden", "scroll", "auto"],
+        },
+        overflowY: {
+          type: "select",
+          label: "Overflow Y",
+          options: ["visible", "hidden", "scroll", "auto"],
+        },
+        borderRadius: {
+          type: "text",
+          label: "Border Radius",
+        },
+        border: {
+          type: "text",
+          label: "Border",
+        },
+        textAlign: {
+          type: "select",
+          label: "Text Align",
+          options: ["left", "center", "right"],
+        },
+        position: {
+          type: "select",
+          label: "Position",
+          options: ["relative", "absolute", "fixed"],
+        },
+        top: {
+          type: "text",
+          label: "Top",
+        },
+        left: {
+          type: "text",
+          label: "Left",
+        },
+        right: {
+          type: "text",
+          label: "Right",
+        },
+        bottom: {
+          type: "text",
+          label: "Bottom",
+        },
+        zIndex: {
+          type: "text",
+          label: "Z-Index",
+        },
+        gridTemplateColumns: {
+          type: "text",
+          label: "Grid Template Columns",
         },
       }}
       setProp={setProp}
