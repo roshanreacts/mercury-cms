@@ -1,5 +1,5 @@
 "use client";
-import { Editor as CraftEditor, Frame, Element, useEditor } from "@craftjs/core";
+import { Editor as CraftEditor, Frame, Element, useEditor, useNode } from "@craftjs/core";
 import Box from "@/components/Box";
 import Text from "@/components/Text";
 import Input from "@/components/Input";
@@ -10,7 +10,7 @@ import Button from "@/components/Button";
 import { Toolbox } from "@/editor/Toolbox";
 import { SettingsPanel } from "@/editor/SettingPanel";
 import Image from "@/components/Image";
-
+import From from "@/components/Form";
 const resolver = {
   Input,
   List,
@@ -19,7 +19,8 @@ const resolver = {
   Text,
   Button,
   Dropdown,
-  Image
+  Image,
+  From
 };
 
 export const Editor = () => {
