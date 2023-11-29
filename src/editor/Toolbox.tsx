@@ -84,7 +84,7 @@ export const Toolbox = () => {
       </ToolboxButton>
       <ToolboxButton
         ref={(ref: any) =>
-          connectors.create(ref, <Element canvas is={Box} p="20px" />)
+          connectors.create(ref, <Element canvas is={Box} p="20px" backgroundColor="white" />)
         }
         data-cy="toolbox-container"
       >
