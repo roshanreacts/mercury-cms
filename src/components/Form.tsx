@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
-import SettingsWrapper from "@/editor/SettingsCopmposer";
+import SettingsWrapper from "@/editor/SettingsComposer";
 
 type FormProps = {
   display?: string;
@@ -42,6 +42,7 @@ type FormProps = {
   zIndex?: string;
   gridTemplateColumns?: string;
   color?: string;
+  isSelected?: boolean;
   [x: string]: any;
   children?: React.ReactNode;
 };
@@ -79,6 +80,10 @@ const StyledForm = styled.form<FormProps>`
   color: ${(props) => props.color};
 
   ${(props) =>
+    props.isSelected && `border: 4px dotted red;`
+  }
+
+  ${(props) =>
     props.display &&
     `display: ${props.display};
     flex-direction: ${props.flexDirection};
@@ -105,8 +110,10 @@ const Form: React.FC<FormProps> = ({ children, ...props }: any) => {
 
   useEffect(() => {
     if (selected) {
+      setProp((props: any) => props.isSelected = true);
       return;
     }
+    setProp((props: any) => props.isSelected = false);
 
     setEditable(false);
   }, [selected]);

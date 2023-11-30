@@ -44,6 +44,21 @@ const StyledText = styled.p<TextProps>`
   padding: ${(props: TextProps) => props.padding};
   cursor: ${(props: TextProps) => props.cursor};
   vertical-align: ${(props: TextProps) => props.verticalAlign};
+  isSelected: ${(props) => props.isSelected};
+  ${(props) =>
+    // props.display &&
+    //   `display: ${props.display};
+    //   flex-direction: ${props.flexDirection};
+    //   justify-content: ${props.justifyContent};
+    //   align-items: ${props.alignItems};
+    //   flex-wrap: ${props.flexWrap};
+    //   gap: ${props.gap};
+    //   place-items: ${props.placeItems};
+    //   grid-template-columns: ${props.gridTemplateColumns};
+    // `
+
+    props.isSelected && `border: 4px dotted red;`
+  }
 `;
 
 const Text: React.FC<TextProps> = ({ text, ...props }: any) => {
@@ -59,9 +74,11 @@ const Text: React.FC<TextProps> = ({ text, ...props }: any) => {
 
   useEffect(() => {
     if (selected) {
+      setProp((props: any) => props.isSelected = true)
       return;
     }
     setEditable(false);
+    setProp((props: any) => props.isSelected = false)
   }, [selected]);
 
   return (

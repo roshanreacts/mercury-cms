@@ -17,6 +17,7 @@ type InputProps = {
   textAlign?: string;
   placeholder?: string;
   value?: string;
+  isSelected?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   [x: string]: any;
 };
@@ -32,6 +33,21 @@ const StyledInput = styled.input<InputProps>`
   border-radius: ${(props) => props.borderRadius}px;
   color: ${(props) => props.color};
   text-align: ${(props) => props.textAlign};
+
+  ${(props) =>
+    // props.display &&
+    //   `display: ${props.display};
+    //   flex-direction: ${props.flexDirection};
+    //   justify-content: ${props.justifyContent};
+    //   align-items: ${props.alignItems};
+    //   flex-wrap: ${props.flexWrap};
+    //   gap: ${props.gap};
+    //   place-items: ${props.placeItems};
+    //   grid-template-columns: ${props.gridTemplateColumns};
+    // `
+
+    props.isSelected && `border: 4px dotted red;`
+  }
 `;
 
 const Input: React.FC<InputProps> = ({ onChange, ...props }: any) => {
@@ -48,8 +64,11 @@ const Input: React.FC<InputProps> = ({ onChange, ...props }: any) => {
 
   useEffect(() => {
     if (selected) {
+      setProp((props: any) => props.isSelected = true)
       return;
     }
+
+    setProp((props: any) => props.isSelected = false)
 
     setEditable(false);
   }, [selected]);
@@ -145,11 +164,11 @@ Input.craft = {
   related: {
     settings: InputSettings,
   },
-  rules: {
-    canDrop: (node: any) => {
-      return node.data.displayName === "Form";
-    }
-  }
+  // rules: {
+  //   canDrop: (node: any) => {
+  //     return node.data.displayName === "Form";
+  //   }
+  // }
 };
 
 export default Input;

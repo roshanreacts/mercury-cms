@@ -17,6 +17,7 @@ type ButtonProps = {
   cursor?: string;
   transition?: string;
   hoverBackground?: string;
+  isSelected?: boolean;
   [x:string]: any;
 };
 
@@ -30,10 +31,13 @@ const StyledButton = styled.button<ButtonProps>`
   font-size: ${(props) => props?.fontSize || "14px"};
   font-weight: ${(props) => props?.fontWeight || "bold"};
   transition: ${(props) => props?.transition || "background 0.3s ease"};
-
+  ${(props) =>
+    props.isSelected && "border: 4px dotted red;"
+  }
   &:hover {
     background: ${(props) => props?.hoverBackground || "darkgreen"};
   }
+  
 `;
 
 const Button: React.FC<ButtonProps> = ({
@@ -52,8 +56,10 @@ const Button: React.FC<ButtonProps> = ({
 
   useEffect(() => {
     if (selected) {
+      setProp((props: any) => props.isSelected = true)
       return;
     }
+    setProp((props: any) => props.isSelected = false)
 
     setEditable(false);
   }, [selected]);
