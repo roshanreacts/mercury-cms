@@ -60,8 +60,9 @@ const StyledText = styled.p<TextProps>`
     props.isSelected && `border: 4px dotted red;`
   }
 `;
-
-const Text: React.FC<TextProps> = ({ text, ...props }: any) => {
+const Text: React.FC<TextProps> = ({
+  ...props
+}: any) => {
   const {
     connectors: { connect, drag },
     selected,
@@ -70,6 +71,7 @@ const Text: React.FC<TextProps> = ({ text, ...props }: any) => {
     selected: state.events.selected,
     dragged: state.events.dragged,
   }));
+
   const [editable, setEditable] = useState(false);
 
   useEffect(() => {
@@ -77,21 +79,23 @@ const Text: React.FC<TextProps> = ({ text, ...props }: any) => {
       setProp((props: any) => props.isSelected = true)
       return;
     }
-    setEditable(false);
     setProp((props: any) => props.isSelected = false)
+
+    setEditable(false);
   }, [selected]);
 
   return (
     <div
-      ref={(ref: any) => connect(drag(ref))}
       {...props}
-      onClick={selected && setEditable(true)}
+      ref={(ref: any) => connect(drag(ref))}
+      onClick={() => selected && setEditable(true)}
     >
       <StyledText
         ref={connect}
         onClick={props.onClick}
-        {...props}>
-        {text}
+        {...props}
+      >
+        {props.text}
       </StyledText>
     </div>
   );
