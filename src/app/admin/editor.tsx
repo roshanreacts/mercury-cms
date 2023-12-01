@@ -11,6 +11,9 @@ import { Toolbox } from "@/editor/Toolbox";
 import { SettingsPanel } from "@/editor/SettingPanel";
 import Image from "@/components/Image";
 import From from "@/components/Form";
+import Anchor from "@/components/Anchor";
+
+
 const resolver = {
   Input,
   List,
@@ -20,7 +23,8 @@ const resolver = {
   Button,
   Dropdown,
   Image,
-  From
+  From,
+  Anchor
 };
 
 export const Editor = () => {

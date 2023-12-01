@@ -15,6 +15,10 @@ import Input from "@/components/Input";
 import styled from '@emotion/styled';
 import Image from "@/components/Image";
 import Form from "../components/Form";
+import { FaWpforms } from "react-icons/fa6";
+import Anchor from "@/components/Anchor";
+import { IoIosLink } from "react-icons/io";
+
 
 
 
@@ -128,7 +132,15 @@ export const Toolbox = () => {
         }
         data-cy="toolbox-container"
       >
-        <TbBoxModel2 /> Form
+        <FaWpforms /> Form
+      </ToolboxButton>
+      <ToolboxButton
+        ref={(ref: any) =>
+          connectors.create(ref, <Element canvas is={Anchor} href="#" p="20px" backgroundColor="white"/>)
+        }
+        data-cy="toolbox-container"
+      >
+        <IoIosLink /> Anchor
       </ToolboxButton>
     </ToolboxContainer>
   );

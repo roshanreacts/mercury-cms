@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
-import { ChromePicker, SketchPicker } from "react-color";
+import { ChromePicker } from "react-color";
 type SettingsComposerProps = {
   type: "text" | "number" | "select" | "boolean" | "color" | "textarea";
   onChange?: (color: any) => void;

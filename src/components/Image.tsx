@@ -17,6 +17,7 @@ type ImageProps = {
     right?: string;
     bottom?: string;
     zIndex?: string;
+    isSelected?: boolean;
     [x: string]: any;
 };
 
@@ -34,6 +35,9 @@ const StyledImage = styled.img<ImageProps>`
   right: ${(props) => props.right};
   bottom: ${(props) => props.bottom};
   z-index: ${(props) => props.zIndex};
+  ${(props) =>
+    props.isSelected && "border: 4px dotted red;"
+  }
 `;
 
 const Image: React.FC<ImageProps> = ({ ...props }: any) => {
@@ -50,8 +54,10 @@ const Image: React.FC<ImageProps> = ({ ...props }: any) => {
 
     useEffect(() => {
         if (selected) {
+            setProp((props: any) => props.isSelected = true)
             return;
         }
+        setProp((props: any) => props.isSelected = false)
 
         setEditable(false);
     }, [selected]);
@@ -70,7 +76,8 @@ const Image: React.FC<ImageProps> = ({ ...props }: any) => {
 };
 
 export const ImageDefaultProps: ImageProps = {
-    src: "https://picsum.photos/200"
+    src: "https://picsum.photos/200",
+    isSelected: true,
 };
 
 const ImageSettings = () => {
