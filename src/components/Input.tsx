@@ -108,6 +108,7 @@ const InputSettings = () => {
 
   return (
     <SettingsWrapper
+      defaultValues={props}
       settings={{
         width: {
           type: "text",

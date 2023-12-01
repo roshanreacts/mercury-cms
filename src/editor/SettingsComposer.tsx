@@ -4,11 +4,12 @@ import { ChromePicker, SketchPicker } from "react-color";
 type SettingsComposerProps = {
   type: "text" | "number" | "select" | "boolean" | "color" | "textarea";
   onChange?: (color: any) => void;
-  options?: string[]
+  options?: string[],
+  defaultValues?: any
 };
 
 
-function convertCssStringToMap(cssString: string): string[] {
+function convertCssStringToMap(cssString: string): any{
 
   const lines = cssString.split('\n');
 
@@ -49,6 +50,7 @@ const StyledLabel = styled.label`
 const SettingsComposer: React.FC<SettingsComposerProps> = ({
   type,
   options,
+  defaultValues,
   ...props
 }) => {
 
@@ -61,7 +63,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
   });
   const handleChange = (color: any) => {
     setColorChip({ ...color.rgb })
-    console.log(color.rgb, "rgb");
+    // console.log(color.rgb, "rgb");
 
     props.onChange && props.onChange(`rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`)
   };
@@ -78,11 +80,11 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
 
   switch (type) {
     case "text":
-      return <input type="text" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)} />;
+      return <input type="text" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)} value={defaultValues} />;
     case "number":
-      return <input type="number" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)} />;
+      return <input type="number" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)} value={defaultValues} />;
     case "select":
-      return <select onChange={(e) => props.onChange && props.onChange(e.target.value)}>
+      return <select onChange={(e) => props.onChange && props.onChange(e.target.value)} value={defaultValues}>
         {options?.map((option, index) => (
           <option key={index} value={option}>
             {option}
@@ -90,9 +92,9 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
         ))}
       </select>;
     case "boolean":
-      return <input type="checkbox" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)} />;
+      return <input type="checkbox" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)} value={defaultValues} />;
     case "textarea":
-      return <textarea {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)} rows={3} />;
+      return <textarea {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)} value={defaultValues} rows={3} />;
     case "color":
       return (
         <>
@@ -143,11 +145,13 @@ type SettingsWrapperProps = {
     };
   };
   setProp: (cb: any, throttleRate?: number | undefined) => void;
+  defaultValues: any;
 };
 
 const SettingsWrapper: React.FC<SettingsWrapperProps> = ({
   settings,
   setProp,
+  defaultValues
 }: SettingsWrapperProps) => {
   return (
     <StyledForm>
@@ -157,6 +161,7 @@ const SettingsWrapper: React.FC<SettingsWrapperProps> = ({
           <SettingsComposer
             type={settings[key].type}
             options={settings[key]?.options ? settings[key].options : undefined}
+            defaultValues={defaultValues[key]}
             onChange={(e: any) => {
 
               if (settings[key].type === "textarea") {

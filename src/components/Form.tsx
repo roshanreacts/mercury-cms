@@ -143,6 +143,7 @@ const FormSettings = () => {
 
   return (
     <SettingsWrapper
+      defaultValues={props}
       settings={{
         display: {
           type: "select",

@@ -111,6 +111,7 @@ export const TextSettings = () => {
 
   return (
     <SettingsWrapper
+      defaultValues={props}
       settings={{
         text: {
           type: "text",
