@@ -23,6 +23,7 @@ type TextProps = {
   padding?: string;
   cursor?: string;
   verticalAlign?: string;
+  fontFamily?: string;
   [x: string]: any;
 }
 
@@ -45,24 +46,19 @@ const StyledText = styled.p<TextProps>`
   cursor: ${(props: TextProps) => props.cursor};
   vertical-align: ${(props: TextProps) => props.verticalAlign};
   isSelected: ${(props) => props.isSelected};
+  font-family: ${(props) => props.fontFamily};
   ${(props) =>
-    // props.display &&
-    //   `display: ${props.display};
-    //   flex-direction: ${props.flexDirection};
-    //   justify-content: ${props.justifyContent};
-    //   align-items: ${props.alignItems};
-    //   flex-wrap: ${props.flexWrap};
-    //   gap: ${props.gap};
-    //   place-items: ${props.placeItems};
-    //   grid-template-columns: ${props.gridTemplateColumns};
-    // `
-
     props.isSelected && `border: 4px dotted red;`
   }
 `;
 const Text: React.FC<TextProps> = ({
   ...props
 }: any) => {
+
+  useEffect(() => {
+    console.log(props);
+    
+  }, [props])
   const {
     connectors: { connect, drag },
     selected,
@@ -119,6 +115,10 @@ export const TextSettings = () => {
         text: {
           type: "text",
           label: "Text",
+        },
+        fontFamily: {
+          type: "text",
+          label: "Font Family",
         },
         color: {
           type: "color",
@@ -201,6 +201,10 @@ export const TextSettings = () => {
           type: "text",
           label: "Vertical Align",
         },
+        customCss: {
+          type: "textarea",
+          label: "Custom CSS"
+        }
       }}
       setProp={setProp}
     />

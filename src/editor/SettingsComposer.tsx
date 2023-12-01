@@ -2,10 +2,29 @@ import styled from "@emotion/styled";
 import React, { useState } from "react";
 import { ChromePicker, SketchPicker } from "react-color";
 type SettingsComposerProps = {
-  type: "text" | "number" | "select" | "boolean" | "color";
+  type: "text" | "number" | "select" | "boolean" | "color" | "textarea";
   onChange?: (color: any) => void;
   options?: string[]
 };
+
+
+function convertCssStringToMap(cssString: string): string[] {
+
+  const lines = cssString.split('\n');
+
+  const nonEmptyLines = lines.map((line) => line.trim()).filter((line) => line !== '');
+
+  const linesWithoutSemicolons = nonEmptyLines.map((line) => line.replace(/;$/, ''));
+
+  const cssMap: Record<string, string> = {};
+  linesWithoutSemicolons.forEach((line) => {
+    const [property, value] = line.split(':').map((part) => part.trim());
+    cssMap[property] = value;
+  });
+
+  return cssMap;
+}
+
 
 const StyledForm = styled.form`
   display: flex;
@@ -59,9 +78,9 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
 
   switch (type) {
     case "text":
-      return <input type="text" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)}/>;
+      return <input type="text" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)} />;
     case "number":
-      return <input type="number" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)}/>;
+      return <input type="number" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)} />;
     case "select":
       return <select onChange={(e) => props.onChange && props.onChange(e.target.value)}>
         {options?.map((option, index) => (
@@ -71,9 +90,10 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
         ))}
       </select>;
     case "boolean":
-      return <input type="checkbox" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)}/>;
+      return <input type="checkbox" {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)} />;
+    case "textarea":
+      return <textarea {...props} onChange={(e) => props.onChange && props.onChange(e.target.value)} rows={3} />;
     case "color":
-
       return (
         <>
           <div style={{
@@ -108,10 +128,6 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
             </div> : null
           }
         </>
-
-        // <SketchPicker
-        //   onChange={(color) => props.onChange && props.onChange(color.hex)}
-        // />
       );
     default:
       return null;
@@ -142,9 +158,17 @@ const SettingsWrapper: React.FC<SettingsWrapperProps> = ({
             type={settings[key].type}
             options={settings[key]?.options ? settings[key].options : undefined}
             onChange={(e: any) => {
-              console.log(key, "event");
 
-              setProp((props: any) => (props[key] = e))
+              if (settings[key].type === "textarea") {
+                const cssmap = convertCssStringToMap(e);
+                Object.keys(cssmap).map((csskey: any) => {
+                  console.log(csskey, "dsfd", cssmap[csskey]);
+
+                  setProp((props: any) => (props[csskey] = cssmap[csskey]))
+                })
+              }
+              else
+                setProp((props: any) => (props[key] = e))
             }
             }
           />
