@@ -83,6 +83,7 @@ const ImageSettings = () => {
 
     return (
         <SettingsWrapper
+            defaultValues={props}
             settings={{
                 src: {
                     type: "text",

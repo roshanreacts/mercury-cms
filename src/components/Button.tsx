@@ -18,7 +18,7 @@ type ButtonProps = {
   transition?: string;
   hoverBackground?: string;
   isSelected?: boolean;
-  [x:string]: any;
+  [x: string]: any;
 };
 
 const StyledButton = styled.button<ButtonProps>`
@@ -71,7 +71,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={() => selected && setEditable(true)}
     >
       <StyledButton
-      ref={connect}
+        ref={connect}
         onClick={props.onClick}
         {...props}
       >
@@ -105,6 +105,7 @@ export const ButtonSettings = () => {
 
   return (
     <SettingsWrapper
+      defaultValues={props}
       settings={{
         text: {
           type: "text",
@@ -164,53 +165,3 @@ Button.craft = {
 };
 
 export default Button;
-
-
-// "use client"
-// import React, { useEffect, useState } from "react";
-// import styled from "@emotion/styled";
-// import { useNode } from "@craftjs/core";
-// import SettingsWrapper from "@/editor/SettingsCopmposer";
-
-
-// export const Button = ({ text, ...props }: { text: string, props?: any }) => {
-//   const {
-//     connectors: { connect, drag },
-//     selected,
-//     actions: { setProp },
-//   } = useNode((state: any) => {
-//     return {
-//       selected: state.events.selected,
-//       dragged: state.events.dragged,
-//     };
-//   })
-
-//   const [editable, setEditable] = useState(false);
-
-//   useEffect(() => {
-//     if (selected) {
-//       return;
-//     }
-//     setEditable(false);
-
-//   }, [selected]);
-
-//   return (
-//     <div {...props}
-//     ref={(ref: any) => connect(drag(ref))}
-//     onClick={() => selected && setEditable(true)}>
-      
-//     </div>
-//   )
-
-// }
-
-// const CustomButton = 
-
-// export const ButtonDefaultProps = {
-//   text: "Default"
-// }
-
-// Button.craft = {
-//   props: ButtonDefaultProps,
-// }

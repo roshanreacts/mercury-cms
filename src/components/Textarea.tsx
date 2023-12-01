@@ -108,6 +108,7 @@ const TextAreaSettings = () => {
 
   return (
     <SettingsWrapper
+      defaultValues={props}
       settings={{
         padding: {
           type: "text",

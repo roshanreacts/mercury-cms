@@ -90,7 +90,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 export const DropdownDefaultProps: DropdownProps = {
   options: [],
   selectedOption: "",
-  onSelect: () => {},
+  onSelect: () => { },
   width: "200px",
   backgroundColor: "#fff",
   color: "#000",
@@ -112,6 +112,7 @@ const DropdownSettings = () => {
 
   return (
     <SettingsWrapper
+      defaultValues={props}
       settings={{
         width: {
           type: "text",

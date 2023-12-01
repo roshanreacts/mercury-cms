@@ -143,6 +143,7 @@ const BoxSettings = () => {
 
   return (
     <SettingsWrapper
+      defaultValues={props}
       settings={{
         display: {
           type: "select",
