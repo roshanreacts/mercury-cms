@@ -20,6 +20,9 @@ function convertCssStringToMap(cssString: string): any{
   const cssMap: Record<string, string> = {};
   linesWithoutSemicolons.forEach((line) => {
     const [property, value] = line.split(':').map((part) => part.trim());
+    if(!value){
+      return;
+    }
     cssMap[property] = value;
   });
 
@@ -167,8 +170,6 @@ const SettingsWrapper: React.FC<SettingsWrapperProps> = ({
               if (settings[key].type === "textarea") {
                 const cssmap = convertCssStringToMap(e);
                 Object.keys(cssmap).map((csskey: any) => {
-                  console.log(csskey, "dsfd", cssmap[csskey]);
-
                   setProp((props: any) => (props[csskey] = cssmap[csskey]))
                 })
               }

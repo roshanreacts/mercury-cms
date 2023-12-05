@@ -24,6 +24,7 @@ type TextProps = {
   cursor?: string;
   verticalAlign?: string;
   fontFamily?: string;
+  // customCss?: Record<any, any>;
   [x: string]: any;
 }
 
@@ -47,6 +48,9 @@ const StyledText = styled.p<TextProps>`
   vertical-align: ${(props: TextProps) => props.verticalAlign};
   isSelected: ${(props) => props.isSelected};
   font-family: ${(props) => props.fontFamily};
+  
+
+
   ${(props) =>
     props.isSelected && `border: 4px dotted red;`
   }
@@ -54,6 +58,10 @@ const StyledText = styled.p<TextProps>`
 const Text: React.FC<TextProps> = ({
   ...props
 }: any) => {
+
+  // ${(props) =>
+  //   props.customCss && Object.keys(props.customCss).map(cssKey => `${cssKey}:${props.customCss && props.customCss[cssKey]};`)
+  // }
 
   useEffect(() => {
     console.log(props);
