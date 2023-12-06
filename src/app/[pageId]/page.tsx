@@ -1,10 +1,10 @@
-import PageForm from '@/components/PageForm'
+import PageContainer from '@/containers/PageContainer'
 import React from 'react'
 
 const page = () => {
     return (
         <div>
-            <PageForm />
+            <PageContainer />
         </div>
     )
 }
