@@ -35,7 +35,7 @@ const StyledButton = styled.button`
   border: none;
   cursor: pointer;
   border-radius: 4px;
-  color: ${(props: any) => (props.type === "warning" ? "#fff" : "#000")};
+  color: ${(props: any) => (props.type === "warning" ? "#fff" : "#fff")};
   background-color: ${(props: any) => {
     switch (props.type) {
       case "warning":
@@ -154,7 +154,7 @@ const CustomFiEdit = styled(FiEdit)`
                   {` ${para}  ${action}?`}
                 </p>
                 <CustomButton onClick={toggleModal} type={type}>No, cancel</CustomButton>
-                <CustomButton style={{ backgroundColor: 'blue' }} type={type} onClick={handleConfirm}>
+                <CustomButton style={{ backgroundColor: 'blue',color:'white' }} type={type} onClick={handleConfirm}>
                   Yes, I'm sure
                 </CustomButton>
 
