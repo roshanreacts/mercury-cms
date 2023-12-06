@@ -5,16 +5,15 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useRouter } from "next/navigation";
 // import { formatDate } from "@/utils/methods";
 import styled from "@emotion/styled";
+import ConfirmActionButton from "../ConfirmActionButton";
 
 // Styled components for each section
 
 const StyledPageForm = styled.div`
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
 `;
 
 const StyledFormContainer = styled.div`
@@ -26,7 +25,6 @@ const StyledFormContainer = styled.div`
   border-radius: 1.5rem;
   margin-top: 2rem;
   width: 65%;
- 
 `;
 
 const StyledHeader = styled.div`
@@ -56,7 +54,7 @@ const StyledHeader = styled.div`
 
   .action-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: rows;
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 0.8rem;
@@ -181,11 +179,21 @@ const PageForm = ({
           <StyledHeader>
             <div className="action-container">
               <div className="button-container">
-                {/* Your DeleteConfirmPopup component here */}
+                <ConfirmActionButton
+                  action="Delete"
+                  para="Are you sure you want to"
+                  // onConfirm={handleConfirmAction}
+                  type="warning"
+                />
               </div>
               {!edit && (
                 <div className="button-container">
-                  {/* Your ConfirmActionButton component here */}
+                  <ConfirmActionButton
+                    action="Update"
+                    para="Are you sure you want to"
+                    // onConfirm={handleConfirmAction}
+                    type="info"
+                  />
                 </div>
               )}
             </div>
@@ -316,11 +324,7 @@ const PageForm = ({
                 </StyledFieldContainer>
                 <StyledFieldContainer>
                   <label htmlFor="status">Status</label>
-                  <Field
-                    as="select"
-                    name="status"
-                    disabled={!(add || edit)}
-                  >
+                  <Field as="select" name="status" disabled={!(add || edit)}>
                     <option value="Draft">Draft</option>
                     <option value="Active">Active</option>
                   </Field>
