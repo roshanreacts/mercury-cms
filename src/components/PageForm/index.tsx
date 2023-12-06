@@ -221,17 +221,17 @@ const PageForm = ({
           onSubmit={onSubmit}
           //   innerRef={formikRef}
         >
-          {({ touched, errors }) => (
+          {({ touched, errors }:any) => (
             <StyledForm>
               <StyledButtonContainer>
                 {add ? (
                   <button type="submit">
-                    {loading ? <Loader size="small" type="info" /> : "Create"}
+                    {loading ? 'wait' : "Create"}
                   </button>
                 ) : (
                   edit && (
                     <button type="submit">
-                      {loading ? <Loader size="small" type="info" /> : "Update"}
+                      {loading ? 'wait' : "Update"}
                     </button>
                   )
                 )}
