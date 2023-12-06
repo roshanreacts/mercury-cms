@@ -9,12 +9,12 @@ import styled from "@emotion/styled";
 // Styled components for each section
 
 const StyledPageForm = styled.div`
-  margin: 2rem 1.6rem;
+  margin: 0 1.6rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem 2.5rem;
+  padding: 0 2.5rem;
   
 `;
 
@@ -152,7 +152,7 @@ const PageForm = ({
   validationSchema,
   onSubmit,
   add,
-  edit=true,
+  edit,
   pageId,
   loading,
   handleDelete,

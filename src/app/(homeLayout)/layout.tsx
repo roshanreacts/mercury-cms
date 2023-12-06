@@ -33,7 +33,11 @@ export default function layout({
             <SideBar />
           </div>
           <div style={{
-            flex: 1
+            flex: 1,
+            backgroundColor: "#F2F2F2",
+            maxWidth: "100%",
+            height: "100%",
+            padding: "40px",
           }}>
             {children}
           </div>

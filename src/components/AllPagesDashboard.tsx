@@ -40,7 +40,7 @@ const Td = styled.td`
 `;
 
 const EditButton = styled.button`
-  background-color: #4caf50;
+  background-color: #007bea;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -60,6 +60,8 @@ const dummyData = [
     { id: "page4", Name: 'Title 4', Slug: 'slug-4', MetaTitle: 'Meta Title 4', MetaDescription: 'Meta Desc 4', Path: '/path-4', Status: 'Inactive', Version: '2.1', CreatedOn: '2023-04-01', UpdatedOn: '2023-04-02' },
     { id: "page5", Name: 'Title 5', Slug: 'slug-5', MetaTitle: 'Meta Title 5', MetaDescription: 'Meta Desc 5', Path: '/path-5', Status: 'Active', Version: '1.2', CreatedOn: '2023-05-01', UpdatedOn: '2023-05-02' },
 ];
+
+
 const AllPagesDashboard = () => {
     return (
         <MainDiv>

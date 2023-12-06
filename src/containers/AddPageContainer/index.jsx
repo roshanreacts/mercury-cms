@@ -1,4 +1,6 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
+import * as Yup from 'yup';
 import PageForm from '@/components/PageForm'
 import { useParams } from 'next/navigation';
 
@@ -22,6 +24,7 @@ const AddPageContainer = () => {
         pageName: Yup.string().required("Page Name is required"),
         pageComponents: Yup.string().required("Page Components are required"),
         metaDescription: Yup.string().required("Meta Description is required"),
+        metaTitle: Yup.string().required("Meta Title is required"),
         pagePath: Yup.string().required("Page Path is required"),
         version: Yup.string()
             .required("Version is required")
@@ -37,10 +40,11 @@ const AddPageContainer = () => {
                 add={true}
                 edit={true}
                 pageId={pageId}
-                onSubmit={onSubmit}
+                // onSubmit={onSubmit}
                 // loading={updatePageResponse.loading}
-                handleDelete={handleDelete}
-                timeStamp={timeStamp} />
+                // handleDelete={handleDelete}
+                // timeStamp={timeStamp}
+                 />
         </div>
     )
 }

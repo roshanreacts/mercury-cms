@@ -24,9 +24,9 @@ const Navbar = () => {
   return (
     <MainDiv>
       <Image
-        src="https://res.cloudinary.com/dagmm478n/image/upload/v1696575035/vithi/aucff76kntvla4dwbbbi.png"
+        src="https://res.cloudinary.com/dagmm478n/image/upload/v1701852568/mercury-cms/mercury-logo_eyfwy6.png"
         alt="logo"
-        width={80}
+        width={170}
         height={40}
       />
       <ProfileDiv >
