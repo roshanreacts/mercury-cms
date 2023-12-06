@@ -9,24 +9,23 @@ import styled from "@emotion/styled";
 // Styled components for each section
 
 const StyledPageForm = styled.div`
-  margin: 0 1.6rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 2.5rem;
   
 `;
 
 const StyledFormContainer = styled.div`
   position: relative;
-  padding: 1rem 2.5rem;
+  padding: 1.5rem 2.5rem;
   background-color: white;
   margin: 0.8rem 0;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 1.5rem;
   margin-top: 2rem;
-  width: 50%;
+  width: 65%;
  
 `;
 
