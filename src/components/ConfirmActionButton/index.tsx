@@ -14,6 +14,7 @@ const CustomButton = styled.button`
   cursor: pointer;
   border: none;
   outline: none;
+  margin: 2rem 0.5rem
   transition: background-color 0.3s ease-in-out, box-shadow 0.2s ease-in-out;
   &:hover {
     background-color: #c53030; /* Darker shade of red for hover */
@@ -79,7 +80,7 @@ const ModalContainer = styled.div`
 
 const ModalContent = styled.div`
   position: relative;
-  padding: 3rem;
+  padding: 5rem;
   width: 100%;
   max-width: 28rem;
   height: 100%;
@@ -88,7 +89,7 @@ const ModalContent = styled.div`
 
 const ModalBox = styled.div`
   position: relative;
-  padding: 3rem;
+  padding: 2rem;
   text-align: center;
   background-color: white;
   border-radius: 0.375rem;
@@ -107,14 +108,25 @@ const ConfirmActionButton = ({ action, para, onConfirm, type }: any) => {
     onConfirm();
   };
 
+  const CustomMdAutoDelete = styled(MdAutoDelete)`
+  color: black;
+  width: 2.5rem;
+  height: 2.5rem;
+`;
+
+const CustomFiEdit = styled(FiEdit)`
+  color: black;
+  width: 2.5rem;
+  height: 2.5rem;
+`;
   const getIcon = () => {
     switch (type) {
       case "warning":
-        return <MdAutoDelete className="text-white w-10 h-10" />;
+        return <CustomMdAutoDelete/>;
       case "success":
         return <span>Custom Success Icon</span>; // Add your custom success icon here
       case "info":
-        return <FiEdit className="text-white" />;
+        return <CustomFiEdit/>;
       default:
         return null;
     }
