@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { RiFileAddLine } from "react-icons/ri";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useRouter } from "next/navigation";
@@ -158,11 +158,9 @@ const PageForm = ({
   const formikRef = useRef();
   const router = useRouter();
 
-  const handleUpdate = () => {
-    console.log("update clicked");
-    router.push("?edit=true");
-  };
-
+  const handleConfirmAction = () => {
+    router.push('?edit=true');
+  }
   return (
     <StyledPageForm>
       <StyledFormContainer>
@@ -182,7 +180,7 @@ const PageForm = ({
                 <ConfirmActionButton
                   action="Delete"
                   para="Are you sure you want to"
-                  // onConfirm={handleConfirmAction}
+                  onConfirm={handleConfirmAction}
                   type="warning"
                 />
               </div>
@@ -191,7 +189,7 @@ const PageForm = ({
                   <ConfirmActionButton
                     action="Update"
                     para="Are you sure you want to"
-                    // onConfirm={handleConfirmAction}
+                    onConfirm={handleConfirmAction}
                     type="info"
                   />
                 </div>
@@ -219,19 +217,19 @@ const PageForm = ({
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={onSubmit}
-          //   innerRef={formikRef}
+        //   innerRef={formikRef}
         >
           {({ touched, errors }) => (
             <StyledForm>
               <StyledButtonContainer>
                 {add ? (
                   <button type="submit">
-                    {loading ? <Loader size="small" type="info" /> : "Create"}
+                    {loading ? "Wait..." : "Create"}
                   </button>
                 ) : (
                   edit && (
                     <button type="submit">
-                      {loading ? <Loader size="small" type="info" /> : "Update"}
+                      {loading ? "Wait..." : "Update"}
                     </button>
                   )
                 )}
