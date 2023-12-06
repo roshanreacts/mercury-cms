@@ -219,7 +219,7 @@ const PageForm = ({
           onSubmit={onSubmit}
         //   innerRef={formikRef}
         >
-          {({ touched, errors }) => (
+          {({ touched, errors }:any) => (
             <StyledForm>
               <StyledButtonContainer>
                 {add ? (

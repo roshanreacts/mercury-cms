@@ -3,6 +3,30 @@ import { FiEdit } from "react-icons/fi";
 import { MdAutoDelete } from "react-icons/md";
 import styled from "@emotion/styled";
 
+const CustomButton = styled.button`
+  padding: 0.5rem 1rem;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #fff;
+  background-color: #dc2626; /* Red color, you can adjust this */
+  border-radius: 0.375rem;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.2s ease-in-out;
+  &:hover {
+    background-color: #c53030; /* Darker shade of red for hover */
+  }
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(209, 213, 219, 0.5); /* Adjust the focus color as needed */
+  }
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+`;
+
 const StyledButton = styled.button`
   padding: 8px 16px;
   font-size: 14px;
@@ -43,7 +67,7 @@ const ModalContainer = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   position: fixed;
-  top: 40%;
+  top: 30%;
   right: 0;
   left: 0;
   z-index: 50;
@@ -55,7 +79,7 @@ const ModalContainer = styled.div`
 
 const ModalContent = styled.div`
   position: relative;
-  padding: 1rem;
+  padding: 3rem;
   width: 100%;
   max-width: 28rem;
   height: 100%;
@@ -64,7 +88,7 @@ const ModalContent = styled.div`
 
 const ModalBox = styled.div`
   position: relative;
-  padding: 1rem;
+  padding: 3rem;
   text-align: center;
   background-color: white;
   border-radius: 0.375rem;
@@ -86,7 +110,7 @@ const ConfirmActionButton = ({ action, para, onConfirm, type }: any) => {
   const getIcon = () => {
     switch (type) {
       case "warning":
-        return <MdAutoDelete className="text-white" />;
+        return <MdAutoDelete className="text-white w-10 h-10" />;
       case "success":
         return <span>Custom Success Icon</span>; // Add your custom success icon here
       case "info":
@@ -118,12 +142,11 @@ const ConfirmActionButton = ({ action, para, onConfirm, type }: any) => {
                 <p>
                   {` ${para}  ${action}?`}
                 </p>
-                <div>
-                  <button onClick={toggleModal}>No, cancel</button>
-                  <button type="submit" onClick={handleConfirm}>
+                  <CustomButton onClick={toggleModal}>No, cancel</CustomButton>
+                  <CustomButton style={{backgroundColor:'blue'}} type="submit" onClick={handleConfirm}>
                     Yes, I'm sure
-                  </button>
-                </div>
+                  </CustomButton>
+               
               </ModalBox>
             </ModalContent>
           </ModalContainer>
