@@ -91,7 +91,7 @@ const StyledButtonContainer = styled.div`
     background-color: #2d3748;
     color: white;
     padding: 0.5rem 1rem;
-    border-radius: 0.9rem;
+    border-radius: 0.5rem;
     border: none;
     cursor: pointer;
     font-size: 1rem;
@@ -107,7 +107,7 @@ const StyledButtonContainer = styled.div`
 const StyledGridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4rem;
+  gap: 3rem;
 `;
 
 const StyledFieldContainer = styled.div`
@@ -128,7 +128,7 @@ const StyledFieldContainer = styled.div`
     width: 100%;
     padding: 0.5rem;
     border: 1px solid #cbd5e0;
-    border-radius: 0.8rem;
+    border-radius: 0.3rem;
     font-size: 1rem;
     color: #4a5568;
 
