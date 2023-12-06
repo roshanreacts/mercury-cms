@@ -34,8 +34,8 @@ const StyledButton = styled.button`
   border: none;
   cursor: pointer;
   border-radius: 4px;
-  color: ${(props) => (props.type === "warning" ? "#fff" : "#000")};
-  background-color: ${(props) => {
+  color: ${(props: any) => (props.type === "warning" ? "#fff" : "#000")};
+  background-color: ${(props: any) => {
     switch (props.type) {
       case "warning":
         return "red";
@@ -48,18 +48,18 @@ const StyledButton = styled.button`
     }
   }};
   &:hover {
-    background-color: ${(props) => {
-      switch (props.type) {
-        case "warning":
-          return "#ff4444";
-        case "success":
-          return "#4caf50";
-        case "info":
-          return "#2196f3";
-        default:
-          return "#ff4444";
-      }
-    }};
+    background-color: ${(props: any) => {
+    switch (props.type) {
+      case "warning":
+        return "#ff4444";
+      case "success":
+        return "#4caf50";
+      case "info":
+        return "#2196f3";
+      default:
+        return "#ff4444";
+    }
+  }};
   }
 `;
 
@@ -127,7 +127,6 @@ const ConfirmActionButton = ({ action, para, onConfirm, type }: any) => {
           <StyledButton
             id="deleteButton"
             onClick={toggleModal}
-            type="button"
             type={type}
           >
             {action}
@@ -142,11 +141,11 @@ const ConfirmActionButton = ({ action, para, onConfirm, type }: any) => {
                 <p>
                   {` ${para}  ${action}?`}
                 </p>
-                  <CustomButton onClick={toggleModal}>No, cancel</CustomButton>
-                  <CustomButton style={{backgroundColor:'blue'}} type="submit" onClick={handleConfirm}>
-                    Yes, I'm sure
-                  </CustomButton>
-               
+                <CustomButton onClick={toggleModal} type={type}>No, cancel</CustomButton>
+                <CustomButton style={{ backgroundColor: 'blue' }} type={type} onClick={handleConfirm}>
+                  Yes, I'm sure
+                </CustomButton>
+
               </ModalBox>
             </ModalContent>
           </ModalContainer>
