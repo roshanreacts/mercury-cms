@@ -1,6 +1,9 @@
-import React from 'react'
+'use client'
+import React,{useState} from 'react'
 import PageForm from '@/components/PageForm'
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
+import * as Yup from 'yup';
+
 let edit = false;
 
 const PageContainer = () => {
@@ -39,10 +42,11 @@ const PageContainer = () => {
                 add={false}
                 edit={edit}
                 pageId={pageId}
-                onSubmit={onSubmit}
+                // onSubmit={onSubmit}
                 // loading={updatePageResponse.loading}
-                handleDelete={handleDelete}
-                timeStamp={timeStamp} />
+                // handleDelete={handleDelete}
+                // timeStamp={timeStamp} 
+                />
         </div>
     )
 }

@@ -13,26 +13,32 @@ const StyledPageForm = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding: 1rem 2.5rem;
+  
 `;
 
 const StyledFormContainer = styled.div`
   position: relative;
-  padding: 1.6rem 2.5rem;
+  padding: 1rem 2.5rem;
   background-color: white;
   margin: 0.8rem 0;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 1.5rem;
+  margin-top: 2rem;
+  width: 50%;
+ 
 `;
 
 const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-top: 0.5rem;
 
   .icon-container {
-    height: 2.8rem;
-    width: 2.8rem;
-    background-color: #2d3748;
+    height: 3.8rem;
+    width: 3.8rem;
+    background-color: #007bea;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -45,7 +51,7 @@ const StyledHeader = styled.div`
     display: block;
     padding-left: 0.8rem;
     font-weight: bold;
-    font-size: 1.6rem;
+    font-size: 1rem;
     color: #4a5568;
   }
 
@@ -65,10 +71,10 @@ const StyledHeader = styled.div`
 
 const StyledDateContainer = styled.div`
   display: flex;
-  gap: 0.5rem;
+  gap: 0.8rem;
   margin-top: 1rem;
   color: #718096;
-  font-size: 1.4rem;
+  font-size: 1rem;
 `;
 
 const StyledForm = styled(Form)`
@@ -84,11 +90,11 @@ const StyledButtonContainer = styled.div`
   button {
     background-color: #2d3748;
     color: white;
-    padding: 1rem 2rem;
-    border-radius: 0.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.9rem;
     border: none;
     cursor: pointer;
-    font-size: 1.4rem;
+    font-size: 1rem;
 
     &:hover {
       background-color: transparent;
@@ -101,7 +107,7 @@ const StyledButtonContainer = styled.div`
 const StyledGridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.6rem;
+  gap: 4rem;
 `;
 
 const StyledFieldContainer = styled.div`
@@ -112,7 +118,7 @@ const StyledFieldContainer = styled.div`
     display: block;
     margin-bottom: 0.4rem;
     font-weight: bold;
-    font-size: 1.4rem;
+    font-size: 1rem;
     color: #4a5568;
   }
 
@@ -120,10 +126,10 @@ const StyledFieldContainer = styled.div`
   textarea,
   select {
     width: 100%;
-    padding: 1rem;
+    padding: 0.5rem;
     border: 1px solid #cbd5e0;
     border-radius: 0.8rem;
-    font-size: 1.4rem;
+    font-size: 1rem;
     color: #4a5568;
 
     &:disabled {
@@ -137,7 +143,7 @@ const StyledFieldContainer = styled.div`
 
   .error-message {
     color: #e53e3e;
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 `;
 
