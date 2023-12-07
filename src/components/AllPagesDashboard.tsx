@@ -1,8 +1,12 @@
 "use client"
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import { useLazyQuery } from '@/containers/hooks';
+import { serverFetch } from '@/app/action';
+import { GET_ALL_PAGES } from '@/utils/queries';
+import { ToastContainer } from 'react-toastify'
+import { ToastErrorMessage } from './ToastMessage';
 
 const MainDiv = styled.div`
   background-color: white;
@@ -53,18 +57,29 @@ const EditButton = styled.button`
 `;
 
 
-const dummyData = [
-    { id: "page1", Name: 'Title 1', Slug: 'slug-1', MetaTitle: 'Meta Title 1', MetaDescription: 'Meta Desc 1', Path: '/path-1', Status: 'Active', Version: '1.0', CreatedOn: '2023-01-01', UpdatedOn: '2023-01-02' },
-    { id: "page2", Name: 'Title 2', Slug: 'slug-2', MetaTitle: 'Meta Title 2', MetaDescription: 'Meta Desc 2', Path: '/path-2', Status: 'Inactive', Version: '2.0', CreatedOn: '2023-02-01', UpdatedOn: '2023-02-02' },
-    { id: "page3", Name: 'Title 3', Slug: 'slug-3', MetaTitle: 'Meta Title 3', MetaDescription: 'Meta Desc 3', Path: '/path-3', Status: 'Active', Version: '1.1', CreatedOn: '2023-03-01', UpdatedOn: '2023-03-02' },
-    { id: "page4", Name: 'Title 4', Slug: 'slug-4', MetaTitle: 'Meta Title 4', MetaDescription: 'Meta Desc 4', Path: '/path-4', Status: 'Inactive', Version: '2.1', CreatedOn: '2023-04-01', UpdatedOn: '2023-04-02' },
-    { id: "page5", Name: 'Title 5', Slug: 'slug-5', MetaTitle: 'Meta Title 5', MetaDescription: 'Meta Desc 5', Path: '/path-5', Status: 'Active', Version: '1.2', CreatedOn: '2023-05-01', UpdatedOn: '2023-05-02' },
-];
-
 
 const AllPagesDashboard = () => {
+    const [getAllPages, { data, loading, error }] = useLazyQuery(serverFetch)
+
+    useEffect(() => {
+        getAllPages(
+            GET_ALL_PAGES,
+            {},
+            {
+                cache: 'no-store'
+            }
+        )
+    }, [])
+
+    useEffect(() => {
+        if (error) {
+            ToastErrorMessage(error.message)
+        }
+    }, [data, loading, error])
+
     return (
         <MainDiv>
+            <ToastContainer />
             <Heading>Pages</Heading>
 
             <Table>
@@ -85,19 +100,19 @@ const AllPagesDashboard = () => {
                 <tbody>
 
                     {
-                        dummyData.map((data, index) =>
+                        data?.listPages?.docs?.map((item: any, index: any) =>
                             <tr key={index} >
-                                <Td>{data.Name}</Td>
-                                <Td>{data.Slug}</Td>
-                                <Td>{data.MetaTitle}</Td>
-                                <Td>{data.MetaDescription}</Td>
-                                <Td>{data.Path}</Td>
-                                <Td>{data.Status}</Td>
-                                <Td>{data.Version}</Td>
-                                <Td>{data.CreatedOn}</Td>
-                                <Td>{data.UpdatedOn}</Td>
+                                <Td>{item.name}</Td>
+                                <Td>{item.slug}</Td>
+                                <Td>{item.metaTitle}</Td>
+                                <Td>{item.metaDescription}</Td>
+                                <Td>{item.path}</Td>
+                                <Td>{item.status}</Td>
+                                <Td>{item.version}</Td>
+                                <Td>{item.createdOn}</Td>
+                                <Td>{item.updatedOn}</Td>
                                 <Td>
-                                    <Link href={`/${data.id}`}>
+                                    <Link href={`/${item.id}`}>
                                         <EditButton>Edit</EditButton>
                                     </Link>
                                 </Td>
