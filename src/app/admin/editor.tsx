@@ -16,6 +16,8 @@ import StyledBox from "@/components/Atoms/StyledBox";
 import { StyledButton } from "@/components/Atoms/StyledButton";
 import { PiArrowBendUpLeftBold, PiArrowBendUpRightBold } from "react-icons/pi";
 import { StyledText } from "@/components/Atoms/StyledText";
+import { useState } from "react";
+import EditorActions from "@/containers/EditorActions";
 
 
 const resolver = {
@@ -32,12 +34,10 @@ const resolver = {
 };
 
 export const Editor = () => {
+  const [uiJson, setUiJson] = useState("");
 
-  const SaveButton = () => {
-    const { query } = useEditor();
-    console.log(query.serialize())
-    return <a onClick={() => console.log(query.serialize())}>Get JSON</a>
-  }
+
+
 
   return (
     <div style={{ height: "100vh", width: "97vw", overflowY: "scroll" }}>
@@ -64,7 +64,12 @@ export const Editor = () => {
           success: "#2d9d78",
           error: "#e34850",
         }}
+        onNodesChange={query => {
+          const json = query.serialize();
+          setUiJson(json);
+        }}
       >
+        <EditorActions />
         <div style={{ display: "flex", height: "100%", flexWrap: "wrap" }}>
           <div style={{ width: "auto", minWidth: "150px", backgroundColor: "#fff", padding: "20px",}}>
             <Toolbox />

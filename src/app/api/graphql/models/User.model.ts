@@ -6,20 +6,12 @@ export const User = mercury.createModel(
     name: {
       type: "string",
     },
-    account: {
-      type: "relationship",
-      ref: "Account",
-    },
-    test: {
+    email: {
       type: "string",
-      default: "default",
     },
-    testv: {
-      type: "virtual",
-      ref: "Account",
-      localField: "account",
-      foreignField: "_id",
-      many: false,
+    password: {
+      type: "string",
+      bcrypt: true
     },
     roleType: {
       type: "enum",
