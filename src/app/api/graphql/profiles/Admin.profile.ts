@@ -11,20 +11,20 @@ const rules = [
     },
   },
   {
-    modelName: "Account",
+    modelName: "Page",
     access: {
       create: true,
       read: true,
       update: true,
       delete: true,
     },
-    fieldLevelAccess: true,
-    fields: {
-      name: {
-        read: false,
-      },
-    },
+    // fieldLevelAccess: true,
+    // fields: {
+    //   name: {
+    //     read: false,
+    //   },
+    // },
   },
 ];
 
-export const AdminProfile = mercury.access.createProfile("Admin", rules);
+export const AdminProfile = mercury.access.createProfile("ADMIN", rules);

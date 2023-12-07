@@ -13,6 +13,13 @@ export const User = mercury.createModel(
       type: "string",
       bcrypt: true
     },
+    pages: {
+      type: "virtual",
+      ref: "Page",
+      many: true,
+      localField: "_id",
+      foreignField: "author"
+    },
     role: {
       type: "enum",
       enum: ["ADMIN", "MEMBER", "ANONYMOUS"],

@@ -1,2 +1,2 @@
 export { AdminProfile } from "./Admin.profile";
-export { UserProfile } from "./User.profile";
+export { UserProfile } from "./Member.profile";

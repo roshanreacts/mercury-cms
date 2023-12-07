@@ -11,7 +11,7 @@ const rules = [
     },
   },
   {
-    modelName: "Account",
+    modelName: "Page",
     access: {
       create: false,
       read: true,
@@ -21,4 +21,4 @@ const rules = [
   },
 ];
 
-export const UserProfile = mercury.access.createProfile("User", rules);
+export const UserProfile = mercury.access.createProfile("MEMBER", rules);
