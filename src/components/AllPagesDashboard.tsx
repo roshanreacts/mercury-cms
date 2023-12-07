@@ -7,6 +7,7 @@ import { serverFetch } from '@/app/action';
 import { GET_ALL_PAGES } from '@/utils/queries';
 import { ToastContainer } from 'react-toastify'
 import { ToastErrorMessage } from './ToastMessage';
+import { formatDate } from '@/utils/methods';
 
 const MainDiv = styled.div`
   background-color: white;
@@ -109,8 +110,8 @@ const AllPagesDashboard = () => {
                                 <Td>{item.path}</Td>
                                 <Td>{item.status}</Td>
                                 <Td>{item.version}</Td>
-                                <Td>{item.createdOn}</Td>
-                                <Td>{item.updatedOn}</Td>
+                                <Td>{formatDate(item.createdOn)}</Td>
+                                <Td>{formatDate(item.updatedOn)}</Td>
                                 <Td>
                                     <Link href={`/${item.id}`}>
                                         <EditButton>Edit</EditButton>
