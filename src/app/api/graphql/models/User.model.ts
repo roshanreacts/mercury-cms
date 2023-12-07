@@ -13,11 +13,11 @@ export const User = mercury.createModel(
       type: "string",
       bcrypt: true
     },
-    roleType: {
+    role: {
       type: "enum",
-      enum: ["admin", "user"],
+      enum: ["ADMIN", "MEMBER", "ANONYMOUS"],
       enumType: "string",
-    },
+    }
   },
   {}
 );

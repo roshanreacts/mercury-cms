@@ -13,7 +13,7 @@ import TextArea from "@/components/dragableComponents/Textarea";
 import List from "@/components/dragableComponents/List";
 import Input from "@/components/dragableComponents/Input";
 import styled from "@emotion/styled";
-import Image from "@/components/dragableComponents/Image";
+import CustomImage from "@/components/dragableComponents/Image";
 import Form from "../components/dragableComponents/Form";
 import { FaWpforms } from "react-icons/fa6";
 import Anchor from "@/components/dragableComponents/Anchor";
@@ -127,7 +127,7 @@ export const Toolbox = () => {
         </ToolboxButton>
         <ToolboxButton
           ref={(ref: any) =>
-            connectors.create(ref, <Element canvas is={Image} p="20px" />)
+            connectors.create(ref, <Element canvas is={CustomImage} p="20px" />)
           }
           data-cy="toolbox-container"
         >

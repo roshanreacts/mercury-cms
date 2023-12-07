@@ -40,7 +40,7 @@ const StyledImage = styled.img<ImageProps>`
   }
 `;
 
-const Image: React.FC<ImageProps> = ({ ...props }: any) => {
+const CustomImage: React.FC<ImageProps> = ({ ...props }: any) => {
     const {
         connectors: { connect, drag },
         selected,
@@ -152,11 +152,11 @@ const ImageSettings = () => {
     );
 };
 
-Image.craft = {
+CustomImage.craft = {
     props: ImageDefaultProps,
     related: {
         settings: ImageSettings,
     },
 };
 
-export default Image;
+export default CustomImage;
