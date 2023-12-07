@@ -1,6 +1,6 @@
 import * as Slider from '@radix-ui/react-slider';
 import styled from "@emotion/styled";
-import theme from '~/theme';
+import theme from '@/theme';
 
 export const SliderRoot = styled(Slider.Root)( {
   position: 'relative',

@@ -14,7 +14,7 @@ type TextProps = {
   textAlign?:string;
 };
 
-export const Text = styled.span<TextProps>`
+export const StyledText = styled.span<TextProps>`
   ${(props) => props.size === "small" && `font-size: 12px;`}
   ${(props) => props.size === "medium" && `font-size: 14px;`}
   ${(props) => props.size === "large" && `font-size: 16px;`}
@@ -39,7 +39,7 @@ export const Text = styled.span<TextProps>`
   heigth: ${(props) => props.height};
 `;
 
-Text.defaultProps = {
+StyledText.defaultProps = {
   size: "medium",
   padding: '4px',
   color: 'black',

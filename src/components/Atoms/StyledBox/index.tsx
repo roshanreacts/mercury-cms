@@ -1,6 +1,5 @@
 "use client";
 import styled from "@emotion/styled";
-import theme from '~/theme'
 
 type BoxProps = {
   display?: string;
@@ -39,7 +38,7 @@ type BoxProps = {
   [x: string]: any;
 };
 
-const Box = styled.div<BoxProps>`
+const StyledBox = styled.div<BoxProps>`
   background: ${(props) => props.backgroundColor};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
@@ -87,5 +86,5 @@ const Box = styled.div<BoxProps>`
 //   backgroundColor:theme.colors.whiteA
 // };
 
-export default Box;
+export default StyledBox;
 

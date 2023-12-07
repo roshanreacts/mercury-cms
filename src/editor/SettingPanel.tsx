@@ -2,12 +2,14 @@
 import { useEditor } from "@craftjs/core";
 import React from "react";
 import styled from '@emotion/styled';
+import StyledBox from "@/components/Atoms/StyledBox";
+import { StyledText } from "@/components/Atoms/StyledText";
 
 const SettingsContainer = styled.div`
   margin-top: 20px;
   padding: 15px;
   border: 1px solid #f4f4f4;
-  background: lightgrey;
+  background: white;
 `;
 
 const TopLabel = styled.p`
@@ -15,7 +17,7 @@ const TopLabel = styled.p`
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  color: #fff;
+  color: #000;
 `;
 
 const SelectedInfo = styled.div`
@@ -75,13 +77,13 @@ export const SettingsPanel = () => {
       {isEnabled && selected ? (
         <SettingsContainer>
           <SelectedInfo>
-            <div>
-              <p>{selected?.name}</p>
-            </div>
+            <StyledBox>
+              <StyledText weight="large">{selected?.name}</StyledText>
+            </StyledBox>
           </SelectedInfo>
-          <div data-cy="settings-panel">
+          <StyledBox data-cy="settings-panel">
             {selected.settings && React.createElement(selected.settings)}
-          </div>
+          </StyledBox>
 
           {selected.isDeletable ? (
             <DeleteButton

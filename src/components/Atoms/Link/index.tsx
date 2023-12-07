@@ -1,6 +1,6 @@
 import React from 'react';
 import NextLink from 'next/link';
-import { Text } from '../Text';
+import { Text } from '../StyledText';
 
 type CustomLinkProps = {
     url: any,
