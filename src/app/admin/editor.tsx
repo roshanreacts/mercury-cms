@@ -69,7 +69,7 @@ export const Editor = () => {
           setUiJson(json);
         }}
       >
-        <EditorActions />
+        {/* <EditorActions /> */}
         <div style={{ display: "flex", height: "100%", flexWrap: "wrap" }}>
           <div style={{ width: "auto", minWidth: "150px", backgroundColor: "#fff", padding: "20px",}}>
             <Toolbox />
