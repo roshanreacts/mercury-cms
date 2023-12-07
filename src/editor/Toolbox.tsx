@@ -6,17 +6,17 @@ import { CiCircleList, CiText } from 'react-icons/ci';
 import { TbBoxModel2 } from "react-icons/tb";
 import { BsTextareaT } from 'react-icons/bs'
 import { RiInputCursorMove } from 'react-icons/ri';
-import Button from "../components/Button";
-import Text from "../components/Text";
-import Box from "../components/Box";
-import TextArea from "@/components/Textarea";
-import List from "@/components/List";
-import Input from "@/components/Input";
+import Button from "../components/dragableComponents/Button";
+import Text from "../components/dragableComponents/Text";
+import Box from "../components/dragableComponents/Box";
+import TextArea from "@/components/dragableComponents/Textarea";
+import List from "@/components/dragableComponents/List";
+import Input from "@/components/dragableComponents/Input";
 import styled from '@emotion/styled';
-import Image from "@/components/Image";
-import Form from "../components/Form";
+import Image from "@/components/dragableComponents/Image";
+import Form from "../components/dragableComponents/Form";
 import { FaWpforms } from "react-icons/fa6";
-import Anchor from "@/components/Anchor";
+import Anchor from "@/components/dragableComponents/Anchor";
 import { IoIosLink } from "react-icons/io";
 
 

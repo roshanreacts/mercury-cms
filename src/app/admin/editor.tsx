@@ -1,17 +1,17 @@
 "use client";
 import { Editor as CraftEditor, Frame, Element, useEditor, useNode } from "@craftjs/core";
-import Box from "@/components/Box";
-import Text from "@/components/Text";
-import Input from "@/components/Input";
-import Dropdown from "@/components/Dropdown";
-import TextArea from "@/components/Textarea";
-import List from "@/components/List";
-import Button from "@/components/Button";
+import Box from "@/components/dragableComponents/Box";
+import Text from "@/components/dragableComponents/Text";
+import Input from "@/components/dragableComponents/Input";
+import Dropdown from "@/components/dragableComponents/Dropdown";
+import TextArea from "@/components/dragableComponents/Textarea";
+import List from "@/components/dragableComponents/List";
+import Button from "@/components/dragableComponents/Button";
 import { Toolbox } from "@/editor/Toolbox";
 import { SettingsPanel } from "@/editor/SettingPanel";
-import Image from "@/components/Image";
-import From from "@/components/Form";
-import Anchor from "@/components/Anchor";
+import Image from "@/components/dragableComponents/Image";
+import From from "@/components/dragableComponents/Form";
+import Anchor from "@/components/dragableComponents/Anchor";
 import { useState } from "react";
 import EditorActions from "@/containers/EditorActions";
 
