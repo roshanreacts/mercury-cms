@@ -84,7 +84,7 @@ const handler = startServerAndCreateNextHandler(server, {
     ...req,
     user: {
       id: "1",
-      profile: "Admin",
+      profile: "ADMIN",
     },
   }),
 });
