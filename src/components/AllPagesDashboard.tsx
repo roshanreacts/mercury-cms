@@ -7,6 +7,9 @@ import { serverFetch } from '@/app/action';
 import { GET_ALL_PAGES } from '@/utils/queries';
 import { ToastContainer } from 'react-toastify'
 import { ToastErrorMessage } from './ToastMessage';
+import { formatDate } from '@/utils/methods';
+import { DotLoader } from 'react-spinners';
+import StyledBox from './Atoms/StyledBox';
 
 const MainDiv = styled.div`
   background-color: white;
@@ -100,24 +103,29 @@ const AllPagesDashboard = () => {
                 <tbody>
 
                     {
-                        data?.listPages?.docs?.map((item: any, index: any) =>
-                            <tr key={index} >
-                                <Td>{item.name}</Td>
-                                <Td>{item.slug}</Td>
-                                <Td>{item.metaTitle}</Td>
-                                <Td>{item.metaDescription}</Td>
-                                <Td>{item.path}</Td>
-                                <Td>{item.status}</Td>
-                                <Td>{item.version}</Td>
-                                <Td>{item.createdOn}</Td>
-                                <Td>{item.updatedOn}</Td>
-                                <Td>
-                                    <Link href={`/${item.id}`}>
-                                        <EditButton>Edit</EditButton>
-                                    </Link>
-                                </Td>
-                            </tr>
-                        )
+                        loading ?
+                            <StyledBox display='flex' justifyContent='center' alignItems='center' mt='10px'>
+                                <DotLoader color="#007bea" />
+                            </StyledBox>
+                            :
+                            data?.listPages?.docs?.map((item: any, index: any) =>
+                                <tr key={index} >
+                                    <Td>{item.name}</Td>
+                                    <Td>{item.slug}</Td>
+                                    <Td>{item.metaTitle}</Td>
+                                    <Td>{item.metaDescription}</Td>
+                                    <Td>{item.path}</Td>
+                                    <Td>{item.status}</Td>
+                                    <Td>{item.version}</Td>
+                                    <Td>{formatDate(item.createdOn)}</Td>
+                                    <Td>{formatDate(item.updatedOn)}</Td>
+                                    <Td>
+                                        <Link href={`/${item.id}`}>
+                                            <EditButton>Edit</EditButton>
+                                        </Link>
+                                    </Td>
+                                </tr>
+                            )
                     }
                 </tbody>
             </Table>
