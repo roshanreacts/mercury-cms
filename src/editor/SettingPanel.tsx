@@ -23,7 +23,7 @@ const TopLabel = styled.p`
 const SelectedInfo = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   & > div {
     flex: 1;
