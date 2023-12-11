@@ -181,14 +181,15 @@ const BoxSettings = () => {
           type: "text",
           label: "Gap",
         },
-        placeItems: {
-          type: "text",
-          label: "Place Items",
-        },
         backgroundColor: {
           type: "color",
           label: "Background Color",
         },
+        placeItems: {
+          type: "text",
+          label: "Place Items",
+        },
+        
         color: {
           type: "color",
           label: "Text Color",
