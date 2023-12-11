@@ -12,6 +12,7 @@ import { serverFetch } from '@/app/action';
 import { SAVE_PAGE_CONTENT } from '@/utils/queries';
 import { ToastErrorMessage } from '@/components/ToastMessage';
 import { ToastContainer } from 'react-toastify';
+import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
 const EditorTopBar = ({ edit, content, pageId }: { edit: boolean, content: string, pageId: any }) => {
     const { actions, query, enabled, canUndo, canRedo, selected } = useEditor(
@@ -86,11 +87,11 @@ const EditorTopBar = ({ edit, content, pageId }: { edit: boolean, content: strin
                     {
                         edit ?
                             <StyledButton width="55px" size="medium" onClick={() => router.push('?edit=false')}>
-                                <PiArrowBendUpLeftBold />
+                                <HiOutlineEye />
                             </StyledButton>
                             :
                             <StyledButton width="55px" size="medium" onClick={() => router.push('?edit=true')}>
-                                <PiArrowBendUpLeftBold />
+                                <HiOutlineEyeOff />
                             </StyledButton>
                     }
                     <StyledButton width="110px" background="#12B76A" disabled={!edit} onClick={saveCurrentState}>
