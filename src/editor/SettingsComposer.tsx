@@ -1,6 +1,6 @@
 import StyledBox from "@/components/Atoms/StyledBox";
 import styled from "@emotion/styled";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChromePicker } from "react-color";
 type SettingsComposerProps = {
   type: "text" | "number" | "select" | "boolean" | "color" | "textarea";
@@ -70,7 +70,6 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
   });
   const handleChange = (color: any) => {
     setColorChip({ ...color.rgb });
-    // console.log(color.rgb, "rgb");
 
     props.onChange &&
       props.onChange(
@@ -182,6 +181,20 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
         </StyledBox>
       );
     case "color":
+
+      useEffect(() => {
+        var match = defaultValues?.match(/rgba\((\d+), (\d+), (\d+), ([\d.]+)\)/);
+        if (match) {
+          setColorChip({
+            r: match[0] ? match[0] : "256",
+            g: match[1] ? match[1] : "256",
+            b: match[2] ? match[2] : "256",
+            a: match[3] ? match[3] : "1",
+          })
+        }
+      }, [])
+
+
       return (
         <StyledBox style={{ position: "relative" }}>
           <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
