@@ -81,6 +81,8 @@ export const Editor = () => {
           }}
           onNodesChange={query => {
             const json = query.serialize();
+            console.log(json);
+            
             setUiJson(json);
           }}
         >

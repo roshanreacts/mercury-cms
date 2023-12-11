@@ -89,8 +89,8 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
   switch (type) {
     case "text":
       return (
-        <StyledBox style={{position:"relative"}}>
-          <StyledLabel style={{position:"absolute",top:"-17px"}}>{label}</StyledLabel>
+        <StyledBox style={{ position: "relative" }}>
+          <StyledLabel style={{ position: "absolute", top: "-11px", backgroundColor: "white", zIndex: "10", paddingLeft: "5px", paddingRight: "5px" }}>{label}</StyledLabel>
           <input
             style={{
               width: "200px",
@@ -107,8 +107,8 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "number":
       return (
-        <StyledBox style={{position:"relative"}}>
-          <StyledLabel style={{position:"absolute",top:"-17px"}}>{label}</StyledLabel>
+        <StyledBox style={{ position: "relative" }}>
+          <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
           <input
             style={{
               width: "200px",
@@ -125,8 +125,8 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "select":
       return (
-        <StyledBox width="200px" style={{position:"relative"}}>
-          <StyledLabel style={{position:"absolute",top:"-12px", zIndex:"10", backgroundColor:"white", padding:"0 5px"}}>{label}</StyledLabel>
+        <StyledBox width="200px" style={{ position: "relative" }}>
+          <StyledLabel style={{ position: "absolute", top: "-12px", zIndex: "10", backgroundColor: "white", padding: "0 5px" }}>{label}</StyledLabel>
           <select
             style={{
               width: "200px",
@@ -147,8 +147,8 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "boolean":
       return (
-        <StyledBox style={{position:"relative"}}>
-          <StyledLabel style={{position:"absolute",top:"-17px"}}>{label}</StyledLabel>
+        <StyledBox style={{ position: "relative" }}>
+          <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
           <input
             style={{
               width: "200px",
@@ -165,8 +165,8 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "textarea":
       return (
-        <StyledBox style={{position:"relative"}}>
-          <StyledLabel style={{position:"absolute",top:"-17px"}}>{label}</StyledLabel>
+        <StyledBox style={{ position: "relative" }}>
+          <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
           <input
             style={{
               width: "200px",
@@ -183,8 +183,8 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "color":
       return (
-        <StyledBox style={{position:"relative"}}>
-          <StyledLabel style={{position:"absolute",top:"-17px"}}>{label}</StyledLabel>
+        <StyledBox style={{ position: "relative" }}>
+          <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
           <div
             style={{
               padding: "5px",
