@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
@@ -23,8 +24,9 @@ type TextAreaProps = {
   rows?: number;
   cols?: number;
   resize?: string;
-  [x: string]: any;
   children?: React.ReactNode;
+  // customCss?: any;
+  [x: string]: any;
 };
 
 const StyledTextArea = styled.textarea<TextAreaProps>`
@@ -56,8 +58,8 @@ const StyledTextArea = styled.textarea<TextAreaProps>`
     gap: ${props.gap};
     place-items: ${props.placeItems};
     grid-template-columns: ${props.gridTemplateColumns};
-  `}
-`;
+    `}
+    `;
 
 const TextArea: React.FC<TextAreaProps> = ({ children, ...props }: any) => {
   const {
@@ -66,15 +68,18 @@ const TextArea: React.FC<TextAreaProps> = ({ children, ...props }: any) => {
     actions: { setProp },
   } = useNode((state) => ({
     selected: state.events.selected,
+    dragged: state.events.dragged,
   }));
 
   const [editable, setEditable] = useState(false);
 
   useEffect(() => {
     if (selected) {
+      setProp((props: any) => props.isSelected = true)
       return;
     }
 
+    setProp((props: any) => props.isSelected = false)
     setEditable(false);
   }, [selected]);
 
@@ -84,7 +89,8 @@ const TextArea: React.FC<TextAreaProps> = ({ children, ...props }: any) => {
       ref={(ref: any) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
     >
-      <StyledTextArea {...props}>{children}</StyledTextArea>
+      <StyledTextArea ref={connect}
+        onClick={props.onClick} {...props}>{children}</StyledTextArea>
     </div>
   );
 };
@@ -95,7 +101,6 @@ export const TextAreaDefaultProps: TextAreaProps = {
   padding: "10px",
   borderRadius: 4,
   resize: "vertical",
-  // Add default values for other TextAreaProps here
 };
 
 const TextAreaSettings = () => {

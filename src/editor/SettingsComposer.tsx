@@ -89,7 +89,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
   switch (type) {
     case "text":
       return (
-        <StyledBox style={{ position: "relative",width:"100px"}}>
+        <StyledBox style={{ position: "relative", width: "100px" }}>
           <StyledLabel style={{ position: "absolute", top: "-11px", backgroundColor: "white", zIndex: "10", paddingLeft: "5px", paddingRight: "5px" }}>{label}</StyledLabel>
           <input
             style={{
@@ -108,7 +108,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "number":
       return (
-        <StyledBox style={{ position: "relative",width:"100px"}}>
+        <StyledBox style={{ position: "relative", width: "100px" }}>
           <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
           <input
             style={{
@@ -135,7 +135,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
               height: "20px",
               border: "none",
               borderRadius: "5px"
-              
+
             }}
             onChange={(e) => props.onChange && props.onChange(e.target.value)}
             value={defaultValues}
@@ -150,7 +150,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "boolean":
       return (
-        <StyledBox style={{ position: "relative",width:"100px"}}>
+        <StyledBox style={{ position: "relative", width: "100px" }}>
           <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
           <input
             style={{
@@ -169,7 +169,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "textarea":
       return (
-        <StyledBox style={{ position: "relative",width:"100px"}}>
+        <StyledBox style={{ position: "relative", width: "100px" }}>
           <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
           <input
             style={{
@@ -202,7 +202,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
 
 
       return (
-        <StyledBox style={{ position: "relative",width:"100px"}}>
+        <StyledBox style={{ position: "relative", width: "100px" }}>
           <StyledLabel style={{ position: "absolute", top: "-12px", zIndex: "10", backgroundColor: "white", padding: "0 5px" }}>{label}</StyledLabel>
           <div
             style={{
@@ -219,7 +219,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
             onClick={handleClick}
           >
             <StyledBox>
-            <MdFormatColorFill/>
+              <MdFormatColorFill />
             </StyledBox>
             <div
               style={{
@@ -284,12 +284,14 @@ const SettingsWrapper: React.FC<SettingsWrapperProps> = ({
             defaultValues={defaultValues[key]}
             label={settings[key].label}
             onChange={(e: any) => {
-              if (settings[key].type === "textarea") {
-                const cssmap = convertCssStringToMap(e);
-                Object.keys(cssmap).map((csskey: any) => {
-                  setProp((props: any) => (props[csskey] = cssmap[csskey]));
-                });
-              } else setProp((props: any) => (props[key] = e));
+              // if (settings[key].type === "textarea") {
+              //   const cssmap = convertCssStringToMap(e);
+              //   Object.keys(cssmap).map((csskey: any) => {
+              //     setProp((props: any) => (props[csskey] = cssmap[csskey]));
+              //   });
+              // } else {
+              setProp((props: any) => (props[key] = e));
+              // }
             }}
           />
         </StyledFieldset>
