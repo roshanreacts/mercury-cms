@@ -27,7 +27,6 @@ const EditorTopBar = ({ edit, content, pageId }: { edit: boolean, content: strin
     const [savePageContent, { data, loading, error }] = useLazyQuery(serverFetch);
     actions.setOptions((options) => (options.enabled = edit));
 
-
     if (content) {
         const json = compressBase64ToJson(content);
         actions.deserialize(json);
@@ -56,7 +55,7 @@ const EditorTopBar = ({ edit, content, pageId }: { edit: boolean, content: strin
         if (data) {
             const json = compressBase64ToJson(data.updatePage.content);
             actions.deserialize(json);
-            
+
             router.push("?edit=false")
         }
     }, [data, error, loading])

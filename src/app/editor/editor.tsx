@@ -95,12 +95,12 @@ export const Editor = () => {
             <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
               <Frame>
                 <Element is={Box} canvas height="100vh" width="auto" backgroundColor="#f7f7f7" overflowY="scroll">
-                  {/* <Box backgroundColor="white" p="50px" m="20px">
+                  <Box backgroundColor="white" p="50px" m="20px">
                     <Text text="Hello World!" fontSize="35px" color="red" />
                     <Button text="Click Me" />
 
                     <Input value="text" />
-                  </Box> */}
+                  </Box>
                 </Element>
               </Frame>
             </div>
