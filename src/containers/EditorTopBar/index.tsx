@@ -3,18 +3,22 @@ import { StyledButton } from '@/components/Atoms/StyledButton';
 import { StyledText } from '@/components/Atoms/StyledText';
 import { useEditor } from '@craftjs/core';
 import Image from 'next/image';
+import { redirect, useRouter } from 'next/navigation';
 import React from 'react'
 import { PiArrowBendUpLeftBold, PiArrowBendUpRightBold } from 'react-icons/pi';
 
-const EditorTopBar = () => {
+const EditorTopBar = ({ edit }: { edit: boolean }) => {
     const { actions, query, enabled, canUndo, canRedo, selected } = useEditor(
         (state: any, query: any) => ({
             enabled: state.options.enabled,
             canUndo: state.options.enabled && query.history.canUndo(),
             canRedo: state.options.enabled && query.history.canRedo(),
-            selected: state.events.selected
+            selected: state.events.selected,
         })
     );
+    const router = useRouter();
+
+    actions.setOptions((options) => (options.enabled = edit));
 
     return (
         <div>
@@ -27,16 +31,30 @@ const EditorTopBar = () => {
                 />
                 <StyledBox backgroundColor="white" display="flex" gap="6px" border="2px solid">
                     <StyledButton width="55px" size="medium" onClick={() => actions.history.undo()} disabled={!canUndo}>
-                        <PiArrowBendUpLeftBold  />
+                        <PiArrowBendUpLeftBold />
                     </StyledButton>
                     <StyledButton width="55px" onClick={() => actions.history.redo()} disabled={!canRedo}>
-                        <PiArrowBendUpRightBold  />
+                        <PiArrowBendUpRightBold />
                     </StyledButton>
                 </StyledBox>
 
-                <StyledButton width="110px" background="#12B76A">
-                    <StyledText color="white" weight="large">Finish Editing</StyledText>
-                </StyledButton>
+
+                <StyledBox backgroundColor="white" display="flex" gap="6px" border="2px solid">
+                    {
+                        edit ?
+                            <StyledButton width="55px" size="medium" onClick={() => router.push('?edit=false')}>
+                                <PiArrowBendUpLeftBold />
+                            </StyledButton>
+                            :
+                            <StyledButton width="55px" size="medium" onClick={() => router.push('?edit=true')}>
+                                <PiArrowBendUpLeftBold />
+                            </StyledButton>
+                    }
+                    <StyledButton width="110px" background="#12B76A">
+                        <StyledText color="white" weight="large">Finish Editing</StyledText>
+                    </StyledButton>
+                </StyledBox>
+
 
 
             </StyledBox>

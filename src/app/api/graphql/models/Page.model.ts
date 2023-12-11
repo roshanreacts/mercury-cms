@@ -22,8 +22,8 @@ export const Page = mercury.createModel(
         status: {
             type: "enum",
             enumType: "string",
-            enum: ["Draft", "Active"],
-            default: "Draft"
+            enum: ["DRAFT", "ACTIVE"],
+            default: "DRAFT"
         },
         author: {
             type: "relationship",

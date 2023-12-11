@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 // import { formatDate } from "@/utils/methods";
 import styled from "@emotion/styled";
 import ConfirmActionButton from "../ConfirmActionButton";
+import { formatDate } from "@/utils/methods";
 
 // Styled components for each section
 
@@ -147,7 +148,7 @@ const StyledFieldContainer = styled.div`
 const PageForm = ({
   initialValues,
   validationSchema,
-  onSubmit,
+  submitPage,
   add,
   edit,
   pageId,
@@ -161,6 +162,8 @@ const PageForm = ({
   const handleConfirmAction = () => {
     router.push('?edit=true');
   }
+
+
   return (
     <StyledPageForm>
       <StyledFormContainer>
@@ -180,7 +183,7 @@ const PageForm = ({
                 <ConfirmActionButton
                   action="Delete"
                   para="Are you sure you want to"
-                  onConfirm={handleConfirmAction}
+                  onConfirm={handleDelete}
                   type="warning"
                 />
               </div>
@@ -202,12 +205,12 @@ const PageForm = ({
           {!add && (
             <>
               <div>
-                <span className="font-bold">Updated On :</span>{" "}
-                {/* {formatDate(timeStamp?.updatedOn)} */}
+                <span style={{ fontWeight: "700" }}>Updated On :</span>{" "}
+                {formatDate(timeStamp?.updatedOn)}
               </div>
               <div>
-                <span className="font-bold">Created On :</span>{" "}
-                {/* {formatDate(timeStamp?.createdOn)} */}
+                <span style={{ fontWeight: "700" }}>Created On :</span>{" "}
+                {formatDate(timeStamp?.createdOn)}
               </div>
             </>
           )}
@@ -216,35 +219,33 @@ const PageForm = ({
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={onSubmit}
-        //   innerRef={formikRef}
+          onSubmit={submitPage}
+          formRef={formikRef}
         >
-          {({ touched, errors }:any) => (
+          {({ touched, errors }: any) => (
             <StyledForm>
               <StyledButtonContainer>
                 {add ? (
-                  <button type="submit">
+                  <button type="submit" disabled={loading}>
                     {loading ? "Wait..." : "Create"}
                   </button>
-                ) : (
-                  edit && (
-                    <button type="submit">
-                      {loading ? "Wait..." : "Update"}
-                    </button>
-                  )
-                )}
+                ) : edit ? (
+                  <button type="submit" disabled={loading} >
+                    {loading ? "Wait..." : "Update"}
+                  </button>
+                ) : null}
               </StyledButtonContainer>
               <StyledGridContainer>
                 <StyledFieldContainer>
-                  <label htmlFor="pageName">Page Name</label>
+                  <label htmlFor="name">Page Name</label>
                   <Field
                     type="text"
-                    name="pageName"
+                    name="name"
                     disabled={!(add || edit)}
                     placeholder="Page Name"
                   />
                   <ErrorMessage
-                    name="pageName"
+                    name="name"
                     component="div"
                     className="error-message"
                   />
@@ -264,30 +265,37 @@ const PageForm = ({
                   />
                 </StyledFieldContainer>
                 <StyledFieldContainer>
-                  <label htmlFor="pageSlug">Page Slug</label>
+                  <label htmlFor="slug">Page Slug</label>
                   <Field
                     type="text"
-                    name="pageSlug"
+                    name="slug"
                     disabled={!(add || edit)}
                     placeholder="Page Slug"
                   />
                   <ErrorMessage
-                    name="pageSlug"
+                    name="slug"
                     component="div"
                     className="error-message"
                   />
                 </StyledFieldContainer>
               </StyledGridContainer>
+              {
+                add ? null :
+                  <StyledFieldContainer>
+                    <label htmlFor="pageComponents">Page Components</label>
+                    <StyledButtonContainer>
+                      <button type="button" onClick={() => {
+                        router.push(`/editor/${pageId}`)
+                      }}>Go to Playground</button>
+                    </StyledButtonContainer>
 
-              <StyledFieldContainer>
-                <label htmlFor="pageComponents">Page Components</label>
-
-                <ErrorMessage
-                  name="pageComponents"
-                  component="div"
-                  className="error-message"
-                />
-              </StyledFieldContainer>
+                    <ErrorMessage
+                      name="pageComponents"
+                      component="div"
+                      className="error-message"
+                    />
+                  </StyledFieldContainer>
+              }
 
               <StyledFieldContainer>
                 <label htmlFor="metaDescription">Meta Description</label>
@@ -307,15 +315,15 @@ const PageForm = ({
 
               <StyledGridContainer>
                 <StyledFieldContainer>
-                  <label htmlFor="pagePath">Page Path</label>
+                  <label htmlFor="path">Page Path</label>
                   <Field
                     type="text"
-                    name="pagePath"
+                    name="path"
                     disabled={!(add || edit)}
                     placeholder="Page Path"
                   />
                   <ErrorMessage
-                    name="pagePath"
+                    name="path"
                     component="div"
                     className="error-message"
                   />
@@ -323,8 +331,8 @@ const PageForm = ({
                 <StyledFieldContainer>
                   <label htmlFor="status">Status</label>
                   <Field as="select" name="status" disabled={!(add || edit)}>
-                    <option value="Draft">Draft</option>
-                    <option value="Active">Active</option>
+                    <option value="DRAFT">Draft</option>
+                    <option value="ACTIVE">Active</option>
                   </Field>
                 </StyledFieldContainer>
                 <StyledFieldContainer>

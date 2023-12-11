@@ -1,35 +1,74 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as Yup from 'yup';
 import PageForm from '@/components/PageForm'
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { useLazyQuery } from '../hooks';
+import { serverFetch } from '@/app/action';
+import { CREATE_PAGE } from '@/utils/queries';
+import { ToastErrorMessage, ToastSuccessMessage } from '@/components/ToastMessage';
 
 const AddPageContainer = () => {
+    const router = useRouter();
     const [initialValues, setInitialValues] = useState({
-        pageSlug: "",
-        pageName: "",
+        slug: "",
+        name: "",
         pageComponents: "",
         metaDescription: "",
-        pagePath: "",
-        status: "draft",
+        path: "",
+        status: "DRAFT",
         version: "0.1",
         metaTitle: "",
     });
 
+    const [createPage, { data, loading, error }] = useLazyQuery(serverFetch);
+
 
     const validationSchema = Yup.object().shape({
-        pageSlug: Yup.string()
+        slug: Yup.string()
             .required("Page slug is required")
             .matches(/^(?![\s\S]*\s)[\S\s]*$/, "spaces not allowed"),
-        pageName: Yup.string().required("Page Name is required"),
-        pageComponents: Yup.string().required("Page Components are required"),
+        name: Yup.string().required("Page Name is required"),
+        pageComponents: Yup.string(),
         metaDescription: Yup.string().required("Meta Description is required"),
         metaTitle: Yup.string().required("Meta Title is required"),
-        pagePath: Yup.string().required("Page Path is required"),
+        path: Yup.string().required("Page Path is required"),
         version: Yup.string()
             .required("Version is required")
             .matches(/^[0-9]*\.?[0-9]+$/, "Only Numbers Are Accepted"),
     });
+
+    const handlePageSubmit = (values: any) => {
+        createPage(
+            CREATE_PAGE,
+            {
+                "input": {
+                    "author": "6571b407f3908e9fd9592c54",
+                    "metaDescription": values.metaDescription,
+                    "metaTitle": values.metaTitle,
+                    "name": values.name,
+                    "path": values.path,
+                    "slug": values.slug,
+                    "status": values.status,
+                    "version": values.version
+                }
+            },
+            {
+                cache: "no-store"
+            }
+        )
+    }
+
+    useEffect(()=>{
+        if(data){
+            ToastSuccessMessage("Page Created Successfully!!");
+            router.replace('/');
+        }
+
+        if(error){
+            ToastErrorMessage(error.message);
+        }
+    }, [data, loading, error])
 
     const pageId = useParams().pageId;
     return (
@@ -40,11 +79,9 @@ const AddPageContainer = () => {
                 add={true}
                 edit={true}
                 pageId={pageId}
-                // onSubmit={onSubmit}
-                // loading={updatePageResponse.loading}
-                // handleDelete={handleDelete}
-                // timeStamp={timeStamp}
-                 />
+                submitPage={handlePageSubmit}
+                loading={loading}
+            />
         </div>
     )
 }

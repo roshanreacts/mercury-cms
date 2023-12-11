@@ -14,6 +14,7 @@ import From from "@/components/dragableComponents/Form";
 import Anchor from "@/components/dragableComponents/Anchor";
 import { useState } from "react";
 import EditorTopBar from "@/containers/EditorTopBar";
+import { useParams, useSearchParams } from "next/navigation";
 
 
 const resolver = {
@@ -28,16 +29,15 @@ const resolver = {
   From,
   Anchor
 };
-
+let edit = false;
 export const Editor = () => {
   const [uiJson, setUiJson] = useState("");
-
-
-
+  const pageId = useParams().pageId;
+  edit = useSearchParams().get("edit") === "true" ? true : false;
 
   return (
     <div style={{ height: "100vh", width: "100%", overflowY: "scroll" }}>
-      
+
       <CraftEditor
         enabled
         resolver={resolver}
@@ -50,7 +50,7 @@ export const Editor = () => {
           setUiJson(json);
         }}
       >
-        <EditorTopBar />
+        <EditorTopBar edit={edit} />
         <div style={{ display: "flex", height: "100%", flexWrap: "wrap" }}>
           <div style={{ width: "auto", minWidth: "150px", backgroundColor: "#fff", padding: "20px", }}>
             <Toolbox />
