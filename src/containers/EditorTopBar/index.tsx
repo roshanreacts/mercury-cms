@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { redirect, useRouter } from 'next/navigation';
 import React from 'react'
 import { PiArrowBendUpLeftBold, PiArrowBendUpRightBold } from 'react-icons/pi';
+import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
 const EditorTopBar = ({ edit }: { edit: boolean }) => {
     const { actions, query, enabled, canUndo, canRedo, selected } = useEditor(
@@ -43,11 +44,11 @@ const EditorTopBar = ({ edit }: { edit: boolean }) => {
                     {
                         edit ?
                             <StyledButton width="55px" size="medium" onClick={() => router.push('?edit=false')}>
-                                <PiArrowBendUpLeftBold />
+                                <HiOutlineEye />
                             </StyledButton>
                             :
                             <StyledButton width="55px" size="medium" onClick={() => router.push('?edit=true')}>
-                                <PiArrowBendUpLeftBold />
+                                <HiOutlineEyeOff />
                             </StyledButton>
                     }
                     <StyledButton width="110px" background="#12B76A">
