@@ -13,7 +13,7 @@ const AddPageContainer = () => {
     const [initialValues, setInitialValues] = useState({
         slug: "",
         name: "",
-        pageComponents: "",
+        content: "",
         metaDescription: "",
         path: "",
         status: "DRAFT",
@@ -29,7 +29,7 @@ const AddPageContainer = () => {
             .required("Page slug is required")
             .matches(/^(?![\s\S]*\s)[\S\s]*$/, "spaces not allowed"),
         name: Yup.string().required("Page Name is required"),
-        pageComponents: Yup.string(),
+        content: Yup.string(),
         metaDescription: Yup.string().required("Meta Description is required"),
         metaTitle: Yup.string().required("Meta Title is required"),
         path: Yup.string().required("Page Path is required"),

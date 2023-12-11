@@ -282,7 +282,7 @@ const PageForm = ({
               {
                 add ? null :
                   <StyledFieldContainer>
-                    <label htmlFor="pageComponents">Page Components</label>
+                    <label htmlFor="content">Page Content</label>
                     <StyledButtonContainer>
                       <button type="button" onClick={() => {
                         router.push(`/editor/${pageId}`)
@@ -290,7 +290,7 @@ const PageForm = ({
                     </StyledButtonContainer>
 
                     <ErrorMessage
-                      name="pageComponents"
+                      name="content"
                       component="div"
                       className="error-message"
                     />

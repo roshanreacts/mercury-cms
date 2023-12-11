@@ -16,7 +16,7 @@ const PageContainer = () => {
     const [initialValues, setInitialValues] = useState({
         slug: "",
         name: "",
-        pageComponents: "",
+        content: "",
         metaDescription: "",
         path: "",
         status: "DRAFT",

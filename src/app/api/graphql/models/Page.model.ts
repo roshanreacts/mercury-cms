@@ -31,7 +31,7 @@ export const Page = mercury.createModel(
             many: false,
             required: true
         },
-        pageJson: {
+        content: {
             type: "string"
         },
         metaTitle: {

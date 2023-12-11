@@ -7,7 +7,7 @@ export const GET_ALL_PAGES = `query ListPages {
       path
       metaDescription
       status
-      pageJson
+      content
       metaTitle
       version
       createdOn
@@ -33,7 +33,7 @@ query GetPage($where: wherePageInput!) {
     path
     metaDescription
     status
-    pageJson
+    content
     metaTitle
     version
     createdOn
@@ -51,4 +51,19 @@ export const UPDATE_PAGE = `mutation UpdatePage($input: updatePageInput!) {
 
 export const DELETE_PAGE = `mutation DeletePage($deletePageId: ID!) {
   deletePage(id: $deletePageId)
+}`
+
+export const GET_PAGE_CONTENT = `query GetPage($where: wherePageInput!) {
+  getPage(where: $where) {
+    id
+    content
+  }
+}`
+
+
+export const SAVE_PAGE_CONTENT = `mutation UpdatePage($input: updatePageInput!) {
+  updatePage(input: $input) {
+    id
+    content
+  }
 }`
