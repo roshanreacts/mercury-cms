@@ -48,6 +48,7 @@ const StyledText = styled.p<TextProps>`
   vertical-align: ${(props: TextProps) => props.verticalAlign};
   isSelected: ${(props) => props.isSelected};
   font-family: ${(props) => props.fontFamily};
+  background-color: ${(props) => props.backgroundColor};
   
 
 
@@ -136,6 +137,10 @@ export const TextSettings = () => {
         fontSize: {
           type: "text",
           label: "Font Size",
+        },
+        backgroundColor: {
+          type: "color",
+          label: "Background Color",
         },
         textAlign: {
           type: "select",

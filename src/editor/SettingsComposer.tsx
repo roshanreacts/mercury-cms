@@ -2,6 +2,7 @@ import StyledBox from "@/components/Atoms/StyledBox";
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
 import { ChromePicker } from "react-color";
+import { MdFormatColorFill } from "react-icons/md";
 type SettingsComposerProps = {
   type: "text" | "number" | "select" | "boolean" | "color" | "textarea";
   onChange?: (color: any) => void;
@@ -34,10 +35,10 @@ function convertCssStringToMap(cssString: string): any {
 }
 
 const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  max-width: 230px;
-  margin: auto;
+display: grid;
+grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+gap:px; /* Gap between grid items *
+margin: auto;
 `;
 
 const StyledFieldset = styled.fieldset`
@@ -88,14 +89,15 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
   switch (type) {
     case "text":
       return (
-        <StyledBox style={{ position: "relative" }}>
+        <StyledBox style={{ position: "relative",width:"100px"}}>
           <StyledLabel style={{ position: "absolute", top: "-11px", backgroundColor: "white", zIndex: "10", paddingLeft: "5px", paddingRight: "5px" }}>{label}</StyledLabel>
           <input
             style={{
-              width: "200px",
+              width: "100px",
               height: "20px",
-              border: "1px #000",
+              border: "none",
               borderRadius: "5px",
+              outline: "none",
             }}
             type="text"
             {...props}
@@ -106,14 +108,15 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "number":
       return (
-        <StyledBox style={{ position: "relative" }}>
+        <StyledBox style={{ position: "relative",width:"100px"}}>
           <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
           <input
             style={{
-              width: "200px",
+              width: "100px",
               height: "20px",
               border: "1px #000",
               borderRadius: "5px",
+              outline: "none",
             }}
             type="number"
             {...props}
@@ -124,14 +127,15 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "select":
       return (
-        <StyledBox width="200px" style={{ position: "relative" }}>
+        <StyledBox width="100px" style={{ position: "relative" }}>
           <StyledLabel style={{ position: "absolute", top: "-12px", zIndex: "10", backgroundColor: "white", padding: "0 5px" }}>{label}</StyledLabel>
           <select
             style={{
-              width: "200px",
+              width: "100px",
               height: "20px",
               border: "none",
               borderRadius: "5px"
+              
             }}
             onChange={(e) => props.onChange && props.onChange(e.target.value)}
             value={defaultValues}
@@ -146,14 +150,15 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "boolean":
       return (
-        <StyledBox style={{ position: "relative" }}>
+        <StyledBox style={{ position: "relative",width:"100px"}}>
           <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
           <input
             style={{
-              width: "200px",
+              width: "100px",
               height: "20px",
               border: "1px #000",
               borderRadius: "5px",
+              outline: "none",
             }}
             type="boolean"
             {...props}
@@ -164,14 +169,15 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "textarea":
       return (
-        <StyledBox style={{ position: "relative" }}>
+        <StyledBox style={{ position: "relative",width:"100px"}}>
           <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
           <input
             style={{
-              width: "200px",
+              width: "100px",
               height: "20px",
               border: "1px #000",
               borderRadius: "5px",
+              outline: "none",
             }}
             type="textarea"
             {...props}
@@ -196,24 +202,30 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
 
 
       return (
-        <StyledBox style={{ position: "relative" }}>
-          <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
+        <StyledBox style={{ position: "relative",width:"100px"}}>
+          <StyledLabel style={{ position: "absolute", top: "-12px", zIndex: "10", backgroundColor: "white", padding: "0 5px" }}>{label}</StyledLabel>
           <div
             style={{
-              padding: "5px",
+              width: "100px",
+              height: "30px",
+              padding: "1px",
               background: "#fff",
-              borderRadius: "1px",
+              borderRadius: "8px",
               boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
-              display: "inline-block",
+              display: "flex",
+              justifyContent: "space-evenly",
               cursor: "pointer",
             }}
             onClick={handleClick}
           >
+            <StyledBox>
+            <MdFormatColorFill/>
+            </StyledBox>
             <div
               style={{
-                width: "36px",
-                height: "14px",
-                borderRadius: "2px",
+                width: "30px",
+                height: "30px",
+                borderRadius: "8px",
                 background: `rgba(${colorChip.r}, ${colorChip.g}, ${colorChip.b}, ${colorChip.a})`,
               }}
             />
@@ -222,7 +234,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
             <div
               style={{
                 position: "absolute",
-                zIndex: "2",
+                zIndex: "20"
               }}
             >
               <div
