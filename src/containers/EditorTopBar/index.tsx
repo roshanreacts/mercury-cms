@@ -54,9 +54,6 @@ const EditorTopBar = ({ edit }: { edit: boolean }) => {
                         <StyledText color="white" weight="large">Finish Editing</StyledText>
                     </StyledButton>
                 </StyledBox>
-
-
-
             </StyledBox>
         </div>
     )

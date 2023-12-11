@@ -52,9 +52,12 @@ export const Editor = () => {
       >
         <EditorTopBar edit={edit} />
         <div style={{ display: "flex", height: "100%", flexWrap: "wrap" }}>
-          <div style={{ width: "auto", minWidth: "150px", backgroundColor: "#fff", padding: "20px", }}>
-            <Toolbox />
-          </div>
+          {
+            edit &&
+            <div style={{ width: "auto", minWidth: "150px", backgroundColor: "#fff", padding: "20px", }}>
+              <Toolbox />
+            </div>
+          }
           <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
             <Frame>
               <Element is={Box} canvas height="100vh" width="auto" backgroundColor="#f7f7f7" overflowY="scroll">
@@ -67,9 +70,12 @@ export const Editor = () => {
               </Element>
             </Frame>
           </div>
-          <div style={{ width: "auto", minWidth: "150px", backgroundColor: "white", padding: "20px" }}>
-            <SettingsPanel />
-          </div>
+          {
+            edit &&
+            <div style={{ width: "auto", minWidth: "150px", backgroundColor: "white", padding: "20px" }}>
+              <SettingsPanel />
+            </div>
+          }
         </div>
       </CraftEditor >
     </div >
