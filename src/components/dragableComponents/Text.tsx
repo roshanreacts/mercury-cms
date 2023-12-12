@@ -216,6 +216,7 @@ export const TextSettings = () => {
   );
 };
 
+//@ts-ignore
 Text.craft = {
   props: TextDefaultProps,
   related: {

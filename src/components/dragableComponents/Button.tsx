@@ -151,7 +151,7 @@ export const ButtonSettings = () => {
         },
         hoverBackground: {
           type: "color",
-          label: "Hover Background Color",
+          label: "Hover Bg Color",
         },
         customCss: {
           type: "textarea",
@@ -163,6 +163,7 @@ export const ButtonSettings = () => {
   );
 };
 
+//@ts-ignore
 Button.craft = {
   props: ButtonDefaultProps,
   related: {

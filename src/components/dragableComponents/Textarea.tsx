@@ -138,6 +138,8 @@ const TextAreaSettings = () => {
   );
 };
 
+
+//@ts-ignore
 TextArea.craft = {
   props: TextAreaDefaultProps,
   related: {

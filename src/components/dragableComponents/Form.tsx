@@ -327,6 +327,7 @@ const FormSettings = () => {
   );
 };
 
+//@ts-ignore
 Form.craft = {
   props: FormDefaultProps,
   related: {

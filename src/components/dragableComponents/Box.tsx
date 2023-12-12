@@ -316,7 +316,7 @@ const BoxSettings = () => {
         },
         gridTemplateColumns: {
           type: "text",
-          label: "Grid Template Columns",
+          label: "Grid Temp Col",
         },
         customCss: {
           type: "textarea",
@@ -328,6 +328,7 @@ const BoxSettings = () => {
   );
 };
 
+//@ts-ignore
 Box.craft = {
   props: BoxDefaultProps,
   related: {

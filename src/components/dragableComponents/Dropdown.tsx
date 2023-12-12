@@ -72,7 +72,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       onClick={() => selected && setEditable(true)}
     >
       <StyledDropdown {...props}>
-        {options.map((option) => (
+        {options.map((option: any) => (
           <div
             key={option}
             onClick={() => onSelect(option)}
@@ -148,6 +148,7 @@ const DropdownSettings = () => {
   );
 };
 
+//@ts-ignore
 Dropdown.craft = {
   props: DropdownDefaultProps,
   related: {

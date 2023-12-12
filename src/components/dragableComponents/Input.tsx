@@ -160,6 +160,7 @@ const InputSettings = () => {
   );
 };
 
+//@ts-ignore
 Input.craft = {
   props: InputDefaultProps,
   related: {
