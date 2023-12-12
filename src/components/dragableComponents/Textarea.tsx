@@ -25,7 +25,7 @@ type TextAreaProps = {
   cols?: number;
   resize?: string;
   children?: React.ReactNode;
-  // customCss?: any;
+  customCss?: any;
   [x: string]: any;
 };
 
@@ -47,6 +47,7 @@ const StyledTextArea = styled.textarea<TextAreaProps>`
   bottom: ${(props) => props.bottom};
   z-index: ${(props) => props.zIndex};
   resize: ${(props) => props.resize};
+  ${(props) => props.customCss};
 
   ${(props) =>
     props.display &&
@@ -127,6 +128,10 @@ const TextAreaSettings = () => {
           type: "color",
           label: "Background Color",
         },
+        customCss: {
+          type: "textarea",
+          label: "Custom CSS"
+        }
       }}
       setProp={setProp}
     />

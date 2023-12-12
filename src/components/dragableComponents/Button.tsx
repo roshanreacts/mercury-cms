@@ -19,6 +19,7 @@ type ButtonProps = {
   hoverBackground?: string;
   isSelected?: boolean;
   [x: string]: any;
+  customCss?: any;
 };
 
 const StyledButton = styled.button<ButtonProps>`
@@ -31,6 +32,7 @@ const StyledButton = styled.button<ButtonProps>`
   font-size: ${(props) => props?.fontSize || "14px"};
   font-weight: ${(props) => props?.fontWeight || "bold"};
   transition: ${(props) => props?.transition || "background 0.3s ease"};
+  ${(props) => props.customCss};
   ${(props) =>
     props.isSelected && "border: 4px dotted red;"
   }
@@ -151,6 +153,10 @@ export const ButtonSettings = () => {
           type: "color",
           label: "Hover Background Color",
         },
+        customCss: {
+          type: "textarea",
+          label: "Custom CSS"
+        }
       }}
       setProp={setProp}
     />

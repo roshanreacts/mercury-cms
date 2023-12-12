@@ -45,6 +45,7 @@ type FormProps = {
   isSelected?: boolean;
   [x: string]: any;
   children?: React.ReactNode;
+  customCss?: any;
 };
 
 const StyledForm = styled.form<FormProps>`
@@ -78,6 +79,7 @@ const StyledForm = styled.form<FormProps>`
   bottom: ${(props) => props.bottom};
   z-index: ${(props) => props.zIndex};
   color: ${(props) => props.color};
+  ${(props) => props.customCss};
 
   ${(props) =>
     props.isSelected && `border: 4px dotted red;`
@@ -313,7 +315,12 @@ const FormSettings = () => {
         gridTemplateColumns: {
           type: "text",
           label: "Grid Template Columns",
+          
         },
+        customCss: {
+          type: "textarea",
+          label: "Custom CSS"
+        }
       }}
       setProp={setProp}
     />

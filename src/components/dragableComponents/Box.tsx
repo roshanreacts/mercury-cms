@@ -44,6 +44,7 @@ type BoxProps = {
   color?: string;
   [x: string]: any;
   children?: React.ReactNode;
+  customCss?: any;
 };
 
 const StyledBox = styled.div<BoxProps>`
@@ -77,6 +78,8 @@ const StyledBox = styled.div<BoxProps>`
   bottom: ${(props) => props.bottom};
   z-index: ${(props) => props.zIndex};
   color: ${(props) => props.color};
+  ${(props) => props.customCss};
+  
 
   ${(props) =>
     props.display &&
@@ -315,6 +318,10 @@ const BoxSettings = () => {
           type: "text",
           label: "Grid Template Columns",
         },
+        customCss: {
+          type: "textarea",
+          label: "Custom CSS"
+        }
       }}
       setProp={setProp}
     />

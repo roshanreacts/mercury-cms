@@ -19,6 +19,7 @@ type ImageProps = {
     zIndex?: string;
     isSelected?: boolean;
     [x: string]: any;
+    customCss?: any;
 };
 
 const StyledImage = styled.img<ImageProps>`
@@ -35,6 +36,7 @@ const StyledImage = styled.img<ImageProps>`
   right: ${(props) => props.right};
   bottom: ${(props) => props.bottom};
   z-index: ${(props) => props.zIndex};
+  ${(props) => props.customCss};
   ${(props) =>
     props.isSelected && "border: 4px dotted red;"
   }
@@ -146,6 +148,10 @@ const ImageSettings = () => {
                     type: "text",
                     label: "Z-Index",
                 },
+                customCss: {
+                    type: "textarea",
+                    label: "Custom CSS"
+                  }
             }}
             setProp={setProp}
         />
