@@ -170,7 +170,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
     case "textarea":
       return (
         <StyledBox style={{ position: "relative", width: "100px" }}>
-          <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
+          <StyledLabel style={{ position: "absolute", top: "-12px", zIndex:"10", padding: "0 5px", background: "white" }}>{label}</StyledLabel>
           <textarea
             rows={3}
             style={{
@@ -190,14 +190,14 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
     case "color":
 
       useEffect(() => {
-        var match = defaultValues?.match(/rgba\((\d+), (\d+), (\d+), ([\d.]+)\)/);
+        var match = defaultValues?.match(/rgba?\((\d+), (\d+), (\d+)(, ([\d.]+))?\)/);
         if (match) {
           setColorChip({
-            r: match[0] ? match[0] : "256",
-            g: match[1] ? match[1] : "256",
-            b: match[2] ? match[2] : "256",
-            a: match[3] ? match[3] : "1",
-          })
+            r: match[1] ? match[1] : "256",
+            g: match[2] ? match[2] : "256",
+            b: match[3] ? match[3] : "256",
+            a: match[5] ? match[5] : "1",
+          });
         }
       }, [])
 
@@ -216,18 +216,20 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
               display: "flex",
               justifyContent: "space-evenly",
               cursor: "pointer",
+              alignItems: "center",
             }}
             onClick={handleClick}
           >
-            <StyledBox>
+            <StyledBox >
               <MdFormatColorFill />
             </StyledBox>
             <div
               style={{
                 width: "30px",
-                height: "30px",
+                height: "25px",
                 borderRadius: "8px",
                 background: `rgba(${colorChip.r}, ${colorChip.g}, ${colorChip.b}, ${colorChip.a})`,
+                border: "1px solid"
               }}
             />
           </div>
@@ -285,14 +287,8 @@ const SettingsWrapper: React.FC<SettingsWrapperProps> = ({
             defaultValues={defaultValues[key]}
             label={settings[key].label}
             onChange={(e: any) => {
-              // if (settings[key].type === "textarea") {
-              //   const cssmap = convertCssStringToMap(e);
-              //   Object.keys(cssmap).map((csskey: any) => {
-              //     setProp((props: any) => (props[csskey] = cssmap[csskey]));
-              //   });
-              // } else {
+
               setProp((props: any) => (props[key] = e));
-              // }
             }}
           />
         </StyledFieldset>
