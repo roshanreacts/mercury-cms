@@ -64,9 +64,9 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
 }) => {
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const [colorChip, setColorChip] = useState<any>({
-    r: "241",
-    g: "112",
-    b: "19",
+    r: "256",
+    g: "256",
+    b: "256",
     a: "1",
   });
   const handleChange = (color: any) => {
@@ -170,7 +170,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
     case "textarea":
       return (
         <StyledBox style={{ position: "relative", width: "100px" }}>
-          <StyledLabel style={{ position: "absolute", top: "-12px", zIndex:"10", padding: "0 5px", background: "white" }}>{label}</StyledLabel>
+          <StyledLabel style={{ position: "absolute", top: "-12px", zIndex: "10", padding: "0 5px", background: "white" }}>{label}</StyledLabel>
           <textarea
             rows={3}
             style={{
@@ -212,7 +212,6 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
               padding: "1px",
               background: "#fff",
               borderRadius: "8px",
-              boxShadow: "0 0 0 1px rgba(0,0,0,.1)",
               display: "flex",
               justifyContent: "space-evenly",
               cursor: "pointer",
@@ -287,7 +286,6 @@ const SettingsWrapper: React.FC<SettingsWrapperProps> = ({
             defaultValues={defaultValues[key]}
             label={settings[key].label}
             onChange={(e: any) => {
-
               setProp((props: any) => (props[key] = e));
             }}
           />

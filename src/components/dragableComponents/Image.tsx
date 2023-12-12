@@ -152,6 +152,7 @@ const ImageSettings = () => {
     );
 };
 
+//@ts-ignore
 CustomImage.craft = {
     props: ImageDefaultProps,
     related: {

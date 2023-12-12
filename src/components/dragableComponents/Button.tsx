@@ -149,7 +149,7 @@ export const ButtonSettings = () => {
         },
         hoverBackground: {
           type: "color",
-          label: "Hover Background Color",
+          label: "Hover Bg Color",
         },
       }}
       setProp={setProp}
@@ -157,6 +157,7 @@ export const ButtonSettings = () => {
   );
 };
 
+//@ts-ignore
 Button.craft = {
   props: ButtonDefaultProps,
   related: {

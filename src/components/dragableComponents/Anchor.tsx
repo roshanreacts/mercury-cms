@@ -219,6 +219,7 @@ export const AnchorSettings = () => {
     );
 };
 
+//@ts-ignore
 Anchor.craft = {
     props: AnchorDefaultProps,
     related: {
