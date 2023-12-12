@@ -36,8 +36,8 @@ function convertCssStringToMap(cssString: string): any {
 
 const StyledForm = styled.form`
 display: grid;
-grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
-gap:px; /* Gap between grid items *
+grid-template-columns: repeat(2, 1fr); 
+gap:px;
 margin: auto;
 `;
 
@@ -171,15 +171,16 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       return (
         <StyledBox style={{ position: "relative", width: "100px" }}>
           <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
-          <input
+          <textarea
+            rows={3}
             style={{
               width: "100px",
               height: "20px",
               border: "1px #000",
               borderRadius: "5px",
               outline: "none",
+              fontSize: "11px"
             }}
-            type="textarea"
             {...props}
             onChange={(e) => props.onChange && props.onChange(e.target.value)}
             value={defaultValues}
