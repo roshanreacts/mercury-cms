@@ -285,7 +285,7 @@ const PageForm = ({
                     <label htmlFor="content">Page Content</label>
                     <StyledButtonContainer>
                       <button type="button" onClick={() => {
-                        router.push(`/editor/${pageId}`)
+                        router.push(`/admin/editor/${pageId}`)
                       }}>Go to Playground</button>
                     </StyledButtonContainer>
 

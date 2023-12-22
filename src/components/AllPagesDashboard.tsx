@@ -120,7 +120,7 @@ const AllPagesDashboard = () => {
                                     <Td>{formatDate(item.createdOn)}</Td>
                                     <Td>{formatDate(item.updatedOn)}</Td>
                                     <Td>
-                                        <Link href={`/${item.id}`}>
+                                        <Link href={`/admin/${item.id}`}>
                                             <EditButton>Edit</EditButton>
                                         </Link>
                                     </Td>

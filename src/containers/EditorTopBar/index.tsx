@@ -69,7 +69,7 @@ const EditorTopBar = ({ edit, content, pageId }: { edit: boolean, content: strin
                     alt="logo"
                     width={170}
                     height={40}
-                    onClick={() => router.replace('/')}
+                    onClick={() => router.replace('/admin')}
                     style={{ cursor: "pointer" }}
                 />
                 <StyledBox backgroundColor="white" display="flex" gap="6px" border="2px solid">
