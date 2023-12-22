@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import EditorTopBar from "@/containers/EditorTopBar";
 import { useParams, useSearchParams } from "next/navigation";
 import { useLazyQuery } from "@/containers/hooks";
-import { serverFetch } from "../action";
+import { serverFetch } from "@/app/action";
 import { GET_PAGE_CONTENT } from "@/utils/queries";
 import { ToastErrorMessage } from "@/components/ToastMessage";
 import { ToastContainer } from "react-toastify";

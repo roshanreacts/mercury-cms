@@ -125,7 +125,7 @@ const PageContainer = () => {
     useEffect(() => {
         if (deletePageResponse.data) {
             ToastSuccessMessage("Deleted Successfully!!");
-            router.replace("/")
+            router.replace("/admin")
         }
 
         if (deletePageResponse.error) {

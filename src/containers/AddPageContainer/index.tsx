@@ -62,7 +62,7 @@ const AddPageContainer = () => {
     useEffect(()=>{
         if(data){
             ToastSuccessMessage("Page Created Successfully!!");
-            router.replace('/');
+            router.replace('/admin');
         }
 
         if(error){
