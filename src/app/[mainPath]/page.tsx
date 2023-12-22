@@ -17,6 +17,7 @@ const page = async ({ params }: any) => {
         <div>
             <Head>
                 <title>{data?.getPage?.metaTitle}</title>
+                <meta property="og:title" content={data?.getPage?.metaTitle} key="title" />
                 <meta name="description" content={data?.getPage?.metaDescription} />
             </Head>
             <RenderPage content={content} />
