@@ -80,14 +80,14 @@ const SideBar = () => {
                 }}>
                     <SubTitles onClick={() => {
                         // setCuurentTab("allPages")
-                        router.push('/')
+                        router.push('/admin')
 
                     }}>
                         All Pages
                     </SubTitles>
                     <SubTitles onClick={() => {
                         // setCuurentTab("addPage")
-                        router.push('/add')
+                        router.push('/admin/add')
 
                     }}>
                         Create Page
