@@ -27,6 +27,7 @@ type TextAreaProps = {
   children?: React.ReactNode;
   customCss?: any;
   [x: string]: any;
+  classNames?: string;
 };
 
 const StyledTextArea = styled.textarea<TextAreaProps>`
@@ -91,7 +92,7 @@ const TextArea: React.FC<TextAreaProps> = ({ children, ...props }: any) => {
       onClick={() => selected && setEditable(true)}
     >
       <StyledTextArea ref={connect}
-        onClick={props.onClick} {...props}>{children}</StyledTextArea>
+        onClick={props.onClick} {...props} className={props?.classNames}>{children}</StyledTextArea>
     </div>
   );
 };
@@ -116,6 +117,10 @@ const TextAreaSettings = () => {
     <SettingsWrapper
       defaultValues={props}
       settings={{
+        classNames: {
+          type: "textarea",
+          label: "Tailwind Classes"
+        },
         padding: {
           type: "text",
           label: "Padding",

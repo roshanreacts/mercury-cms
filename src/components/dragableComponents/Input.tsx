@@ -20,6 +20,7 @@ type InputProps = {
   isSelected?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   [x: string]: any;
+  classNames?: string;
 };
 
 const StyledInput = styled.input<InputProps>`
@@ -79,6 +80,7 @@ const Input: React.FC<InputProps> = ({ onChange, ...props }: any) => {
       ref={(ref: any) => connect(drag(ref))}
       onChange={onChange}
       onClick={() => selected && setEditable(true)}
+      className={props?.classNames}
     />
   );
 };
@@ -110,6 +112,10 @@ const InputSettings = () => {
     <SettingsWrapper
       defaultValues={props}
       settings={{
+        classNames: {
+          type: "textarea",
+          label: "Tailwind Classes"
+        },
         width: {
           type: "text",
           label: "Width",

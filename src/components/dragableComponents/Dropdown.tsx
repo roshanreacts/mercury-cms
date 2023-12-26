@@ -22,6 +22,7 @@ type DropdownProps = {
   zIndex?: string;
   [x: string]: any;
   children?: React.ReactNode;
+  classNames?: string;
 };
 
 const StyledDropdown = styled.div<DropdownProps>`
@@ -71,7 +72,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       ref={(ref: any) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
     >
-      <StyledDropdown {...props}>
+      <StyledDropdown {...props} className={props?.classNames}>
         {options.map((option: any) => (
           <div
             key={option}
@@ -114,6 +115,10 @@ const DropdownSettings = () => {
     <SettingsWrapper
       defaultValues={props}
       settings={{
+        classNames: {
+          type: "textarea",
+          label: "Tailwind Classes"
+        },
         width: {
           type: "text",
           label: "Width",

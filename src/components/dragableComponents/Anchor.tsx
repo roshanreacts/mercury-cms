@@ -30,6 +30,7 @@ type AnchorProps = {
     isSelected?: boolean;
     children?: React.ReactNode; 
     [x: string]: any;
+    classNames?: string;
 };
 
 const StyledAnchor = styled.a<AnchorProps>`
@@ -87,7 +88,7 @@ const Anchor: React.FC<AnchorProps> = ({ children, ...props }: any) => {
             ref={(ref: any) => connect(drag(ref))}
             onClick={() => selected && setEditable(true)}
         >
-            <StyledAnchor ref={connect} onClick={props.onClick} {...props}>
+            <StyledAnchor ref={connect} onClick={props.onClick} {...props} className={props?.classNames}>
                 {children}
             </StyledAnchor>
         </a>
@@ -113,6 +114,10 @@ export const AnchorSettings = () => {
         <SettingsWrapper
             defaultValues={props}
             settings={{
+                classNames: {
+                    type: "textarea",
+                    label: "Tailwind Classes"
+                  },
                 href: {
                     type: "text",
                     label: "Link URL",

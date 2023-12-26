@@ -46,6 +46,7 @@ type FormProps = {
   [x: string]: any;
   children?: React.ReactNode;
   customCss?: any;
+  classNames?: string;
 };
 
 const StyledForm = styled.form<FormProps>`
@@ -126,7 +127,7 @@ const Form: React.FC<FormProps> = ({ children, ...props }: any) => {
       ref={(ref: any) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
     >
-      <StyledForm {...props}>{children}</StyledForm>
+      <StyledForm {...props} className={props?.classNames}>{children}</StyledForm>
     </form>
   );
 };
@@ -147,6 +148,10 @@ const FormSettings = () => {
     <SettingsWrapper
       defaultValues={props}
       settings={{
+        classNames: {
+          type: "textarea",
+          label: "Tailwind Classes"
+        },
         display: {
           type: "select",
           label: "Display",

@@ -26,6 +26,7 @@ type TextProps = {
   fontFamily?: string;
   customCss?: any;
   [x: string]: any;
+  classNames?: string;
 }
 
 const StyledText = styled.p<TextProps>`
@@ -90,6 +91,7 @@ const Text: React.FC<TextProps> = ({
         ref={connect}
         onClick={props.onClick}
         {...props}
+        className={props?.classNames}
       >
         {props.text}
       </StyledText>
@@ -113,6 +115,10 @@ export const TextSettings = () => {
     <SettingsWrapper
       defaultValues={props}
       settings={{
+        classNames: {
+          type: "textarea",
+          label: "Tailwind Classes"
+        },
         text: {
           type: "text",
           label: "Text",

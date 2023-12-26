@@ -20,6 +20,7 @@ type ButtonProps = {
   isSelected?: boolean;
   [x: string]: any;
   customCss?: any;
+  classNames?: string;
 };
 
 const StyledButton = styled.button<ButtonProps>`
@@ -76,7 +77,7 @@ const Button: React.FC<ButtonProps> = ({
         ref={connect}
         onClick={props.onClick}
         {...props}
-      >
+        className={props?.classNames}>
         {props.text}
       </StyledButton>
     </div>
@@ -109,6 +110,10 @@ export const ButtonSettings = () => {
     <SettingsWrapper
       defaultValues={props}
       settings={{
+        classNames: {
+          type: "textarea",
+          label: "Tailwind Classes"
+        },
         text: {
           type: "text",
           label: "Button Text",

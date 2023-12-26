@@ -20,6 +20,7 @@ type ImageProps = {
     isSelected?: boolean;
     [x: string]: any;
     customCss?: any;
+    classNames?: string;
 };
 
 const StyledImage = styled.img<ImageProps>`
@@ -72,7 +73,7 @@ const CustomImage: React.FC<ImageProps> = ({ ...props }: any) => {
         >
             <StyledImage
                 {...props}
-            />
+                className={props?.classNames}/>
         </div>
     );
 };
@@ -94,6 +95,10 @@ const ImageSettings = () => {
         <SettingsWrapper
             defaultValues={props}
             settings={{
+                classNames: {
+                    type: "textarea",
+                    label: "Tailwind Classes"
+                  },
                 src: {
                     type: "text",
                     label: "Image Source",
