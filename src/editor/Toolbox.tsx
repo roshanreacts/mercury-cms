@@ -20,6 +20,7 @@ import Anchor from "@/components/dragableComponents/Anchor";
 import { IoIosLink } from "react-icons/io";
 import StyledBox from "@/components/Atoms/StyledBox";
 import { StyledText } from "@/components/Atoms/StyledText";
+import { Layers } from "@craftjs/layers"
 
 const ToolboxContainer = styled.div`
   display: grid;
@@ -162,6 +163,8 @@ export const Toolbox = () => {
           <IoIosLink /> <StyledText>Anchor</StyledText>
         </ToolboxButton>
       </ToolboxContainer>
+      <DragLabel>Node Tree</DragLabel>
+      <Layers />
     </StyledBox>
   );
 };
