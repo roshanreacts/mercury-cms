@@ -180,6 +180,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
               outline: "none",
               fontSize: "11px"
             }}
+            autoComplete="on"
             {...props}
             onChange={(e) => props.onChange && props.onChange(e.target.value)}
             value={defaultValues}

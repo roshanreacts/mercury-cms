@@ -28,7 +28,7 @@ type AnchorProps = {
     verticalAlign?: string;
     fontFamily?: string;
     isSelected?: boolean;
-    children?: React.ReactNode; 
+    children?: React.ReactNode;
     [x: string]: any;
     classNames?: string;
 };
@@ -83,15 +83,15 @@ const Anchor: React.FC<AnchorProps> = ({ children, ...props }: any) => {
     }, [selected]);
 
     return (
-        <a
+        <div
             {...props}
             ref={(ref: any) => connect(drag(ref))}
             onClick={() => selected && setEditable(true)}
         >
-            <StyledAnchor ref={connect} onClick={props.onClick} {...props} className={props?.classNames}>
+            <StyledAnchor ref={connect} href={props.href} target={props.target} {...props} className={props?.classNames}>
                 {children}
             </StyledAnchor>
-        </a>
+        </div>
     );
 };
 
@@ -100,6 +100,7 @@ export const AnchorDefaultProps: AnchorProps = {
     padding: "20px",
     backgroundColor: "white",
     width: "fit-content",
+    target: "_self"
 };
 
 export const AnchorSettings = () => {
@@ -117,26 +118,27 @@ export const AnchorSettings = () => {
                 classNames: {
                     type: "textarea",
                     label: "Tailwind Classes"
-                  },
+                },
                 href: {
                     type: "text",
                     label: "Link URL",
+                },
+                target: {
+                    type: "select",
+                    label: "Target",
+                    options: ["_blank", "_self", "_parent", "_top"]
                 },
                 backgroundColor: {
                     type: "color",
                     label: "Background Color"
                 },
-                target: {
+                width: {
                     type: "text",
-                    label: "Target",
+                    label: "Width",
                 },
                 color: {
                     type: "color",
                     label: "Text Color",
-                },
-                width: {
-                    type: "text",
-                    label: "Width",
                 },
                 height: {
                     type: "text",
@@ -234,5 +236,6 @@ Anchor.craft = {
         canDrag: () => true,
     },
 };
+
 
 export default Anchor;
