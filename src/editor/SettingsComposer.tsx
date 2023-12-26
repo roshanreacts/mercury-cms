@@ -37,7 +37,7 @@ function convertCssStringToMap(cssString: string): any {
 const StyledForm = styled.form`
 display: grid;
 grid-template-columns: repeat(2, 1fr); 
-gap:px;
+gap: 2px;
 margin: auto;
 `;
 
@@ -169,14 +169,13 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "textarea":
       return (
-        <StyledBox style={{ position: "relative", width: "100px" }}>
+        <StyledBox style={{ position: "relative", width: "100px"}}>
           <StyledLabel style={{ position: "absolute", top: "-12px", zIndex: "10", padding: "0 5px", background: "white" }}>{label}</StyledLabel>
           <textarea
             rows={3}
             style={{
-              width: "100px",
-              height: "20px",
-              border: "1px #000",
+              display: "block",
+              width: "210px",
               borderRadius: "5px",
               outline: "none",
               fontSize: "11px"
@@ -186,6 +185,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
             value={defaultValues}
           />
         </StyledBox>
+
       );
     case "color":
 
@@ -279,7 +279,7 @@ const SettingsWrapper: React.FC<SettingsWrapperProps> = ({
   return (
     <StyledForm>
       {Object.keys(settings).map((key) => (
-        <StyledFieldset key={key}>
+        <StyledFieldset key={key} style= {{ gridColumn: `${settings[key].type === 'textarea'? "span 2" : "inherit"}`}}>
           <SettingsComposer
             type={settings[key].type}
             options={settings[key]?.options ? settings[key].options : undefined}

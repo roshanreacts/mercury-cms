@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
 import SettingsWrapper from "@/editor/SettingsComposer";
+import { ClassNames } from "@emotion/react";
 
 type BoxProps = {
   display?: string;
@@ -45,6 +46,7 @@ type BoxProps = {
   [x: string]: any;
   children?: React.ReactNode;
   customCss?: any;
+  classNames?: string;
 };
 
 const StyledBox = styled.div<BoxProps>`
@@ -127,7 +129,7 @@ const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
       ref={(ref: any) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
     >
-      <StyledBox {...props}>{children}</StyledBox>
+      <StyledBox {...props} className={props?.classNames}>{children}</StyledBox>
     </div>
   );
 };
@@ -148,6 +150,10 @@ const BoxSettings = () => {
     <SettingsWrapper
       defaultValues={props}
       settings={{
+        classNames: {
+          type: "textarea",
+          label: "Tailwind Classes"
+        },
         display: {
           type: "select",
           label: "Display",
@@ -192,7 +198,7 @@ const BoxSettings = () => {
           type: "text",
           label: "Place Items",
         },
-        
+
         color: {
           type: "color",
           label: "Text Color",
