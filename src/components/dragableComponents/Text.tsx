@@ -3,6 +3,7 @@ import React, { HTMLAttributes, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
 import SettingsWrapper from "@/editor/SettingsComposer";
+import CopyComponentButton from "../CopyComponentButton";
 
 type TextProps = {
   text: string;
@@ -53,13 +54,13 @@ const StyledText = styled.p<TextProps>`
   ${(props) => props.customCss};
   
   ${(props) =>
-    props.isSelected && `border: 4px dotted red;`
+    props.isSelected && `border: 2px dashed red;`
   }
   `;
 const Text: React.FC<TextProps> = ({
   ...props
 }: any) => {
-  
+
   const {
     connectors: { connect, drag },
     selected,
@@ -86,7 +87,12 @@ const Text: React.FC<TextProps> = ({
       {...props}
       ref={(ref: any) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
+      style={{
+        position: 'relative'
+      }}
     >
+      <CopyComponentButton isSelected={props?.isSelected} />
+
       <StyledText
         ref={connect}
         onClick={props.onClick}

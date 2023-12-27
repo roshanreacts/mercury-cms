@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
 import SettingsWrapper from "@/editor/SettingsComposer";
+import CopyComponentButton from "../CopyComponentButton";
 
 type TextAreaProps = {
   backgroundColor?: string;
@@ -90,7 +91,12 @@ const TextArea: React.FC<TextAreaProps> = ({ children, ...props }: any) => {
       {...props}
       ref={(ref: any) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
+      style={{
+        position: 'relative'
+      }}
     >
+      <CopyComponentButton isSelected={props?.isSelected} />
+
       <StyledTextArea ref={connect}
         onClick={props.onClick} {...props} className={props?.classNames}>{children}</StyledTextArea>
     </div>
