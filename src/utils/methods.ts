@@ -17,7 +17,6 @@ export const formatDate = (dateString: string) => {
     const formattedDate = new Intl.DateTimeFormat("en-IN", options)?.format(date);
     return formattedDate;
   } catch (error) {
-    // console.log(error);
 
   }
 };

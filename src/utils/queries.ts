@@ -67,3 +67,16 @@ export const SAVE_PAGE_CONTENT = `mutation UpdatePage($input: updatePageInput!) 
     content
   }
 }`
+
+
+export const LOGIN = `
+mutation Login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    message
+    token
+    name
+    email
+    role
+    id
+  }
+}`

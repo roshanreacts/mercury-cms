@@ -1,19 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoLogInOutline } from "react-icons/io5";
 import Image from "next/image";
 import { useFormik } from "formik";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useLazyQuery } from "@/containers/hooks";
+import { serverFetch } from "@/app/action";
+import { LOGIN } from "@/utils/queries";
+import { ToastErrorMessage, ToastSuccessMessage } from "./ToastMessage";
+import { PuffLoader } from "react-spinners";
 
 const LoginComponent = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loginAPICall, { data, error, loading }] = useLazyQuery(serverFetch);
 
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    validate: (values: {email: string, password: string}) => {
+    validate: (values: { email: string, password: string }) => {
       const errors = {
         email: "",
         password: "",
@@ -26,12 +32,31 @@ const LoginComponent = () => {
       }
       return errors.email || errors.password ? errors : {};
     },
-    onSubmit: (values: {email: string, password: string}) => {
-      console.log(values);
+    onSubmit: (values: { email: string, password: string }) => {
+      loginAPICall(
+        LOGIN,
+        {
+          email: values.email,
+          password: values.password
+        },
+        {
+          cache: "no-store"
+        }
+      )
     },
   });
+
+
+  useEffect(() => {
+    if (error) {
+      ToastErrorMessage(error.message)
+    }
+    if (data) {
+      ToastSuccessMessage("Login Successful!!")
+    }
+  }, [data, loading, error]);
   return (
-    <div className="max-w-lg mx-auto bg-gray-50 p-8 rounded-xl shadow shadow-slate-300 md:mt-28">
+    <div className="max-w-lg mx-auto bg-gray-50 p-8 rounded-xl shadow shadow-slate-300 md:mt-28 mt-[40%]">
       <div className="flex justify-center items-center flex-col gap-4 mb-4">
         <h1 className="text-4xl font-medium">Login</h1>
         <p className="text-slate-500">Hi, Welcome back to</p>
@@ -89,10 +114,16 @@ const LoginComponent = () => {
             className="w-full py-3 font-medium text-white bg-[#0075e5] hover:bg-[#0075e5] rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center"
             type="submit"
           >
-            <span>Login</span>
-            <span>
-              <IoLogInOutline className="w-6 h-6" />
-            </span>
+            {
+              loading ?
+                <PuffLoader color="#fff" size={30}/>
+                :
+                <>
+                  <span>Login</span>
+                  <span>
+                    <IoLogInOutline className="w-6 h-6" />
+                  </span>
+                </>}
           </button>
         </div>
       </form>
