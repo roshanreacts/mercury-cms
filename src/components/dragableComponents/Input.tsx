@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
 import SettingsWrapper from "@/editor/SettingsComposer";
+import CopyComponentButton from "../CopyComponentButton";
 
 type InputProps = {
   width?: string;
@@ -47,7 +48,7 @@ const StyledInput = styled.input<InputProps>`
     //   grid-template-columns: ${props.gridTemplateColumns};
     // `
 
-    props.isSelected && `border: 4px dotted red;`
+    props.isSelected && `border: 2px dashed red;`
   }
 `;
 
@@ -75,13 +76,23 @@ const Input: React.FC<InputProps> = ({ onChange, ...props }: any) => {
   }, [selected]);
 
   return (
-    <StyledInput
+    <div
       {...props}
       ref={(ref: any) => connect(drag(ref))}
-      onChange={onChange}
       onClick={() => selected && setEditable(true)}
-      className={props?.classNames}
-    />
+      style={{
+        position: 'relative'
+      }}
+    >
+
+      <CopyComponentButton isSelected={props?.isSelected} />
+
+      <StyledInput
+        {...props}
+        onChange={onChange}
+        className={props?.classNames}
+      />
+    </div>
   );
 };
 

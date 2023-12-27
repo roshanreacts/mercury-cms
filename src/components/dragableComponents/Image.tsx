@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
 import SettingsWrapper from "@/editor/SettingsComposer";
+import CopyComponentButton from "../CopyComponentButton";
 
 type ImageProps = {
     src?: string;
@@ -39,8 +40,8 @@ const StyledImage = styled.img<ImageProps>`
   z-index: ${(props) => props.zIndex};
   ${(props) => props.customCss};
   ${(props) =>
-    props.isSelected && "border: 4px dotted red;"
-  }
+        props.isSelected && "border: 2px dashed red;"
+    }
 `;
 
 const CustomImage: React.FC<ImageProps> = ({ ...props }: any) => {
@@ -70,10 +71,15 @@ const CustomImage: React.FC<ImageProps> = ({ ...props }: any) => {
             {...props}
             ref={(ref: any) => connect(drag(ref))}
             onClick={() => selected && setEditable(true)}
+            style={{
+                position: 'relative'
+            }}
         >
+            <CopyComponentButton isSelected={props?.isSelected} />
+
             <StyledImage
                 {...props}
-                className={props?.classNames}/>
+                className={props?.classNames} />
         </div>
     );
 };
@@ -98,7 +104,7 @@ const ImageSettings = () => {
                 classNames: {
                     type: "textarea",
                     label: "Tailwind Classes"
-                  },
+                },
                 src: {
                     type: "text",
                     label: "Image Source",
@@ -156,7 +162,7 @@ const ImageSettings = () => {
                 customCss: {
                     type: "textarea",
                     label: "Custom CSS"
-                  }
+                }
             }}
             setProp={setProp}
         />

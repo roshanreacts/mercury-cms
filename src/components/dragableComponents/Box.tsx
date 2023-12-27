@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
 import SettingsWrapper from "@/editor/SettingsComposer";
-import { ClassNames } from "@emotion/react";
+import CopyComponentButton from "../CopyComponentButton";
 
 type BoxProps = {
   display?: string;
@@ -96,7 +96,7 @@ const StyledBox = styled.div<BoxProps>`
      `
   }
   ${(props) =>
-    props.isSelected && "border: 4px dotted red;"
+    props.isSelected && "border: 2px dashed red;"
   }
 
 `;
@@ -113,6 +113,8 @@ const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
 
   const [editable, setEditable] = useState(false);
 
+
+
   useEffect(() => {
     if (selected) {
       setProp((props: any) => props.isSelected = true)
@@ -128,9 +130,11 @@ const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
       {...props}
       ref={(ref: any) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
+      style={{ position: "relative" }}
     >
+      <CopyComponentButton isSelected={props?.isSelected}/>
       <StyledBox {...props} className={props?.classNames}>{children}</StyledBox>
-    </div>
+    </div >
   );
 };
 

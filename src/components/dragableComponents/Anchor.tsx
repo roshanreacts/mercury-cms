@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
 import SettingsWrapper from "@/editor/SettingsComposer";
+import CopyComponentButton from "../CopyComponentButton";
 
 type AnchorProps = {
     href: string;
@@ -57,7 +58,7 @@ const StyledAnchor = styled.a<AnchorProps>`
   vertical-align: ${(props: AnchorProps) => props.verticalAlign};
   font-family: ${(props: AnchorProps) => props.fontFamily};
 
-  ${(props) => props.isSelected && "border: 4px dotted red;"}
+  ${(props) => props.isSelected && "border: 2px dashed red;"}
 `;
 
 const Anchor: React.FC<AnchorProps> = ({ children, ...props }: any) => {
@@ -87,7 +88,12 @@ const Anchor: React.FC<AnchorProps> = ({ children, ...props }: any) => {
             {...props}
             ref={(ref: any) => connect(drag(ref))}
             onClick={() => selected && setEditable(true)}
+            style={{
+                position: 'relative'
+            }}
         >
+            <CopyComponentButton isSelected={props?.isSelected} />
+
             <StyledAnchor ref={connect} href={props.href} target={props.target} {...props} className={props?.classNames}>
                 {children}
             </StyledAnchor>

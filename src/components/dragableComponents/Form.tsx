@@ -83,7 +83,7 @@ const StyledForm = styled.form<FormProps>`
   ${(props) => props.customCss};
 
   ${(props) =>
-    props.isSelected && `border: 4px dotted red;`
+    props.isSelected && `border: 2px dashed red;`
   }
 
   ${(props) =>

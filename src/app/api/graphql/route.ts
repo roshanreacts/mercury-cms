@@ -28,8 +28,6 @@ mercury.addGraphqlSchema(
       hello: (root: any, args: any, ctx: any, resolveInfo: any) => {
         const fields = graphqlFields(resolveInfo);
         const deep = 0;
-        // compose mongoose populate query from graphql fields
-        // console.log("Hello", fields);
         const requestedFields = composePopulateQuery(fields, deep, 4);
         const select = Object.keys(fields).map((key) => key);
         console.log("Hello", JSON.stringify(requestedFields, null, 2));
