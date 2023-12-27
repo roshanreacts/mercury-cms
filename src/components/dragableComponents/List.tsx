@@ -26,6 +26,7 @@ type ListProps = {
   bottom?: string;
   zIndex?: string;
   children?: React.ReactNode;
+  classNames?: string;
 };
 
 const StyledList = styled.ul<ListProps>`
@@ -59,7 +60,7 @@ const StyledList = styled.ul<ListProps>`
 `;
 
 const List: React.FC<ListProps> = ({ children, ...props }: any) => {
-  return <StyledList {...props}>{children}</StyledList>;
+  return <StyledList {...props} className={props?.classNames}>{children}</StyledList>;
 };
 
 export const ListDefaultProps: ListProps = {
