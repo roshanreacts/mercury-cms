@@ -26,7 +26,7 @@ const Navbar = () => {
   const router = useRouter();
   const handleLogOut = () => {
     clearTokenCookie();
-    router.push('/admin/login')
+    router.replace('/admin/login')
   }
   return (
     <MainDiv>
