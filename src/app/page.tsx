@@ -10,7 +10,7 @@ const page = async () => {
 
     const data = await serverFetch(GET_PAGE, { where: { path: { is: "/" } } }, { cache: "no-store" });
 
-    if (!data) {
+    if (data.error || !data) {
         redirect('/404');
     }
 

@@ -95,6 +95,28 @@ const SideBar = () => {
 
                 </div>
 
+
+                <h4 style={{
+                    opacity: "0.5",
+                    fontWeight: '400',
+                    fontSize: "14px",
+                    padding: "0px"
+                }}>Media</h4>
+
+                <div style={{
+                    marginLeft: "3px",
+                    display: "flex",
+                    flexDirection: "column",
+                }}>
+                    <SubTitles onClick={() => {
+                        // setCuurentTab("allPages")
+                        router.replace('/admin/media')
+
+                    }}>
+                        Files
+                    </SubTitles>
+                </div>
+
             </PagesCard>
         </MainDiv>
     )
