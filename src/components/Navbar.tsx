@@ -3,6 +3,8 @@ import Image from 'next/image';
 import React from 'react';
 import { CgProfile } from 'react-icons/cg';
 import styled from '@emotion/styled';
+import { clearTokenCookie } from '@/utils/cookie';
+import { useRouter } from 'next/navigation';
 
 const MainDiv = styled.div`
   display: flex;
@@ -21,6 +23,11 @@ const ProfileDiv = styled.div`
 `
 
 const Navbar = () => {
+  const router = useRouter();
+  const handleLogOut = () => {
+    clearTokenCookie();
+    router.push('/admin/login')
+  }
   return (
     <MainDiv>
       <Image
@@ -30,8 +37,10 @@ const Navbar = () => {
         height={40}
       />
       <ProfileDiv >
+        
         <CgProfile style={{ fontSize: '30px' }} />
       </ProfileDiv>
+      <div><button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline' onClick={handleLogOut}>Log Out</button></div>
     </MainDiv>
   );
 };

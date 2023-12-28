@@ -9,10 +9,14 @@ import { serverFetch } from "@/app/action";
 import { LOGIN } from "@/utils/queries";
 import { ToastErrorMessage, ToastSuccessMessage } from "./ToastMessage";
 import { PuffLoader } from "react-spinners";
+import { setTokenCookie } from "@/utils/cookie";
+import { ToastContainer } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const LoginComponent = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loginAPICall, { data, error, loading }] = useLazyQuery(serverFetch);
+  const router = useRouter()
 
   const formik = useFormik({
     initialValues: {
@@ -52,11 +56,14 @@ const LoginComponent = () => {
       ToastErrorMessage(error.message)
     }
     if (data) {
+      setTokenCookie(data?.login.token)
       ToastSuccessMessage("Login Successful!!")
+      router.push('/admin')
     }
   }, [data, loading, error]);
   return (
     <div className="max-w-lg mx-auto bg-gray-50 p-8 rounded-xl shadow shadow-slate-300 md:mt-28 mt-[40%]">
+      <ToastContainer/>
       <div className="flex justify-center items-center flex-col gap-4 mb-4">
         <h1 className="text-4xl font-medium">Login</h1>
         <p className="text-slate-500">Hi, Welcome back to</p>
