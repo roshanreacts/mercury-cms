@@ -5,23 +5,25 @@ import SettingsWrapper from "@/editor/SettingsComposer";
 import CopyComponentButton from "../CopyComponentButton";
 
 type ImageProps = {
-    src?: string;
-    alt?: string;
-    width?: string;
-    height?: string;
-    borderRadius?: number;
-    border?: number;
-    objectFit?: string;
-    position?: string;
-    top?: string;
-    left?: string;
-    right?: string;
-    bottom?: string;
-    zIndex?: string;
-    isSelected?: boolean;
-    [x: string]: any;
-    customCss?: any;
-    classNames?: string;
+  href?: string;
+  target?: string;
+  src?: string;
+  alt?: string;
+  width?: string;
+  height?: string;
+  borderRadius?: number;
+  border?: number;
+  objectFit?: string;
+  position?: string;
+  top?: string;
+  left?: string;
+  right?: string;
+  bottom?: string;
+  zIndex?: string;
+  isSelected?: boolean;
+  [x: string]: any;
+  customCss?: any;
+  classNames?: string;
 };
 
 const StyledImage = styled.img<ImageProps>`
@@ -39,142 +41,152 @@ const StyledImage = styled.img<ImageProps>`
   bottom: ${(props) => props.bottom};
   z-index: ${(props) => props.zIndex};
   ${(props) => props.customCss};
-  ${(props) =>
-        props.isSelected && "border: 2px dashed red;"
-    }
+  ${(props) => props.isSelected && "border: 2px dashed red;"}
 `;
 
 const CustomImage: React.FC<ImageProps> = ({ ...props }: any) => {
-    const {
-        connectors: { connect, drag },
-        selected,
-        actions: { setProp },
-    } = useNode((state) => ({
-        selected: state.events.selected,
-        dragged: state.events.dragged,
-    }));
+  const {
+    connectors: { connect, drag },
+    selected,
+    actions: { setProp },
+  } = useNode((state) => ({
+    selected: state.events.selected,
+    dragged: state.events.dragged,
+  }));
 
-    const [editable, setEditable] = useState(false);
+  const [editable, setEditable] = useState(false);
 
-    useEffect(() => {
-        if (selected) {
-            setProp((props: any) => props.isSelected = true)
-            return;
-        }
-        setProp((props: any) => props.isSelected = false)
+  useEffect(() => {
+    if (selected) {
+      setProp((props: any) => (props.isSelected = true));
+      return;
+    }
+    setProp((props: any) => (props.isSelected = false));
 
-        setEditable(false);
-    }, [selected]);
+    setEditable(false);
+  }, [selected]);
 
-    return (
-        <div
-            {...props}
-            ref={(ref: any) => connect(drag(ref))}
-            onClick={() => selected && setEditable(true)}
-            style={{
-                position: 'relative'
-            }}
-        >
-            <CopyComponentButton isSelected={props?.isSelected} />
-
-            <StyledImage
-                {...props}
-                className={props?.classNames} />
-        </div>
-    );
+  return (
+    <div
+      {...props}
+      ref={(ref: any) => connect(drag(ref))}
+      onClick={() => selected && setEditable(true)}
+      style={{
+        position: "relative",
+      }}
+    >
+      <CopyComponentButton isSelected={props?.isSelected} />
+      {props.href ? (
+        <a href={props.href} target={props.target}>
+          <StyledImage {...props} className={props?.classNames} />
+        </a>
+      ) : (
+        <StyledImage {...props} className={props?.classNames} />
+      )}
+    </div>
+  );
 };
 
 export const ImageDefaultProps: ImageProps = {
-    src: "https://picsum.photos/200",
-    isSelected: true,
+  src: "https://picsum.photos/200",
+  isSelected: true,
 };
 
 const ImageSettings = () => {
-    const {
-        actions: { setProp },
-        props,
-    } = useNode((node) => ({
-        props: node.data.props,
-    }));
+  const {
+    actions: { setProp },
+    props,
+  } = useNode((node) => ({
+    props: node.data.props,
+  }));
 
-    return (
-        <SettingsWrapper
-            defaultValues={props}
-            settings={{
-                classNames: {
-                    type: "textarea",
-                    label: "Tailwind Classes"
-                },
-                src: {
-                    type: "text",
-                    label: "Image Source",
-                },
-                alt: {
-                    type: "text",
-                    label: "Alt Text",
-                },
-                width: {
-                    type: "text",
-                    label: "Width",
-                },
-                height: {
-                    type: "text",
-                    label: "Height",
-                },
-                borderRadius: {
-                    type: "text",
-                    label: "Border Radius",
-                },
-                border: {
-                    type: "text",
-                    label: "Border",
-                },
-                objectFit: {
-                    type: "select",
-                    label: "Object Fit",
-                    options: ["fill", "contain", "cover", "none", "scale-down"],
-                },
-                position: {
-                    type: "select",
-                    label: "Position",
-                    options: ["relative", "absolute", "fixed"],
-                },
-                top: {
-                    type: "text",
-                    label: "Top",
-                },
-                left: {
-                    type: "text",
-                    label: "Left",
-                },
-                right: {
-                    type: "text",
-                    label: "Right",
-                },
-                bottom: {
-                    type: "text",
-                    label: "Bottom",
-                },
-                zIndex: {
-                    type: "text",
-                    label: "Z-Index",
-                },
-                customCss: {
-                    type: "textarea",
-                    label: "Custom CSS"
-                }
-            }}
-            setProp={setProp}
-        />
-    );
+  return (
+    <SettingsWrapper
+      defaultValues={props}
+      settings={{
+        classNames: {
+          type: "textarea",
+          label: "Tailwind Classes",
+        },
+        src: {
+          type: "text",
+          label: "Image Source",
+        },
+        href: {
+          type: "text",
+          label: "Link URL",
+        },
+        target: {
+          type: "select",
+          label: "Target",
+          options: ["_blank", "_self", "_parent", "_top"],
+        },
+        alt: {
+          type: "text",
+          label: "Alt Text",
+        },
+        width: {
+          type: "text",
+          label: "Width",
+        },
+        height: {
+          type: "text",
+          label: "Height",
+        },
+        borderRadius: {
+          type: "text",
+          label: "Border Radius",
+        },
+        border: {
+          type: "text",
+          label: "Border",
+        },
+        objectFit: {
+          type: "select",
+          label: "Object Fit",
+          options: ["fill", "contain", "cover", "none", "scale-down"],
+        },
+        position: {
+          type: "select",
+          label: "Position",
+          options: ["relative", "absolute", "fixed"],
+        },
+        top: {
+          type: "text",
+          label: "Top",
+        },
+        left: {
+          type: "text",
+          label: "Left",
+        },
+        right: {
+          type: "text",
+          label: "Right",
+        },
+        bottom: {
+          type: "text",
+          label: "Bottom",
+        },
+        zIndex: {
+          type: "text",
+          label: "Z-Index",
+        },
+        customCss: {
+          type: "textarea",
+          label: "Custom CSS",
+        },
+      }}
+      setProp={setProp}
+    />
+  );
 };
 
 //@ts-ignore
 CustomImage.craft = {
-    props: ImageDefaultProps,
-    related: {
-        settings: ImageSettings,
-    },
+  props: ImageDefaultProps,
+  related: {
+    settings: ImageSettings,
+  },
 };
 
 export default CustomImage;

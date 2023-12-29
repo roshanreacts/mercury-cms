@@ -5,6 +5,8 @@ import SettingsWrapper from "@/editor/SettingsComposer";
 import CopyComponentButton from "../CopyComponentButton";
 
 type BoxProps = {
+  href?: string;
+  target?: string;
   display?: string;
   flexDirection?: string;
   justifyContent?: string;
@@ -81,7 +83,6 @@ const StyledBox = styled.div<BoxProps>`
   z-index: ${(props) => props.zIndex};
   color: ${(props) => props.color};
   ${(props) => props.customCss};
-  
 
   ${(props) =>
     props.display &&
@@ -93,12 +94,8 @@ const StyledBox = styled.div<BoxProps>`
       gap: ${props.gap};
       place-items: ${props.placeItems};
       grid-template-columns: ${props.gridTemplateColumns};
-     `
-  }
-  ${(props) =>
-    props.isSelected && "border: 2px dashed red;"
-  }
-
+     `}
+  ${(props) => props.isSelected && "border: 2px dashed red;"}
 `;
 
 const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
@@ -113,15 +110,13 @@ const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
 
   const [editable, setEditable] = useState(false);
 
-
-
   useEffect(() => {
     if (selected) {
-      setProp((props: any) => props.isSelected = true)
+      setProp((props: any) => (props.isSelected = true));
       return;
     }
 
-    setProp((props: any) => props.isSelected = false)
+    setProp((props: any) => (props.isSelected = false));
     setEditable(false);
   }, [selected]);
 
@@ -132,14 +127,25 @@ const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
       onClick={() => selected && setEditable(true)}
       style={{ position: "relative" }}
     >
-      <CopyComponentButton isSelected={props?.isSelected}/>
-      <StyledBox {...props} className={props?.classNames}>{children}</StyledBox>
-    </div >
+      <CopyComponentButton isSelected={props?.isSelected} />
+
+      {props.href ? (
+        <a href={props.href} target={props.target}>
+          <StyledBox {...props} className={props?.classNames}>
+            {children}
+          </StyledBox>
+        </a>
+      ) : (
+        <StyledBox {...props} className={props?.classNames}>
+          {children}
+        </StyledBox>
+      )}
+    </div>
   );
 };
 
 export const BoxDefaultProps: BoxProps = {
-  isSelected: true
+  isSelected: true,
 };
 
 const BoxSettings = () => {
@@ -156,7 +162,16 @@ const BoxSettings = () => {
       settings={{
         classNames: {
           type: "textarea",
-          label: "Tailwind Classes"
+          label: "Tailwind Classes",
+        },
+        href: {
+          type: "text",
+          label: "Link URL",
+        },
+        target: {
+          type: "select",
+          label: "Target",
+          options: ["_blank", "_self", "_parent", "_top"],
         },
         display: {
           type: "select",
@@ -330,8 +345,8 @@ const BoxSettings = () => {
         },
         customCss: {
           type: "textarea",
-          label: "Custom CSS"
-        }
+          label: "Custom CSS",
+        },
       }}
       setProp={setProp}
     />

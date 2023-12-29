@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { useNode } from "@craftjs/core";
@@ -6,6 +6,8 @@ import SettingsWrapper from "@/editor/SettingsComposer";
 import CopyComponentButton from "../CopyComponentButton";
 
 type ButtonProps = {
+  href?: string;
+  target?: string;
   text?: string;
   onClick?: any;
   padding?: string;
@@ -35,18 +37,13 @@ const StyledButton = styled.button<ButtonProps>`
   font-weight: ${(props) => props?.fontWeight || "bold"};
   transition: ${(props) => props?.transition || "background 0.3s ease"};
   ${(props) => props.customCss};
-  ${(props) =>
-    props.isSelected && "border: 2px dashed red;"
-  }
+  ${(props) => props.isSelected && "border: 2px dashed red;"}
   &:hover {
     background: ${(props) => props?.hoverBackground || "darkgreen"};
   }
-  
 `;
 
-const Button: React.FC<ButtonProps> = ({
-  ...props
-}: any) => {
+const Button: React.FC<ButtonProps> = ({ ...props }: any) => {
   const {
     connectors: { connect, drag },
     selected,
@@ -60,10 +57,10 @@ const Button: React.FC<ButtonProps> = ({
 
   useEffect(() => {
     if (selected) {
-      setProp((props: any) => props.isSelected = true)
+      setProp((props: any) => (props.isSelected = true));
       return;
     }
-    setProp((props: any) => props.isSelected = false)
+    setProp((props: any) => (props.isSelected = false));
 
     setEditable(false);
   }, [selected]);
@@ -74,18 +71,31 @@ const Button: React.FC<ButtonProps> = ({
       ref={(ref: any) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
       style={{
-        position: 'relative'
+        position: "relative",
       }}
     >
       <CopyComponentButton isSelected={props?.isSelected} />
-
-      <StyledButton
-        ref={connect}
-        onClick={props.onClick}
-        {...props}
-        className={props?.classNames}>
-        {props.text}
-      </StyledButton>
+      {props?.href ? (
+        <a href={props.href} target={props.target}>
+          <StyledButton
+            ref={connect}
+            onClick={props.onClick}
+            {...props}
+            className={props?.classNames}
+          >
+            {props.text}
+          </StyledButton>
+        </a>
+      ) : (
+        <StyledButton
+          ref={connect}
+          onClick={props.onClick}
+          {...props}
+          className={props?.classNames}
+        >
+          {props.text}
+        </StyledButton>
+      )}
     </div>
   );
 };
@@ -118,7 +128,16 @@ export const ButtonSettings = () => {
       settings={{
         classNames: {
           type: "textarea",
-          label: "Tailwind Classes"
+          label: "Tailwind Classes",
+        },
+        href: {
+          type: "text",
+          label: "Link URL",
+        },
+        target: {
+          type: "select",
+          label: "Target",
+          options: ["_blank", "_self", "_parent", "_top"],
         },
         text: {
           type: "text",
@@ -166,8 +185,8 @@ export const ButtonSettings = () => {
         },
         customCss: {
           type: "textarea",
-          label: "Custom CSS"
-        }
+          label: "Custom CSS",
+        },
       }}
       setProp={setProp}
     />

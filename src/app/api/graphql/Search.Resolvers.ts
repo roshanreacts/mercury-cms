@@ -39,7 +39,7 @@ export default {
           id: user.id,
         };
       } catch (error: any) {
-        throw new GraphQLError(error);
+        throw new GraphQLError("Login Failed, Please Check Credentials");
       }
     },
   },

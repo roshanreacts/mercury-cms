@@ -6,6 +6,8 @@ import SettingsWrapper from "@/editor/SettingsComposer";
 import CopyComponentButton from "../CopyComponentButton";
 
 type TextProps = {
+  href?: string;
+  target?: string;
   text: string;
   color?: string;
   fontSize?: string;
@@ -28,10 +30,11 @@ type TextProps = {
   customCss?: any;
   [x: string]: any;
   classNames?: string;
-}
+};
 
 const StyledText = styled.p<TextProps>`
   color: ${(props: TextProps) => props.color};
+  target: ${(props: TextProps) => props.target};
   font-size: ${(props: TextProps) => props.fontSize};
   text-align: ${(props: TextProps) => props.textAlign};
   font-style: ${(props: TextProps) => props.fontStyle};
@@ -48,19 +51,14 @@ const StyledText = styled.p<TextProps>`
   padding: ${(props: TextProps) => props.padding};
   cursor: ${(props: TextProps) => props.cursor};
   vertical-align: ${(props: TextProps) => props.verticalAlign};
-  isSelected: ${(props) => props.isSelected};
+  isselected: ${(props) => props.isSelected};
   font-family: ${(props) => props.fontFamily};
   background-color: ${(props) => props.backgroundColor};
   ${(props) => props.customCss};
-  
-  ${(props) =>
-    props.isSelected && `border: 2px dashed red;`
-  }
-  `;
-const Text: React.FC<TextProps> = ({
-  ...props
-}: any) => {
 
+  ${(props) => props.isSelected && `border: 2px dashed red;`}
+`;
+const Text: React.FC<TextProps> = ({ ...props }: any) => {
   const {
     connectors: { connect, drag },
     selected,
@@ -74,10 +72,10 @@ const Text: React.FC<TextProps> = ({
 
   useEffect(() => {
     if (selected) {
-      setProp((props: any) => props.isSelected = true)
+      setProp((props: any) => (props.isSelected = true));
       return;
     }
-    setProp((props: any) => props.isSelected = false)
+    setProp((props: any) => (props.isSelected = false));
 
     setEditable(false);
   }, [selected]);
@@ -88,25 +86,37 @@ const Text: React.FC<TextProps> = ({
       ref={(ref: any) => connect(drag(ref))}
       onClick={() => selected && setEditable(true)}
       style={{
-        position: 'relative'
+        position: "relative",
       }}
     >
       <CopyComponentButton isSelected={props?.isSelected} />
-
-      <StyledText
-        ref={connect}
-        onClick={props.onClick}
-        {...props}
-        className={props?.classNames}
-      >
-        {props.text}
-      </StyledText>
+      {props.href ? (
+        <a href={props.href} target={props.target}>
+          <StyledText
+            ref={connect}
+            onClick={props.onClick}
+            {...props}
+            className={props?.classNames}
+          >
+            {props.text}
+          </StyledText>
+        </a>
+      ) : (
+        <StyledText
+          ref={connect}
+          onClick={props.onClick}
+          {...props}
+          className={props?.classNames}
+        >
+          {props.text}
+        </StyledText>
+      )}
     </div>
   );
 };
 
 export const TextDefaultProps: TextProps = {
-  text: "Your Text Here"
+  text: "Your Text Here",
 };
 
 export const TextSettings = () => {
@@ -123,7 +133,16 @@ export const TextSettings = () => {
       settings={{
         classNames: {
           type: "textarea",
-          label: "Tailwind Classes"
+          label: "Tailwind Classes",
+        },
+        href: {
+          type: "text",
+          label: "Link URL",
+        },
+        target: {
+          type: "select",
+          label: "Target",
+          options: ["_blank", "_self", "_parent", "_top"],
         },
         text: {
           type: "text",
@@ -220,8 +239,8 @@ export const TextSettings = () => {
         },
         customCss: {
           type: "textarea",
-          label: "Custom CSS"
-        }
+          label: "Custom CSS",
+        },
       }}
       setProp={setProp}
     />
