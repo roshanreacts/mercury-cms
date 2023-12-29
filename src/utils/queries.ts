@@ -80,3 +80,14 @@ mutation Login($email: String!, $password: String!) {
     id
   }
 }`
+
+
+export const GET_PAGE_METADATA = `
+query GetPage($where: wherePageInput!) {
+  getPage(where: $where) {
+    id
+    name
+    metaDescription
+    metaTitle
+  }
+}`
