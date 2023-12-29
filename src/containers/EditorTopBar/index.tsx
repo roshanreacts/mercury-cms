@@ -14,7 +14,7 @@ import { ToastErrorMessage } from '@/components/ToastMessage';
 import { ToastContainer } from 'react-toastify';
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
-const EditorTopBar = ({ edit, content, pageId }: { edit: boolean, content: string, pageId: any }) => {
+const EditorTopBar = ({ edit, pageId }: { edit: boolean,  pageId: any }) => {
     const { actions, query, enabled, canUndo, canRedo, selected } = useEditor(
         (state: any, query: any) => ({
             enabled: state.options.enabled,
@@ -26,11 +26,6 @@ const EditorTopBar = ({ edit, content, pageId }: { edit: boolean, content: strin
     const router = useRouter();
     const [savePageContent, { data, loading, error }] = useLazyQuery(serverFetch);
     actions.setOptions((options) => (options.enabled = edit));
-
-    if (content) {
-        const json = compressBase64ToJson(content);
-        actions.deserialize(json);
-    }
 
     const saveCurrentState = () => {
         savePageContent(
