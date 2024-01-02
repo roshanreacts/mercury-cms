@@ -12,7 +12,9 @@ const CopyComponentButton = ({ isSelected }: any) => {
         parent: editorNode.data.parent,
     }));
 
-    const { actions, query } = useEditor();
+    const { actions, query, enabled } = useEditor((state: any, query: any) => ({
+        enabled: state.options.enabled
+    }));
     const insertNodeOnParent = useCallback(
         (
             nodeId: string,
@@ -54,9 +56,9 @@ const CopyComponentButton = ({ isSelected }: any) => {
     }, [id, insertNodeOnParent, parent, query]);
     return (
         <>
-            {isSelected && <button style={{
+            {isSelected && enabled && <button style={{
                 position: "absolute",
-                top: "-20px",
+                top: "0px",
                 left: "46%",
                 padding: "10px 10px 10px 10px",
                 background: "#6989ff",
