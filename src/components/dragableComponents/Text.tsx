@@ -81,20 +81,13 @@ const Text: React.FC<TextProps> = ({ ...props }: any) => {
   }, [selected]);
 
   return (
-    <div
-      {...props}
-      ref={(ref: any) => connect(drag(ref))}
-      onClick={() => selected && setEditable(true)}
-      style={{
-        position: "relative",
-      }}
-    >
+    <>
       <CopyComponentButton isSelected={props?.isSelected} />
       {props.href ? (
         <a href={props.href} target={props.target}>
           <StyledText
-            ref={connect}
-            onClick={props.onClick}
+            ref={(ref: any) => connect(drag(ref))}
+            onClick={() => selected && setEditable(true)}
             {...props}
             className={props?.classNames}
           >
@@ -103,15 +96,15 @@ const Text: React.FC<TextProps> = ({ ...props }: any) => {
         </a>
       ) : (
         <StyledText
-          ref={connect}
-          onClick={props.onClick}
+          ref={(ref: any) => connect(drag(ref))}
+          onClick={() => selected && setEditable(true)}
           {...props}
           className={props?.classNames}
         >
           {props.text}
         </StyledText>
       )}
-    </div>
+    </>
   );
 };
 

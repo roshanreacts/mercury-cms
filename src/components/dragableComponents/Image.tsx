@@ -67,23 +67,18 @@ const CustomImage: React.FC<ImageProps> = ({ ...props }: any) => {
   }, [selected]);
 
   return (
-    <div
-      {...props}
-      ref={(ref: any) => connect(drag(ref))}
-      onClick={() => selected && setEditable(true)}
-      style={{
-        position: "relative",
-      }}
-    >
+    <>
       <CopyComponentButton isSelected={props?.isSelected} />
       {props.href ? (
-        <a href={props.href} target={props.target}>
+        <a href={props.href} target={props.target} ref={(ref: any) => connect(drag(ref))}
+          onClick={() => selected && setEditable(true)}>
           <StyledImage {...props} className={props?.classNames} />
         </a>
       ) : (
-        <StyledImage {...props} className={props?.classNames} />
+        <StyledImage {...props} className={props?.classNames} ref={(ref: any) => connect(drag(ref))}
+          onClick={() => selected && setEditable(true)} />
       )}
-    </div>
+    </>
   );
 };
 

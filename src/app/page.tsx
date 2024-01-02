@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
     )
 
     if (page.error || !page) {
-        console.log(page.error);
+        // console.log(page.error);
     }
 
     return {

@@ -66,20 +66,13 @@ const Button: React.FC<ButtonProps> = ({ ...props }: any) => {
   }, [selected]);
 
   return (
-    <div
-      {...props}
-      ref={(ref: any) => connect(drag(ref))}
-      onClick={() => selected && setEditable(true)}
-      style={{
-        position: "relative",
-      }}
-    >
+    <>
       <CopyComponentButton isSelected={props?.isSelected} />
       {props?.href ? (
         <a href={props.href} target={props.target}>
           <StyledButton
-            ref={connect}
-            onClick={props.onClick}
+            ref={(ref: any) => connect(drag(ref))}
+            onClick={() => selected && setEditable(true)}
             {...props}
             className={props?.classNames}
           >
@@ -88,15 +81,15 @@ const Button: React.FC<ButtonProps> = ({ ...props }: any) => {
         </a>
       ) : (
         <StyledButton
-          ref={connect}
-          onClick={props.onClick}
+          ref={(ref: any) => connect(drag(ref))}
+          onClick={() => selected && setEditable(true)}
           {...props}
           className={props?.classNames}
         >
           {props.text}
         </StyledButton>
       )}
-    </div>
+    </>
   );
 };
 
