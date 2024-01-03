@@ -67,7 +67,6 @@ const Button: React.FC<ButtonProps> = ({ ...props }: any) => {
 
   return (
     <>
-      <CopyComponentButton isSelected={props?.isSelected} />
       {props?.href ? (
         <a href={props.href} target={props.target}>
           <StyledButton
@@ -76,6 +75,8 @@ const Button: React.FC<ButtonProps> = ({ ...props }: any) => {
             {...props}
             className={props?.classNames}
           >
+            <CopyComponentButton isSelected={props?.isSelected} />
+
             {props.text}
           </StyledButton>
         </a>
@@ -86,6 +87,8 @@ const Button: React.FC<ButtonProps> = ({ ...props }: any) => {
           {...props}
           className={props?.classNames}
         >
+          <CopyComponentButton isSelected={props?.isSelected} />
+
           {props.text}
         </StyledButton>
       )}

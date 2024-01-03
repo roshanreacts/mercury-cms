@@ -82,7 +82,6 @@ const Text: React.FC<TextProps> = ({ ...props }: any) => {
 
   return (
     <>
-      <CopyComponentButton isSelected={props?.isSelected} />
       {props.href ? (
         <a href={props.href} target={props.target}>
           <StyledText
@@ -91,6 +90,7 @@ const Text: React.FC<TextProps> = ({ ...props }: any) => {
             {...props}
             className={props?.classNames}
           >
+            <CopyComponentButton isSelected={props?.isSelected} />
             {props.text}
           </StyledText>
         </a>
@@ -101,6 +101,8 @@ const Text: React.FC<TextProps> = ({ ...props }: any) => {
           {...props}
           className={props?.classNames}
         >
+          <CopyComponentButton isSelected={props?.isSelected} />
+
           {props.text}
         </StyledText>
       )}

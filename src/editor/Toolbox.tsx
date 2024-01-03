@@ -21,6 +21,9 @@ import { IoIosLink } from "react-icons/io";
 import StyledBox from "@/components/Atoms/StyledBox";
 import { StyledText } from "@/components/Atoms/StyledText";
 import { Layers } from "@craftjs/layers"
+import Carousel from "@/components/dragableComponents/Carousel";
+import { TfiLayoutSlider } from "react-icons/tfi";
+
 
 const ToolboxContainer = styled.div`
   display: grid;
@@ -161,6 +164,21 @@ export const Toolbox = () => {
           data-cy="toolbox-container"
         >
           <IoIosLink /> <StyledText>Anchor</StyledText>
+        </ToolboxButton>
+
+        <ToolboxButton
+          ref={(ref: any) =>
+            connectors.create(
+              ref,
+              <Element
+                canvas
+                is={Carousel}
+              />
+            )
+          }
+          data-cy="toolbox-container"
+        >
+          <TfiLayoutSlider /><StyledText>Carousel</StyledText>
         </ToolboxButton>
       </ToolboxContainer>
       <DragLabel>Node Tree</DragLabel>

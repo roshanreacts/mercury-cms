@@ -6,6 +6,7 @@ import Input from "@/components/dragableComponents/Input";
 import Dropdown from "@/components/dragableComponents/Dropdown";
 import TextArea from "@/components/dragableComponents/Textarea";
 import List from "@/components/dragableComponents/List";
+import Carousel from "@/components/dragableComponents/Carousel";
 import Button from "@/components/dragableComponents/Button";
 import { Toolbox } from "@/editor/Toolbox";
 import { SettingsPanel } from "@/editor/SettingPanel";
@@ -34,7 +35,8 @@ const resolver = {
   Dropdown,
   CustomImage,
   From,
-  Anchor
+  Anchor,
+  Carousel
 };
 let edit = false;
 export const Editor = () => {
@@ -87,6 +89,8 @@ export const Editor = () => {
         }}
         onNodesChange={query => {
           const json = query.serialize()
+          console.log(json);
+
         }}
       >
         <EditorTopBar edit={edit} pageId={pageId} />
@@ -113,6 +117,7 @@ export const Editor = () => {
                 <Element is={Box} canvas height="100vh" width="auto" backgroundColor="#f7f7f7" overflowY="scroll">
                 </Element>
               </Frame>
+
             }
           </div>
           {

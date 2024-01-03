@@ -122,10 +122,11 @@ const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
 
   return (
     <>
-      <CopyComponentButton isSelected={props?.isSelected} />
 
       {props.href ? (
         <a href={props.href} target={props.target}>
+          <CopyComponentButton isSelected={props?.isSelected} />
+
           <StyledBox {...props} className={props?.classNames} ref={(ref: any) => connect(drag(ref))}
             onClick={() => selected && setEditable(true)}>
             {children}
@@ -134,6 +135,7 @@ const Box: React.FC<BoxProps> = ({ children, ...props }: any) => {
       ) : (
         <StyledBox {...props} className={props?.classNames} ref={(ref: any) => connect(drag(ref))}
           onClick={() => selected && setEditable(true)}>
+          <CopyComponentButton isSelected={props?.isSelected} />
           {children}
         </StyledBox>
       )}
