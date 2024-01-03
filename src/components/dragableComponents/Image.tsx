@@ -183,6 +183,9 @@ CustomImage.craft = {
   related: {
     settings: ImageSettings,
   },
+  rules: {
+    canMoveIn: ()=> false
+  }
 };
 
 export default CustomImage;

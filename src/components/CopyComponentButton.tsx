@@ -3,8 +3,6 @@ import { FreshNode, Node, useEditor, useNode } from "@craftjs/core";
 import { MdFileCopy } from 'react-icons/md'
 
 const CopyComponentButton = ({ isSelected }: any) => {
-
-
     const {
         id,
         parent,
@@ -58,9 +56,9 @@ const CopyComponentButton = ({ isSelected }: any) => {
         <>
             {isSelected && enabled && <button style={{
                 position: "absolute",
-                top: "0px",
-                left: "46%",
-                padding: "10px 10px 10px 10px",
+                top: "10px",
+                left: "40%",
+                padding: "6px",
                 background: "#6989ff",
                 color: "#fff",
                 borderRadius: "5px"

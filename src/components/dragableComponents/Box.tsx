@@ -49,6 +49,7 @@ type BoxProps = {
   children?: React.ReactNode;
   customCss?: any;
   classNames?: string;
+  backgroundImage?: string;
 };
 
 const StyledBox = styled.div<BoxProps>`
@@ -83,6 +84,7 @@ const StyledBox = styled.div<BoxProps>`
   z-index: ${(props) => props.zIndex};
   color: ${(props) => props.color};
   ${(props) => props.customCss};
+  ${(props) => props.backgroundImage && `background-image: url(${props.backgroundImage});`};
 
   ${(props) =>
     props.display &&
@@ -211,6 +213,10 @@ const BoxSettings = () => {
         backgroundColor: {
           type: "color",
           label: "Background Color",
+        },
+        backgroundImage: {
+          type: "text",
+          label: "Background Image",
         },
         placeItems: {
           type: "text",
