@@ -4,7 +4,14 @@ import React, { useEffect, useState } from "react";
 import { ChromePicker } from "react-color";
 import { MdFormatColorFill } from "react-icons/md";
 type SettingsComposerProps = {
-  type: "text" | "number" | "select" | "boolean" | "color" | "textarea";
+  type:
+    | "text"
+    | "number"
+    | "select"
+    | "boolean"
+    | "color"
+    | "textarea"
+    | "slider";
   onChange?: (color: any) => void;
   options?: string[];
   label: string | undefined;
@@ -35,10 +42,10 @@ function convertCssStringToMap(cssString: string): any {
 }
 
 const StyledForm = styled.form`
-display: grid;
-grid-template-columns: repeat(2, 1fr); 
-gap: 2px;
-margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  margin: auto;
 `;
 
 const StyledFieldset = styled.fieldset`
@@ -52,7 +59,7 @@ const StyledLabel = styled.label`
   font-size: 10px;
   font-weight: bold;
   color: #000;
-  margin-bottom:10px
+  margin-bottom: 10px;
 `;
 
 const SettingsComposer: React.FC<SettingsComposerProps> = ({
@@ -90,7 +97,18 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
     case "text":
       return (
         <StyledBox style={{ position: "relative", width: "100px" }}>
-          <StyledLabel style={{ position: "absolute", top: "-11px", backgroundColor: "white", zIndex: "10", paddingLeft: "5px", paddingRight: "5px" }}>{label}</StyledLabel>
+          <StyledLabel
+            style={{
+              position: "absolute",
+              top: "-11px",
+              backgroundColor: "white",
+              zIndex: "10",
+              paddingLeft: "5px",
+              paddingRight: "5px",
+            }}
+          >
+            {label}
+          </StyledLabel>
           <input
             style={{
               width: "100px",
@@ -106,10 +124,86 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
           />
         </StyledBox>
       );
+    case "slider":
+      return (
+        <StyledBox style={{ position: "relative", width: "200px" }}>
+          <StyledLabel
+            style={{
+              position: "absolute",
+              top: "-11px",
+              backgroundColor: "white",
+              zIndex: "10",
+              paddingLeft: "5px",
+              paddingRight: "5px",
+            }}
+          >
+            {label}
+          </StyledLabel>
+          <StyledBox
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "4px",
+            }}
+          >
+            <StyledBox
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              width="20px"
+              height="20px"
+              backgroundColor="red"
+              type="slider"
+              {...props}
+              // onChange={(e) => props.onChange && props.onChange(e.target.value)}
+              value={defaultValues}
+            >
+              1
+            </StyledBox>
+            <StyledBox
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              width="20px"
+              height="20px"
+              backgroundColor="green"
+              type="slider"
+              {...props}
+              // onChange={(e) => props.onChange && props.onChange(e.target.value)}
+              value={defaultValues}
+            >
+              2
+            </StyledBox>
+            <StyledBox
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+              width="20px"
+              height="20px"
+              backgroundColor="blue"
+              type="slider"
+              {...props}
+              // onChange={(e) => props.onChange && props.onChange(e.target.value)}
+              value={defaultValues}
+            >
+              3
+            </StyledBox>
+          </StyledBox>
+        </StyledBox>
+      );
     case "number":
       return (
         <StyledBox style={{ position: "relative", width: "100px" }}>
-          <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
+          <StyledLabel style={{ position: "absolute", top: "-17px" }}>
+            {label}
+          </StyledLabel>
           <input
             style={{
               width: "100px",
@@ -128,14 +222,23 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
     case "select":
       return (
         <StyledBox width="100px" style={{ position: "relative" }}>
-          <StyledLabel style={{ position: "absolute", top: "-12px", zIndex: "10", backgroundColor: "white", padding: "0 5px" }}>{label}</StyledLabel>
+          <StyledLabel
+            style={{
+              position: "absolute",
+              top: "-12px",
+              zIndex: "10",
+              backgroundColor: "white",
+              padding: "0 5px",
+            }}
+          >
+            {label}
+          </StyledLabel>
           <select
             style={{
               width: "100px",
               height: "20px",
               border: "none",
-              borderRadius: "5px"
-
+              borderRadius: "5px",
             }}
             onChange={(e) => props.onChange && props.onChange(e.target.value)}
             value={defaultValues}
@@ -151,7 +254,9 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
     case "boolean":
       return (
         <StyledBox style={{ position: "relative", width: "100px" }}>
-          <StyledLabel style={{ position: "absolute", top: "-17px" }}>{label}</StyledLabel>
+          <StyledLabel style={{ position: "absolute", top: "-17px" }}>
+            {label}
+          </StyledLabel>
           <input
             style={{
               width: "100px",
@@ -169,8 +274,18 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "textarea":
       return (
-        <StyledBox style={{ position: "relative", width: "100px"}}>
-          <StyledLabel style={{ position: "absolute", top: "-12px", zIndex: "10", padding: "0 5px", background: "white" }}>{label}</StyledLabel>
+        <StyledBox style={{ position: "relative", width: "100px" }}>
+          <StyledLabel
+            style={{
+              position: "absolute",
+              top: "-12px",
+              zIndex: "10",
+              padding: "0 5px",
+              background: "white",
+            }}
+          >
+            {label}
+          </StyledLabel>
           <textarea
             rows={3}
             style={{
@@ -178,7 +293,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
               width: "210px",
               borderRadius: "5px",
               outline: "none",
-              fontSize: "11px"
+              fontSize: "11px",
             }}
             autoComplete="on"
             {...props}
@@ -186,12 +301,12 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
             value={defaultValues}
           />
         </StyledBox>
-
       );
     case "color":
-
       useEffect(() => {
-        var match = defaultValues?.match(/rgba?\((\d+), (\d+), (\d+)(, ([\d.]+))?\)/);
+        var match = defaultValues?.match(
+          /rgba?\((\d+), (\d+), (\d+)(, ([\d.]+))?\)/
+        );
         if (match) {
           setColorChip({
             r: match[1] ? match[1] : "256",
@@ -200,12 +315,21 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
             a: match[5] ? match[5] : "1",
           });
         }
-      }, [])
-
+      }, []);
 
       return (
         <StyledBox style={{ position: "relative", width: "100px" }}>
-          <StyledLabel style={{ position: "absolute", top: "-12px", zIndex: "10", backgroundColor: "white", padding: "0 5px" }}>{label}</StyledLabel>
+          <StyledLabel
+            style={{
+              position: "absolute",
+              top: "-12px",
+              zIndex: "10",
+              backgroundColor: "white",
+              padding: "0 5px",
+            }}
+          >
+            {label}
+          </StyledLabel>
           <div
             style={{
               width: "100px",
@@ -220,7 +344,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
             }}
             onClick={handleClick}
           >
-            <StyledBox >
+            <StyledBox>
               <MdFormatColorFill />
             </StyledBox>
             <div
@@ -229,7 +353,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
                 height: "25px",
                 borderRadius: "8px",
                 background: `rgba(${colorChip.r}, ${colorChip.g}, ${colorChip.b}, ${colorChip.a})`,
-                border: "1px solid"
+                border: "1px solid",
               }}
             />
           </div>
@@ -237,7 +361,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
             <div
               style={{
                 position: "absolute",
-                zIndex: "20"
+                zIndex: "20",
               }}
             >
               <div
@@ -280,7 +404,17 @@ const SettingsWrapper: React.FC<SettingsWrapperProps> = ({
   return (
     <StyledForm>
       {Object.keys(settings).map((key) => (
-        <StyledFieldset key={key} style= {{ gridColumn: `${settings[key].type === 'textarea'? "span 2" : "inherit"}`}}>
+        <StyledFieldset
+          key={key}
+          style={{
+            gridColumn: `${
+              settings[key].type === "textarea" ||
+              settings[key].type === "slider"
+                ? "span 2"
+                : "inherit"
+            }`,
+          }}
+        >
           <SettingsComposer
             type={settings[key].type}
             options={settings[key]?.options ? settings[key].options : undefined}

@@ -13,7 +13,7 @@ const AddPageContainer = () => {
     const [initialValues, setInitialValues] = useState({
         slug: "",
         name: "",
-        content: "",
+        content: "eyJST09UIjp7InR5cGXECHJlc29sdmVkTmFtZSI6IkJveCJ9LCJpc0NhbnZhcyI6dHJ1ZSwicHJvcHPEL2lzU2VsZWN0ZWTIG2hlaWdodCI6IjEwMHZoIiwid2lkdGgiOiJhdXRvIiwiYmFja2dyb3VuZENvbG9yIjoiI2Y3xAIiLCJvdmVyZmxvd1kiOiJzY3JvbGzEfWRpc3BsYXnrAJIsImN1c3RvbSI6e30sImhpZGRlbiI6ZmFsc2UsIm5vZGVzIjpbIkdtWlNzUmE3eGUiXSwibGlua2VkTsYde319LMwg/wEB/wEB6AEB5wCBcCI6IjIwcOQAp/IA7XdoaXRl/wDW5QDWcGFyZW7kAUjlAaL6AOZIRThUOGFsQ21H9gDmyyD6AOZUZXh07gDnx2fpAOh0xCI6IlN0YXJ0IHRvIGRldmVsb3AgeW91ciBmaXJzdCBQYWdlIEhlcmUixEnvARfxAPLFc/cA8+sBmvkA+fMA7X0=",
         metaDescription: "",
         path: "",
         status: "DRAFT",
@@ -50,7 +50,8 @@ const AddPageContainer = () => {
                     "path": values.path,
                     "slug": values.slug,
                     "status": values.status,
-                    "version": values.version
+                    "version": values.version,
+                    content: values.content
                 }
             },
             {
