@@ -89,8 +89,6 @@ export const Editor = () => {
         }}
         onNodesChange={query => {
           const json = query.serialize()
-          console.log(json);
-
         }}
       >
         <EditorTopBar edit={edit} pageId={pageId} />

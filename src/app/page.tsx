@@ -11,7 +11,8 @@ export async function generateMetadata(): Promise<Metadata> {
     const page = await serverFetch(GET_PAGE_METADATA,
         {
             where: {
-                path: { is: path }
+                path: { is: path },
+                "status": "ACTIVE"
             }
         },
         {
@@ -19,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
         }
     )
 
-    if (page.error || !page) {
+    if (page.error || !page || page?.listPages?.docs.length <= 0) {
         // console.log(page.error);
     }
 
@@ -31,9 +32,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const page = async () => {
 
-    const data = await serverFetch(GET_PAGE, { where: { path: { is: "/" } } }, { cache: "no-store" });
+    const data = await serverFetch(GET_PAGE, { where: { path: { is: "/" }, "status": "ACTIVE" } }, { cache: "no-store" });
 
-    if (data.error || !data) {
+    console.log(data);
+
+    if (data.error || !data || data?.listPages?.docs.length <= 0) {
         redirect('/404');
     }
 

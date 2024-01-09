@@ -5,41 +5,19 @@ import { ChromePicker } from "react-color";
 import { MdFormatColorFill } from "react-icons/md";
 type SettingsComposerProps = {
   type:
-    | "text"
-    | "number"
-    | "select"
-    | "boolean"
-    | "color"
-    | "textarea"
-    | "slider";
+  | "text"
+  | "number"
+  | "select"
+  | "boolean"
+  | "color"
+  | "textarea"
+  | "slider";
   onChange?: (color: any) => void;
   options?: string[];
   label: string | undefined;
   defaultValues?: any;
+  slideCount?: any;
 };
-
-function convertCssStringToMap(cssString: string): any {
-  const lines = cssString.split("\n");
-
-  const nonEmptyLines = lines
-    .map((line) => line.trim())
-    .filter((line) => line !== "");
-
-  const linesWithoutSemicolons = nonEmptyLines.map((line) =>
-    line.replace(/;$/, "")
-  );
-
-  const cssMap: Record<string, string> = {};
-  linesWithoutSemicolons.forEach((line) => {
-    const [property, value] = line.split(":").map((part) => part.trim());
-    if (!value) {
-      return;
-    }
-    cssMap[property] = value;
-  });
-
-  return cssMap;
-}
 
 const StyledForm = styled.form`
   display: grid;
@@ -67,8 +45,10 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
   options,
   defaultValues,
   label,
+  slideCount,
   ...props
 }) => {
+
   const [displayColorPicker, setDisplayColorPicker] = useState<boolean>(false);
   const [colorChip, setColorChip] = useState<any>({
     r: "256",
@@ -147,7 +127,8 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
               gap: "4px",
             }}
           >
-            <StyledBox
+
+            {[...Array(slideCount)].map((_, index: number) => <StyledBox
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -158,43 +139,14 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
               backgroundColor="red"
               type="slider"
               {...props}
-              // onChange={(e) => props.onChange && props.onChange(e.target.value)}
+              onChange={(e) => props.onChange}
               value={defaultValues}
             >
-              1
+              {index + 1}
             </StyledBox>
-            <StyledBox
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              width="20px"
-              height="20px"
-              backgroundColor="green"
-              type="slider"
-              {...props}
-              // onChange={(e) => props.onChange && props.onChange(e.target.value)}
-              value={defaultValues}
-            >
-              2
-            </StyledBox>
-            <StyledBox
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-              width="20px"
-              height="20px"
-              backgroundColor="blue"
-              type="slider"
-              {...props}
-              // onChange={(e) => props.onChange && props.onChange(e.target.value)}
-              value={defaultValues}
-            >
-              3
-            </StyledBox>
+            )
+            }
+
           </StyledBox>
         </StyledBox>
       );
@@ -214,7 +166,7 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
             }}
             type="number"
             {...props}
-            onChange={(e) => props.onChange && props.onChange(e.target.value)}
+            onChange={(e) => props.onChange && props.onChange(Number(e.target.value))}
             value={defaultValues}
           />
         </StyledBox>
@@ -253,21 +205,21 @@ const SettingsComposer: React.FC<SettingsComposerProps> = ({
       );
     case "boolean":
       return (
-        <StyledBox style={{ position: "relative", width: "100px" }}>
+        <StyledBox style={{ position: "relative", width: "50px" }}>
           <StyledLabel style={{ position: "absolute", top: "-17px" }}>
             {label}
           </StyledLabel>
           <input
             style={{
-              width: "100px",
+              width: "50px",
               height: "20px",
               border: "1px #000",
               borderRadius: "5px",
               outline: "none",
             }}
-            type="boolean"
+            type="checkbox"
             {...props}
-            onChange={(e) => props.onChange && props.onChange(e.target.value)}
+            onChange={(e) => props.onChange && props.onChange(e.target.checked)}
             value={defaultValues}
           />
         </StyledBox>
@@ -407,12 +359,11 @@ const SettingsWrapper: React.FC<SettingsWrapperProps> = ({
         <StyledFieldset
           key={key}
           style={{
-            gridColumn: `${
-              settings[key].type === "textarea" ||
+            gridColumn: `${settings[key].type === "textarea" ||
               settings[key].type === "slider"
-                ? "span 2"
-                : "inherit"
-            }`,
+              ? "span 2"
+              : "inherit"
+              }`,
           }}
         >
           <SettingsComposer
@@ -423,7 +374,9 @@ const SettingsWrapper: React.FC<SettingsWrapperProps> = ({
             onChange={(e: any) => {
               setProp((props: any) => (props[key] = e));
             }}
+            slideCount={defaultValues['sliderCount']}
           />
+          
         </StyledFieldset>
       ))}
     </StyledForm>

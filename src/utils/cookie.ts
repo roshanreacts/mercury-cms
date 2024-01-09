@@ -4,7 +4,7 @@ import { setCookie, getCookie, deleteCookie } from 'cookies-next';
 
 export const setTokenCookie = (token: string) => {
     let expires = new Date();
-    expires.setTime(expires.getTime() + 60 * 60 * 1000);
+    expires.setTime(expires.getTime() + 24 * 60 * 60 * 1000);
 
     setCookie("authToken", token, {
         expires: expires

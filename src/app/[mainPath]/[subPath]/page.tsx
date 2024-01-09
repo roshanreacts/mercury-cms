@@ -12,15 +12,16 @@ export async function generateMetadata({ params }: { params: { mainPath: string,
         {
             where: {
                 path: { is: path }
-            }
+            },
+            "status": "ACTIVE"
         },
         {
             cache: "no-store"
         }
     )
 
-    if (page.error || !page) {
-        console.log(page.error);
+    if (page.error || !page || page.listPages?.docs.length <= 0) {
+        // console.log(page.error);
     }
 
     return {
@@ -31,9 +32,9 @@ export async function generateMetadata({ params }: { params: { mainPath: string,
 
 
 const page = async ({ params }: any) => {
-    const data = await serverFetch(GET_PAGE, { where: { path: { is: `/${params?.mainPath}/${params?.subPath}` } } }, { cache: "no-store" });
+    const data = await serverFetch(GET_PAGE, { where: { path: { is: `/${params?.mainPath}/${params?.subPath}` }, "status": "ACTIVE" } }, { cache: "no-store" });
 
-    if (data.error || !data) {
+    if (data.error || !data || data.listPages?.docs.length <= 0) {
         redirect('/404');
     }
     const content = compressBase64ToJson(data?.getPage?.content)
