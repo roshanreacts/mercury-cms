@@ -116,6 +116,31 @@ const SideBar = () => {
                         Files
                     </SubTitles>
                 </div>
+                <h4 style={{
+                    opacity: "0.5",
+                    fontWeight: '400',
+                    fontSize: "14px",
+                    padding: "0px"
+                }}>Blogs</h4>
+                <div style={{
+                    marginLeft: "3px",
+                    display: "flex",
+                    flexDirection: "column",
+                }}>
+                    <SubTitles onClick={() => {
+                        router.replace('/admin/blog')
+
+                    }}>
+                        All Blogs
+                    </SubTitles>
+                    <SubTitles onClick={() => {
+                        router.replace('/admin/blog/add')
+
+                    }}>
+                        Create Blog
+                    </SubTitles>
+                </div>
+
 
             </PagesCard>
         </MainDiv>

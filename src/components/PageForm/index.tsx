@@ -190,7 +190,7 @@ const PageForm = ({
               {!edit && (
                 <div className="button-container">
                   <ConfirmActionButton
-                    action="Update"
+                    action="Edit"
                     para="Are you sure you want to"
                     onConfirm={handleConfirmAction}
                     type="info"
