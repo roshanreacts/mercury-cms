@@ -34,8 +34,6 @@ const page = async () => {
 
     const data = await serverFetch(GET_PAGE, { where: { path: { is: "/" }, "status": "ACTIVE" } }, { cache: "no-store" });
 
-    console.log(data);
-
     if (data.error || !data || data?.listPages?.docs.length <= 0) {
         redirect('/404');
     }

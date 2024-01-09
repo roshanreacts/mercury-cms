@@ -1,0 +1,25 @@
+import mercury from "@mercury-js/core";
+
+export const Blog = mercury.createModel(
+    "Blog",
+    {
+        title: {
+            type: "string",
+            required: true
+        },
+        thumbnail: {
+            type: "string"
+        },
+        description: {
+            type: "string"
+        },
+        content: {
+            type: "string"
+        },
+        author: {
+            type: "relationship",
+            ref: "User"
+        }
+    },
+    {}
+)

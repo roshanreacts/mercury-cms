@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Script src="https://cdn.tailwindcss.com" />
+        <Script src="https://cdn.tailwindcss.com"/>
         
         {children}
       </body>
