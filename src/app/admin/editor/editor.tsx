@@ -112,7 +112,7 @@ export const Editor = () => {
               :
               pageContent &&
               <Frame data={pageContent}>
-                <Element is={Box} canvas height="100vh" width="auto" backgroundColor="#f7f7f7" overflowY="scroll">
+                <Element is={Box} canvas minHeight="100vh" height="auto" width="auto" backgroundColor="#f7f7f7" overflowY="auto">
                 </Element>
               </Frame>
 
