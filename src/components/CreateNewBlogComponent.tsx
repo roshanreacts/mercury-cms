@@ -25,34 +25,13 @@ const CreateNewBlogComponent: React.FC = () => {
     }
   };
 
-  const handleOnChange = (val: EditorValue) => {
+  const handleOnChange = (val: any) => {
+    console.log(value.toString("html"));
+    console.log(value.toString("md"));
+
     setValue(val);
   };
 
-  const toolbarConfig = {
-    display: [
-      "INLINE_STYLE_BUTTONS",
-      "BLOCK_TYPE_BUTTONS",
-      "LINK_BUTTONS",
-      "BLOCK_TYPE_DROPDOWN",
-      "HISTORY_BUTTONS",
-    ],
-    INLINE_STYLE_BUTTONS: [
-      { label: "Bold", style: "BOLD", className: "custom-css-class" },
-      { label: "Italic", style: "ITALIC" },
-      { label: "Underline", style: "UNDERLINE" },
-    ],
-    BLOCK_TYPE_DROPDOWN: [
-      { label: "Normal", style: "unstyled" },
-      { label: "Heading Large", style: "header-one" },
-      { label: "Heading Medium", style: "header-two" },
-      { label: "Heading Small", style: "header-three" },
-    ],
-    BLOCK_TYPE_BUTTONS: [
-      { label: "UL", style: "unordered-list-item" },
-      { label: "OL", style: "ordered-list-item" },
-    ],
-  };
   const customStyleMap = {
     CODE: {
       backgroundColor: "#333",
@@ -72,6 +51,12 @@ const CreateNewBlogComponent: React.FC = () => {
           name="heading"
           className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4 focus:outline-none focus:ring focus:border-blue-400"
           placeholder="Enter heading"
+        />
+        <textarea
+          rows={3}
+          name="heading"
+          className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4 focus:outline-none focus:ring focus:border-blue-400"
+          placeholder="Enter Description"
         />
         <h1 className="mb-1 font-semibold">Thumbnail</h1>
         <input
@@ -93,9 +78,8 @@ const CreateNewBlogComponent: React.FC = () => {
           <RichTextEditor
             value={value}
             onChange={handleOnChange}
-            toolbarConfig={toolbarConfig}
+            // toolbarConfig={toolbarConfig}
             customStyleMap={customStyleMap}
-            style={{ padding: "50px" }}
           />
         </div>
       </div>
@@ -104,3 +88,28 @@ const CreateNewBlogComponent: React.FC = () => {
 };
 
 export default CreateNewBlogComponent;
+
+const toolbarConfig = {
+  display: [
+    "INLINE_STYLE_BUTTONS",
+    "BLOCK_TYPE_BUTTONS",
+    "LINK_BUTTONS",
+    "BLOCK_TYPE_DROPDOWN",
+    "HISTORY_BUTTONS",
+  ],
+  INLINE_STYLE_BUTTONS: [
+    { label: "Bold", style: "BOLD", className: "custom-css-class" },
+    { label: "Italic", style: "ITALIC" },
+    { label: "Underline", style: "UNDERLINE" },
+  ],
+  BLOCK_TYPE_DROPDOWN: [
+    { label: "Normal", style: "unstyled" },
+    { label: "Heading Large", style: "header-one" },
+    { label: "Heading Medium", style: "header-two" },
+    { label: "Heading Small", style: "header-three" },
+  ],
+  BLOCK_TYPE_BUTTONS: [
+    { label: "UL", style: "unordered-list-item" },
+    { label: "OL", style: "ordered-list-item" },
+  ],
+};
