@@ -36,7 +36,7 @@ const BlogContainer = () => {
 
   return (
     <div className="bg-white p-6">
-      <h2 className="text-black font-bold">Blogs</h2>
+      <h2 className="text-black font-bold text-xl">Blogs</h2>
       <div className="flex justify-center items-start gap-4 flex-wrap">
         <ToastContainer />
         {loading ? (
@@ -55,6 +55,8 @@ const BlogContainer = () => {
               heading={item.heading}
               description={item.description}
               created={item.createdOn}
+              id={item.id}
+              content={item.content}
               key={index}
             />
           ))
