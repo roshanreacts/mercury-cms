@@ -37,11 +37,7 @@ const BlogListCard = ({
             </div>
             <div className="overflow-hidden w-full h-full">
               <Link
-                href={{
-                  pathname: `blog/${id}`,
-                  query: content,
-                }}
-              >
+                href={`blog/${id}`}>
                 <h5 className="text-gray-900 font-bold text-xl tracking-tight mb-2 hover:underline  overflow-hidden line-clamp-2">
                   {heading}
                 </h5>

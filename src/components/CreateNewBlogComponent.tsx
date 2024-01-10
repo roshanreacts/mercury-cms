@@ -96,10 +96,11 @@ const CreateNewBlogComponent: React.FC = () => {
             name="thumbnail"
             onChange={formik.handleChange}
             value={formik.values.thumbnail}
-            className="border border-gray-300 rounded-md px-3 py-2 mb-1 focus:outline-none focus:ring focus:border-blue-400"
+            placeholder="Thumbnail Image URL"
+            className="border border-gray-300 rounded-md px-3 py-2 w-full mb-1 focus:outline-none focus:ring focus:border-blue-400"
           />
 
-          <div className="p-5">
+          <div className="p-2">
             <ForwardRefEditor markdown={`Hello **world**!`} ref={mdxEditorRef} onChange={() => console.log(mdxEditorRef.current?.getMarkdown())} />
           </div>
           <button
