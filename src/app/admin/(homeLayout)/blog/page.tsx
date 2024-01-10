@@ -1,11 +1,12 @@
-import React from 'react'
+import BlogContainer from "@/containers/BlogContainer";
+import React from "react";
 
 const page = () => {
   return (
     <div>
-      blog page
+      <BlogContainer />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

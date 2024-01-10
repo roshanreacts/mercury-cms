@@ -18,12 +18,22 @@ const rules = [
       update: true,
       delete: true,
     },
+    
     // fieldLevelAccess: true,
     // fields: {
     //   name: {
     //     read: false,
     //   },
     // },
+  },
+  {
+    modelName: "Blog",
+    access: {
+      create: true,
+      read: true,
+      update: true,
+      delete: true,
+    },
   },
 ];
 

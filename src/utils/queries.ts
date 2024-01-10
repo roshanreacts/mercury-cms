@@ -91,3 +91,26 @@ query GetPage($where: wherePageInput!) {
     metaTitle
   }
 }`
+
+export const CREATE_BLOG = `
+mutation Mutation($input: BlogInput!) {
+  createBlog(input: $input) {
+    id
+  }
+}
+`
+
+export const GET_ALL_BLOGS =`
+query Query {
+  listBlogs {
+    docs {
+      id
+      heading
+      thumbnail
+      description
+      content
+      createdOn
+      updatedOn
+    }
+  }
+}`
