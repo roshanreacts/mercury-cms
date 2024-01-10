@@ -1,14 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RichTextEditor, { EditorValue } from "react-rte";
 import { useFormik } from "formik"; // Import useFormik hook
 import "@/app/globals.css";
+import { useLazyQuery } from "@/containers/hooks";
+import { serverFetch } from "@/app/action";
+import { ToastErrorMessage, ToastSuccessMessage } from "./ToastMessage";
+import { useRouter } from "next/navigation";
+import { CREATE_BLOG } from "@/utils/queries";
 
 const CreateNewBlogComponent: React.FC = () => {
+  const router = useRouter();
+  const [createBlog, { data, loading, error }] = useLazyQuery(serverFetch);
   const [value, setValue] = useState<EditorValue>(
     RichTextEditor.createEmptyValue()
   );
-
 
   const handleOnChange = (val: any) => {
     console.log(value.toString("html"));
@@ -21,12 +27,30 @@ const CreateNewBlogComponent: React.FC = () => {
     initialValues: {
       heading: "",
       description: "",
-      thumbNail: "",
+      thumbnail: "",
     },
-    onSubmit: (values) => {
+    onSubmit: (values:any) => {
       console.log("Form values:", values);
+      createBlog(CREATE_BLOG,{
+        input: {
+          heading: values.heading,
+          description: values.description,
+          thumbnail: values.thumbnail,
+        },
+      });
     },
   });
+
+  useEffect(() => {
+    if (data) {
+      ToastSuccessMessage("Blog Created Successfully!!");
+      router.replace("/admin/blog");
+    }
+
+    if (error) {
+      ToastErrorMessage(error.message);
+    }
+  }, [data, loading, error]);
 
   const customStyleMap = {
     CODE: {
@@ -62,12 +86,12 @@ const CreateNewBlogComponent: React.FC = () => {
           <h1 className="mb-1 font-semibold">Thumbnail</h1>
           <input
             type="text"
-            name="thumbNail"
+            name="thumbnail"
             onChange={formik.handleChange}
-            value={formik.values.thumbNail}
+            value={formik.values.thumbnail}
             className="border border-gray-300 rounded-md px-3 py-2 mb-1 focus:outline-none focus:ring focus:border-blue-400"
           />
-          
+
           <div className="p-5">
             <RichTextEditor
               value={value}

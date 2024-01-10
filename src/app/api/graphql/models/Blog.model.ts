@@ -3,7 +3,7 @@ import mercury from "@mercury-js/core";
 export const Blog = mercury.createModel(
     "Blog",
     {
-        title: {
+        heading: {
             type: "string",
             required: true
         },
