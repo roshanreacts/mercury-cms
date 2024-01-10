@@ -17,8 +17,7 @@ const CreateNewBlogComponent: React.FC = () => {
   );
 
   const handleOnChange = (val: any) => {
-    console.log(value.toString("html"));
-    console.log(value.toString("md"));
+    console.log(value.toString("markdown"));
 
     setValue(val);
   };
