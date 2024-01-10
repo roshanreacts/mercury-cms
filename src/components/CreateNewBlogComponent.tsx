@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, forwardRef, useEffect, useState } from "react";
 import RichTextEditor, { EditorValue } from "react-rte";
 import { useFormik } from "formik"; // Import useFormik hook
 import "@/app/globals.css";
@@ -9,55 +9,45 @@ import { ToastErrorMessage, ToastSuccessMessage } from "./ToastMessage";
 import { useRouter } from "next/navigation";
 import { CREATE_BLOG } from "@/utils/queries";
 import dynamic from "next/dynamic";
-import { MDXEditorMethods } from "@mdxeditor/editor";
+import { MDXEditorMethods, MDXEditorProps } from "@mdxeditor/editor";
 
 const CreateNewBlogComponent: React.FC = () => {
+
+
+
+
   const router = useRouter();
   const [createBlog, { data, loading, error }] = useLazyQuery(serverFetch);
   const [value, setValue] = useState<EditorValue>(
     RichTextEditor.createEmptyValue()
   );
 
-  const handleOnChange = (val: any) => {
-    console.log(val.toString("markdown"));
-
-    formik.setFieldValue("content", val.toString("markdown"));
-
-  };
 
   const Editor = dynamic(() => import('./MdxEditor'), {
     ssr: false
   })
+  const mdxEditorRef = React.useRef<MDXEditorMethods>(null)
 
   const formik = useFormik({
     initialValues: {
       heading: "",
       description: "",
       thumbnail: "",
+      content: ""
     },
-    onSubmit: (values:any) => {
-      console.log("Form values:", values);
-      createBlog(CREATE_BLOG,{
+    onSubmit: (values: any) => {
+      createBlog(CREATE_BLOG, {
         input: {
           heading: values.heading,
           description: values.description,
           thumbnail: values.thumbnail,
+          content: mdxEditorRef.current?.getMarkdown()
         },
       });
     },
   });
 
-  const markdown = `
-    Hello **world**!
-    `
 
-  const mdxEditorRef = React.useRef<MDXEditorMethods>(null)
-
-
-  const handleEditorChange = () => {
-    console.log(mdxEditorRef.current?.getMarkdown());
-
-  }
   useEffect(() => {
     if (data) {
       ToastSuccessMessage("Blog Created Successfully!!");
@@ -110,9 +100,7 @@ const CreateNewBlogComponent: React.FC = () => {
           />
 
           <div className="p-5">
-            <Suspense fallback={null}>
-              <Editor markdown={markdown} editorRef={mdxEditorRef} onChange={handleEditorChange} />
-            </Suspense>
+            <ForwardRefEditor markdown={`Hello **world**!`} ref={mdxEditorRef} onChange={() => console.log(mdxEditorRef.current?.getMarkdown())} />
           </div>
           <button
             type="submit"
@@ -127,3 +115,18 @@ const CreateNewBlogComponent: React.FC = () => {
 };
 
 export default CreateNewBlogComponent;
+
+
+
+// This is the only place InitializedMDXEditor is imported directly.
+const Editor = dynamic(() => import('./MdxEditor'), {
+  // Make sure we turn SSR off
+  ssr: false
+})
+
+// This is what is imported by other components. Pre-initialized with plugins, and ready
+// to accept other props, including a ref.
+export const ForwardRefEditor = forwardRef<MDXEditorMethods, MDXEditorProps>((props, ref) => <Editor {...props} editorRef={ref} />)
+
+// TS complains without the following line
+ForwardRefEditor.displayName = 'ForwardRefEditor'

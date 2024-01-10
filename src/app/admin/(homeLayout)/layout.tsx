@@ -27,7 +27,7 @@ export default function layout({
         </div>
         <div style={{
           display: "flex",
-          flexWrap: "wrap",
+          // flexWrap: "wrap",
         }}>
           <div>
             <SideBar />
