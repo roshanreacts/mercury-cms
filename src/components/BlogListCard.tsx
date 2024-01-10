@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { LiaReadme } from "react-icons/lia";
+import { RiTimer2Line } from "react-icons/ri";
 
 const BlogListCard = ({ imgSrc, heading, description, created }: any) => {
   return (
@@ -17,28 +19,23 @@ const BlogListCard = ({ imgSrc, heading, description, created }: any) => {
             />
           </Link>
           <div className="p-5 pb-2 flex justify-start items-start flex-col">
-            <div className="flex justify-between text-sm mb-2 w-full">
-              <h6>
-                {" "}
+            <div className="flex justify-between text-[12px] mb-2 w-full">
+              <h6 className="flex justify-center items-center gap-1">
+              <RiTimer2Line />
                 {new Date(created).toDateString().split(" ").slice(1).join(" ")}
               </h6>
-              <p>Read</p>
+              <p>
+                <LiaReadme className="w-5 h-5"/>
+              </p>
             </div>
             <div className="overflow-hidden w-full h-full">
               <Link href="#">
-                  <h5 className="text-gray-900 font-bold text-xl tracking-tight mb-2 hover:underline  overflow-hidden line-clamp-2">
-                    {heading}
-                  </h5>
+                <h5 className="text-gray-900 font-bold text-xl tracking-tight mb-2 hover:underline  overflow-hidden line-clamp-2">
+                  {heading}
+                </h5>
               </Link>
               <p className="font-normal text-gray-700 mb-3 overflow-hidden line-clamp-3">
                 {description}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Cupiditate nihil labore dicta aliquid nisi aperiam suscipit
-                consequuntur ab perspiciatis minus deleniti totam tenetur
-                veritatis tempore tempora, eveniet explicabo nobis et voluptas
-                delectus! Maxime sunt vel, id quaerat, reprehenderit quisquam
-                ratione dignissimos voluptatum aliquid, labore nulla fugiat
-                illum voluptas deleniti fugit?
               </p>
             </div>
             <div className=" absolute bottom-8 left-5">

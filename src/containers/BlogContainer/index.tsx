@@ -35,28 +35,31 @@ const BlogContainer = () => {
   console.log(data?.listBlogs?.docs);
 
   return (
-    <div className="flex justify-center items-start gap-4 flex-wrap bg-white p-4">
-      <ToastContainer />
-      {loading ? (
-        <StyledBox
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          mt="10px"
-        >
-          <DotLoader color="#007bea" />
-        </StyledBox>
-      ) : (
-        blogData.map((item: any, index: any) => (
-          <BlogListCard
-            imgSrc={item.thumbnail}
-            heading={item.heading}
-            description={item.description}
-            created={item.createdOn}
-            key={index}
-          />
-        ))
-      )}
+    <div className="bg-white p-6">
+      <h2 className="text-black font-bold">Blogs</h2>
+      <div className="flex justify-center items-start gap-4 flex-wrap">
+        <ToastContainer />
+        {loading ? (
+          <StyledBox
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            mt="10px"
+          >
+            <DotLoader color="#007bea" />
+          </StyledBox>
+        ) : (
+          blogData.map((item: any, index: any) => (
+            <BlogListCard
+              imgSrc={item.thumbnail}
+              heading={item.heading}
+              description={item.description}
+              created={item.createdOn}
+              key={index}
+            />
+          ))
+        )}
+      </div>
     </div>
   );
 };
