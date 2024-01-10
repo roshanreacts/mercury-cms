@@ -1,41 +1,48 @@
 "use client";
-import React, { useState } from "react";
-import RichTextEditor, { EditorValue } from "react-rte";
-import { useFormik } from "formik"; // Import useFormik hook
+import React, { Suspense, useEffect, useState } from "react";
+import { useFormik } from "formik";
 import "@/app/globals.css";
+import InitializedMDXEditor from "./MdxEditor";
+import dynamic from "next/dynamic";
+import { MDXEditorMethods } from "@mdxeditor/editor";
 
 const CreateNewBlogComponent: React.FC = () => {
-  const [value, setValue] = useState<EditorValue>(
-    RichTextEditor.createEmptyValue()
-  );
 
 
   const handleOnChange = (val: any) => {
-    console.log(value.toString("markdown"));
+    console.log(val.toString("markdown"));
 
-    setValue(val);
+    formik.setFieldValue("content", val.toString("markdown"));
+
   };
+
+  const Editor = dynamic(() => import('./MdxEditor'), {
+    ssr: false
+  })
 
   const formik = useFormik({
     initialValues: {
       heading: "",
       description: "",
       thumbNail: "",
+      content: ""
     },
-    onSubmit: (values) => {
+    onSubmit: (values: any) => {
       console.log("Form values:", values);
     },
   });
 
-  const customStyleMap = {
-    CODE: {
-      backgroundColor: "#333",
-      fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-      fontSize: 16,
-      padding: 2,
-      height: "300px",
-    },
-  };
+  const markdown = `
+    Hello **world**!
+    `
+
+  const mdxEditorRef = React.useRef<MDXEditorMethods>(null)
+
+
+  const handleEditorChange = () => {
+    console.log(mdxEditorRef.current?.getMarkdown());
+
+  }
 
   return (
     <div className="p-2 flex justify-center items-center w-full">
@@ -66,13 +73,11 @@ const CreateNewBlogComponent: React.FC = () => {
             value={formik.values.thumbNail}
             className="border border-gray-300 rounded-md px-3 py-2 mb-1 focus:outline-none focus:ring focus:border-blue-400"
           />
-          
+
           <div className="p-5">
-            <RichTextEditor
-              value={value}
-              onChange={handleOnChange}
-              customStyleMap={customStyleMap}
-            />
+            <Suspense fallback={null}>
+              <Editor markdown={markdown} editorRef={mdxEditorRef} onChange={handleEditorChange} />
+            </Suspense>
           </div>
           <button
             type="submit"
