@@ -14,7 +14,8 @@ export const Page = mercury.createModel(
         },
         path: {
             type: "string",
-            required: true
+            required: true,
+            unique: true
         },
         metaDescription: {
             type: "string"

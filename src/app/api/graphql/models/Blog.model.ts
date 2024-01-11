@@ -19,6 +19,10 @@ export const Blog = mercury.createModel(
         author: {
             type: "relationship",
             ref: "User"
+        },
+        slug: {
+            type: "string",
+            unique: true
         }
     },
     {}
