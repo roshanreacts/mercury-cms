@@ -12,28 +12,24 @@ import dynamic from "next/dynamic";
 import { MDXEditorMethods, MDXEditorProps } from "@mdxeditor/editor";
 
 const CreateNewBlogComponent: React.FC = () => {
-
-
-
-
   const router = useRouter();
   const [createBlog, { data, loading, error }] = useLazyQuery(serverFetch);
   const [value, setValue] = useState<EditorValue>(
     RichTextEditor.createEmptyValue()
   );
 
-
-  const Editor = dynamic(() => import('./MdxEditor'), {
-    ssr: false
-  })
-  const mdxEditorRef = React.useRef<MDXEditorMethods>(null)
+  const Editor = dynamic(() => import("./MdxEditor"), {
+    ssr: false,
+  });
+  const mdxEditorRef = React.useRef<MDXEditorMethods>(null);
 
   const formik = useFormik({
     initialValues: {
       heading: "",
       description: "",
       thumbnail: "",
-      content: ""
+      slug: "",
+      content: "",
     },
     onSubmit: (values: any) => {
       createBlog(CREATE_BLOG, {
@@ -41,12 +37,12 @@ const CreateNewBlogComponent: React.FC = () => {
           heading: values.heading,
           description: values.description,
           thumbnail: values.thumbnail,
-          content: mdxEditorRef.current?.getMarkdown()
+          slug: values.slug,
+          content: mdxEditorRef.current?.getMarkdown(),
         },
       });
     },
   });
-
 
   useEffect(() => {
     if (data) {
@@ -59,29 +55,36 @@ const CreateNewBlogComponent: React.FC = () => {
     }
   }, [data, loading, error]);
 
-  const customStyleMap = {
-    CODE: {
-      backgroundColor: "#333",
-      fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-      fontSize: 16,
-      padding: 2,
-      height: "300px",
-    },
-  };
-
   return (
     <div className="p-2 flex justify-center items-center w-full">
       <div className="bg-white rounded-lg shadow-sm p-10 w-[80%]">
         <h2 className="text-2xl font-semibold mb-4">Add New Blog</h2>
         <form onSubmit={formik.handleSubmit}>
-          <input
-            type="text"
-            name="heading"
-            onChange={formik.handleChange}
-            value={formik.values.heading}
-            className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4 focus:outline-none focus:ring focus:border-blue-400"
-            placeholder="Enter heading"
-          />
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+             <label htmlFor="slug" className="font-semibold mb-2">Slug</label>
+              <input
+                type="text"
+                name="slug"
+                onChange={formik.handleChange}
+                value={formik.values.slug}
+                className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4 focus:outline-none focus:ring focus:border-blue-400"
+                placeholder="Enter Slug"
+              />
+            </div>
+            <div>
+            <label htmlFor="slug" className="font-semibold mb-2">Heading</label>
+              <input
+                type="text"
+                name="heading"
+                onChange={formik.handleChange}
+                value={formik.values.heading}
+                className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4 focus:outline-none focus:ring focus:border-blue-400"
+                placeholder="Enter heading"
+              />
+            </div>
+          </div>
+          <label htmlFor="slug" className="font-semibold mb-2">Description</label>
           <textarea
             rows={3}
             name="description"
@@ -101,11 +104,15 @@ const CreateNewBlogComponent: React.FC = () => {
           />
 
           <div className="p-2">
-            <ForwardRefEditor markdown={`Hello **world**!`} ref={mdxEditorRef} onChange={() => console.log(mdxEditorRef.current?.getMarkdown())} />
+            <ForwardRefEditor
+              markdown={`Hello **world**!`}
+              ref={mdxEditorRef}
+            //   onChange={() => console.log(mdxEditorRef.current?.getMarkdown())}
+            />
           </div>
           <button
             type="submit"
-            className="px-3 bg-blue-500 text-white text-md rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+            className="px-4 py-1 bg-blue-500 text-white text-md rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
           >
             Submit
           </button>
@@ -117,17 +124,17 @@ const CreateNewBlogComponent: React.FC = () => {
 
 export default CreateNewBlogComponent;
 
-
-
 // This is the only place InitializedMDXEditor is imported directly.
-const Editor = dynamic(() => import('./MdxEditor'), {
+const Editor = dynamic(() => import("./MdxEditor"), {
   // Make sure we turn SSR off
-  ssr: false
-})
+  ssr: false,
+});
 
 // This is what is imported by other components. Pre-initialized with plugins, and ready
 // to accept other props, including a ref.
-export const ForwardRefEditor = forwardRef<MDXEditorMethods, MDXEditorProps>((props, ref) => <Editor {...props} editorRef={ref} />)
+export const ForwardRefEditor = forwardRef<MDXEditorMethods, MDXEditorProps>(
+  (props, ref) => <Editor {...props} editorRef={ref} />
+);
 
 // TS complains without the following line
-ForwardRefEditor.displayName = 'ForwardRefEditor'
+ForwardRefEditor.displayName = "ForwardRefEditor";

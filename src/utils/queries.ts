@@ -109,8 +109,24 @@ query Query {
       thumbnail
       description
       content
+      slug
       createdOn
       updatedOn
     }
+  }
+}`
+
+
+export const GET_BLOG = `
+query GetBlog($where: whereBlogInput!) {
+  getBlog(where: $where) {
+    id
+    heading
+    thumbnail
+    description
+    content
+    slug
+    createdOn
+    updatedOn
   }
 }`
