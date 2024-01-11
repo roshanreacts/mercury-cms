@@ -11,13 +11,9 @@ import { CREATE_BLOG } from "@/utils/queries";
 import dynamic from "next/dynamic";
 import { MDXEditorMethods, MDXEditorProps } from "@mdxeditor/editor";
 
-const CreateNewBlogComponent: React.FC = () => {
+const CreateNewBlogComponent: React.FC = ({edit}:any) => {
   const router = useRouter();
   const [createBlog, { data, loading, error }] = useLazyQuery(serverFetch);
-  const [value, setValue] = useState<EditorValue>(
-    RichTextEditor.createEmptyValue()
-  );
-
   const Editor = dynamic(() => import("./MdxEditor"), {
     ssr: false,
   });
@@ -58,7 +54,7 @@ const CreateNewBlogComponent: React.FC = () => {
   return (
     <div className="p-2 flex justify-center items-center w-full">
       <div className="bg-white rounded-lg shadow-sm p-10 w-[80%]">
-        <h2 className="text-2xl font-semibold mb-4">Add New Blog</h2>
+        <h2 className="text-2xl font-semibold mb-4">{edit ? "Update" : "Add New Blog"}</h2>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid grid-cols-2 gap-2">
             <div>
@@ -114,7 +110,7 @@ const CreateNewBlogComponent: React.FC = () => {
             type="submit"
             className="px-4 py-1 bg-blue-500 text-white text-md rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
           >
-            Submit
+            Add
           </button>
         </form>
       </div>

@@ -32,7 +32,6 @@ const BlogContainer = () => {
     }
   }, [data, loading, error]);
   console.log(data, "blogList");
-  console.log(data?.listBlogs?.docs);
 
   return (
     <div className="bg-white p-6">

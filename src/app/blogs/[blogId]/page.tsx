@@ -1,5 +1,6 @@
 import { serverFetch } from "@/app/action";
 import BlogListCard from "@/components/BlogListCard";
+import BlogViewerComponent from "@/components/BlogViewerComponent";
 import { GET_BLOG } from "@/utils/queries";
 import React from "react";
 
@@ -20,11 +21,9 @@ const page = async ({ params }: any) => {
     }
   );
 
-  console.log(blogData?.getBlog?.id, "blog");
-
   return (
     <div>
-      <BlogListCard
+      <BlogViewerComponent
         imgSrc={blogData?.getBlog?.thumbnail}
         heading={blogData?.getBlog?.heading}
         description={blogData?.getBlog?.description}
