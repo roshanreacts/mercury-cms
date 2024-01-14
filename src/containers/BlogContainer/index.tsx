@@ -11,7 +11,6 @@ import { ToastContainer } from "react-toastify";
 
 const BlogContainer = () => {
   const [getBlog, { data, loading, error }] = useLazyQuery(serverFetch);
-  const [blogData, setBlogData] = useState([]);
 
   useEffect(() => {
     getBlog(
@@ -27,11 +26,9 @@ const BlogContainer = () => {
     if (error) {
       ToastErrorMessage(error.message);
     }
-    if (data) {
-      setBlogData(data?.listBlogs?.docs);
-    }
+  
   }, [data, loading, error]);
-  console.log(data, "blogList");
+
 
   return (
     <div className="bg-white p-6">
@@ -48,7 +45,7 @@ const BlogContainer = () => {
             <DotLoader color="#007bea" />
           </StyledBox>
         ) : (
-          blogData.map((item: any, index: any) => (
+            data?.listBlogs?.docs.map((item: any, index: any) => (
             <BlogListCard
               imgSrc={item.thumbnail}
               heading={item.heading}

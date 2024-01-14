@@ -1,11 +1,15 @@
+import { serverFetch } from "@/app/action";
+import { useLazyQuery } from "@/containers/hooks";
+import { DELETE_BLOG } from "@/utils/queries";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React from "react";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 import { LiaReadme } from "react-icons/lia";
 import { MdOutlineDeleteOutline, MdOutlineEditCalendar } from "react-icons/md";
 import { RiTimer2Line } from "react-icons/ri";
+import { ToastErrorMessage, ToastSuccessMessage } from "./ToastMessage";
 
 const BlogListCard = ({
   imgSrc,
@@ -15,7 +19,25 @@ const BlogListCard = ({
   id,
   content,
 }: any) => {
+  const [deleteBlog, { data, loading, error }] = useLazyQuery(serverFetch);
+
   const router = useRouter();
+
+  const handleBlogDelete = () => {
+    deleteBlog(DELETE_BLOG, {
+      deleteBlogId: id,
+    });
+  };
+
+  useEffect(() => {
+    if (data) {
+      ToastSuccessMessage("Blog deleted");
+      window.location.reload();
+    }
+    if (error) {
+      ToastErrorMessage(error.message);
+    }
+  }, [data,loading,error]);
   return (
     <div className="relative group hover:scale-105 ease-in duration-300">
       <div className="mx-auto h-[480px] w-80 bg-white shadow-md border border-gray-200 rounded-lg mb-5">
@@ -34,14 +56,22 @@ const BlogListCard = ({
               <button
                 className="px-2 py-1 bg-blue-400 hover:bg-blue-900 rounded hover:text-white text-[10px]"
                 onClick={() => {
-                  router.push(`blog/${id}?edit=true`);
+                  router.push(`blog/update?id=${id}`);
                 }}
               >
-                <span>  <FiEdit className="w-4 h-4" /></span>
-              
+                <span>
+                  {" "}
+                  <FiEdit className="w-4 h-4" />
+                </span>
               </button>
-              <button className="px-2 py-1 bg-red-500 hover:bg-red-900 rounded hover:text-white text-[10px]">
-              <span>  <MdOutlineDeleteOutline className="w-4 h-4" /></span>
+              <button
+                className="px-2 py-1 bg-red-500 hover:bg-red-900 rounded hover:text-white text-[10px]"
+                onClick={handleBlogDelete}
+              >
+                <span>
+                  {" "}
+                  <MdOutlineDeleteOutline className="w-4 h-4" />
+                </span>
               </button>
             </div>
           </div>
