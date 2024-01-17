@@ -13,9 +13,6 @@ import { MDXEditorMethods, MDXEditorProps } from "@mdxeditor/editor";
 const CreateNewBlogComponent: React.FC = ({edit}:any) => {
   const router = useRouter();
   const [createBlog, { data, loading, error }] = useLazyQuery(serverFetch);
-  const Editor = dynamic(() => import("./MdxEditor"), {
-    ssr: false,
-  });
   const mdxEditorRef = React.useRef<MDXEditorMethods>(null);
 
   const formik = useFormik({
@@ -52,7 +49,7 @@ const CreateNewBlogComponent: React.FC = ({edit}:any) => {
 
   return (
     <div className="p-2 flex justify-center items-center w-full">
-      <div className="bg-white rounded-lg shadow-sm p-10 w-[80%]">
+      <div className="bg-white rounded-lg shadow-sm p-10 w-[90%]">
         <h2 className="text-2xl font-semibold mb-4">{edit ? "Update" : "Add New Blog"}</h2>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid grid-cols-2 gap-2">
@@ -98,7 +95,7 @@ const CreateNewBlogComponent: React.FC = ({edit}:any) => {
             className="border border-gray-300 rounded-md px-3 py-2 w-full mb-1 focus:outline-none focus:ring focus:border-blue-400"
           />
 
-          <div className="p-2">
+          <div className="z-20">
             <ForwardRefEditor
               markdown={`Hello **world**!`}
               ref={mdxEditorRef}

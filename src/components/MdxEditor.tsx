@@ -41,6 +41,7 @@ import {
     InsertImage,
     ListsToggle,
     KitchenSinkToolbar
+
 } from '@mdxeditor/editor'
 
 export default function InitializedMDXEditor({
@@ -49,27 +50,28 @@ export default function InitializedMDXEditor({
 }: { editorRef: ForwardedRef<MDXEditorMethods> | null } & MDXEditorProps) {
 
     const pluginOptions = [
-        headingsPlugin(),
-        diffSourcePlugin({ viewMode: 'rich-text', diffMarkdown: 'Previous Code' }),
-        jsxPlugin(),
-        listsPlugin(),
         listsPlugin(),
         quotePlugin(),
+        headingsPlugin(),
         linkPlugin(),
         linkDialogPlugin(),
-        imagePlugin({ imageAutocompleteSuggestions: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150'] }),
+        imagePlugin(),
         tablePlugin(),
         thematicBreakPlugin(),
         frontmatterPlugin(),
         codeBlockPlugin({ defaultCodeBlockLanguage: 'txt' }),
+        // sandpackPlugin(),
+        codeMirrorPlugin({ codeBlockLanguages: { js: 'JavaScript', css: 'CSS', txt: 'text', tsx: 'TypeScript' } }),
+        // directivesPlugin({ directiveDescriptors: [ AdmonitionDirectiveDescriptor] }),
+        diffSourcePlugin({ viewMode: 'rich-text', diffMarkdown: 'boo' }),
         markdownShortcutPlugin()
-    ]
+      ]
 
     if(!props.readOnly){
         pluginOptions.push(toolbarPlugin({
             toolbarContents: () => (
                 <>
-                    {' '}
+                    {/* {' '}
                     <UndoRedo />
                     <BoldItalicUnderlineToggles />
                     <ListsToggle />
@@ -79,14 +81,15 @@ export default function InitializedMDXEditor({
                     <Separator />
                     <InsertFrontmatter />
                     <InsertTable />
-                    <InsertThematicBreak />
+                    <InsertThematicBreak /> */}
                     {/* <DialogButton onSubmit={function (value: string): void {
                         throw new Error('Function not implemented.')
                     }} tooltipTitle={'Title'} dialogInputPlaceholder={'Here'} submitButtonTitle={'Hello World'} />
 
                     <ButtonWithTooltip title={'Click Me'} /> */}
-                    <DiffSourceToggleWrapper children={undefined} />
+                    {/* <DiffSourceToggleWrapper children={undefined} /> */}
                     {/* <KitchenSinkToolbar /> */}
+                    <KitchenSinkToolbar />
                 </>
             )
         }))
