@@ -130,3 +130,13 @@ query GetBlog($where: whereBlogInput!) {
     updatedOn
   }
 }`
+
+export const UPDATE_BLOG = `mutation Mutation($input: updateBlogInput!) {
+  updateBlog(input: $input) {
+    id
+  }
+}`
+
+export const DELETE_BLOG = `mutation Mutation($deleteBlogId: ID!) {
+  deleteBlog(id: $deleteBlogId)
+}`

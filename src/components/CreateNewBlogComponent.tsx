@@ -1,6 +1,5 @@
 "use client";
 import React, { Suspense, forwardRef, useEffect, useState } from "react";
-import RichTextEditor, { EditorValue } from "react-rte";
 import { useFormik } from "formik"; // Import useFormik hook
 import "@/app/globals.css";
 import { useLazyQuery } from "@/containers/hooks";

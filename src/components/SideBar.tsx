@@ -134,12 +134,6 @@ const SideBar = () => {
                         All Blogs
                     </SubTitles>
                     <SubTitles onClick={() => {
-                        router.replace('/admin/blog/')
-
-                    }}>
-                        Update Blog
-                    </SubTitles>
-                    <SubTitles onClick={() => {
                         router.replace('/admin/blog/add')
 
                     }}>
