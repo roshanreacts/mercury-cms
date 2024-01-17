@@ -42,9 +42,9 @@ const BlogListCard = ({
   }, [data,loading,error]);
   return (
     <div className="relative">
-      <div className="mx-auto h-[480px] w-80 bg-white shadow-md border border-gray-200 rounded-lg mb-5">
+      <div className="mx-auto h-[480px] w-80 bg-white shadow-md border border-gray-200 rounded-lg mb-5 group hover:scale-105 ease-in duration-300">
         <div className="">
-          <div className="relative">
+          <div className="relative ">
             <Link href="#" className="">
               <Image
                 className="rounded-t-lg w-80 h-60 object-cover"
@@ -77,16 +77,6 @@ const BlogListCard = ({
               </button>
             </div>
           </div>
-
-          <Link href="#" className="">
-            <Image
-              className="rounded-t-lg w-80 h-60 object-cover"
-              src={imgSrc}
-              alt="image"
-              height={1000}
-              width={1000}
-            />
-          </Link>
           <div className="p-5 pb-2 flex justify-start items-start flex-col">
             <div className="flex justify-between text-[12px] mb-2 w-full">
               <h6 className="flex justify-center items-center gap-1">
