@@ -37,10 +37,9 @@ const page = () => {
 
   return (
     <div>
-      {view && data?.getBlog && (
+      {data?.getBlog && (
         <ForwardRefEditor markdown={data?.getBlog?.content} readOnly={true} />
       )}
-      {edit && <CreateNewBlogComponent />}
     </div>
   );
 };
