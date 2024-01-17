@@ -38,12 +38,11 @@ const BlogsList = ({
                 </p>
               </div>
 
-              <a
-                href="#"
-                className="block mt-4 text-xl font-semibold text-gray-800 hover:underline dark:text-white md:text-2xl"
+              <h1
+                className="block mt-4 text-xl font-semibold text-gray-800 dark:text-white md:text-2xl"
               >
                 {heading}
-              </a>
+              </h1>
 
               <p className="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
                 {description}

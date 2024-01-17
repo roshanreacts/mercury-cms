@@ -33,7 +33,7 @@ const BlogListCard = ({
 
   useEffect(() => {
     if (data) {
-      ToastSuccessMessage("Blog deleted");
+      ToastSuccessMessage("Blog Deleted");
       window.location.reload();
     }
     if (error) {
