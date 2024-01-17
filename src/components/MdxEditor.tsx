@@ -60,7 +60,10 @@ export default function InitializedMDXEditor({
         thematicBreakPlugin(),
         frontmatterPlugin(),
         codeBlockPlugin({ defaultCodeBlockLanguage: 'txt' }),
-        // sandpackPlugin(),
+        sandpackPlugin({sandpackConfig: {
+            defaultPreset: "Hello world",
+            presets: []
+        }}),
         codeMirrorPlugin({ codeBlockLanguages: { js: 'JavaScript', css: 'CSS', txt: 'text', tsx: 'TypeScript' } }),
         // directivesPlugin({ directiveDescriptors: [ AdmonitionDirectiveDescriptor] }),
         diffSourcePlugin({ viewMode: 'rich-text', diffMarkdown: 'boo' }),
