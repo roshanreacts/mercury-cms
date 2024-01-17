@@ -11,7 +11,7 @@ import dynamic from "next/dynamic";
 import { MDXEditorMethods, MDXEditorProps } from "@mdxeditor/editor";
 import { compressJsonToBase64 } from "@/utils/methods";
 
-const CreateNewBlogComponent: React.FC = ({edit}:any) => {
+const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
   const router = useRouter();
   const [createBlog, { data, loading, error }] = useLazyQuery(serverFetch);
   const mdxEditorRef = React.useRef<MDXEditorMethods>(null);
@@ -55,7 +55,7 @@ const CreateNewBlogComponent: React.FC = ({edit}:any) => {
         <form onSubmit={formik.handleSubmit}>
           <div className="grid grid-cols-2 gap-2">
             <div>
-             <label htmlFor="slug" className="font-semibold mb-2">Slug</label>
+              <label htmlFor="slug" className="font-semibold mb-2">Slug</label>
               <input
                 type="text"
                 name="slug"
@@ -66,7 +66,7 @@ const CreateNewBlogComponent: React.FC = ({edit}:any) => {
               />
             </div>
             <div>
-            <label htmlFor="slug" className="font-semibold mb-2">Heading</label>
+              <label htmlFor="slug" className="font-semibold mb-2">Heading</label>
               <input
                 type="text"
                 name="heading"
@@ -95,6 +95,10 @@ const CreateNewBlogComponent: React.FC = ({edit}:any) => {
             placeholder="Thumbnail Image URL"
             className="border border-gray-300 rounded-md px-3 py-2 w-full mb-1 focus:outline-none focus:ring focus:border-blue-400"
           />
+          <div className="flex justify-center items-center my-2 rounded-md">
+
+            <img src={formik.values.thumbnail ? formik.values.thumbnail : "https://assets-global.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"} alt="Preview" className="object-cover h-52 w-52" />
+          </div>
 
           <div className="z-20">
             <ForwardRefEditor
