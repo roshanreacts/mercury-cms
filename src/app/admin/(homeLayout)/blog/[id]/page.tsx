@@ -4,6 +4,7 @@ import CreateNewBlogComponent, {
   ForwardRefEditor,
 } from "@/components/CreateNewBlogComponent";
 import { useLazyQuery } from "@/containers/hooks";
+import { compressBase64ToJson } from "@/utils/methods";
 import { useParams, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -38,7 +39,7 @@ const page = () => {
   return (
     <div>
       {data?.getBlog && (
-        <ForwardRefEditor markdown={data?.getBlog?.content} readOnly={true} />
+        <ForwardRefEditor markdown={compressBase64ToJson(data?.getBlog?.content)} readOnly={true} />
       )}
     </div>
   );

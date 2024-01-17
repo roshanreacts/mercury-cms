@@ -8,6 +8,7 @@ import StyledBox from "@/components/Atoms/StyledBox";
 import { DotLoader } from "react-spinners";
 import BlogListCard from "@/components/BlogListCard";
 import { ToastContainer } from "react-toastify";
+import { compressBase64ToJson } from "@/utils/methods";
 
 const BlogContainer = () => {
   const [getBlog, { data, loading, error }] = useLazyQuery(serverFetch);
@@ -52,7 +53,7 @@ const BlogContainer = () => {
               description={item.description}
               created={item.createdOn}
               id={item.id}
-              content={item.content}
+              content={compressBase64ToJson(item.content)}
               key={index}
             />
           ))

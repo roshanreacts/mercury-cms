@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { CREATE_BLOG } from "@/utils/queries";
 import dynamic from "next/dynamic";
 import { MDXEditorMethods, MDXEditorProps } from "@mdxeditor/editor";
+import { compressJsonToBase64 } from "@/utils/methods";
 
 const CreateNewBlogComponent: React.FC = ({edit}:any) => {
   const router = useRouter();
@@ -30,7 +31,7 @@ const CreateNewBlogComponent: React.FC = ({edit}:any) => {
           description: values.description,
           thumbnail: values.thumbnail,
           slug: values.slug,
-          content: mdxEditorRef.current?.getMarkdown(),
+          content: compressJsonToBase64(mdxEditorRef.current?.getMarkdown()),
         },
       });
     },
