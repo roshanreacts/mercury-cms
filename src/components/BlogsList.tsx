@@ -1,3 +1,4 @@
+import { getBlogReadTime } from "@/utils/methods";
 import Link from "next/link";
 import React from "react";
 import { LiaReadme } from "react-icons/lia";
@@ -35,6 +36,7 @@ const BlogsList = ({
                 </h6>
                 <p>
                   <LiaReadme className="w-5 h-5" />
+                  {getBlogReadTime(content)}
                 </p>
               </div>
 

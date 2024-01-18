@@ -32,6 +32,7 @@ const useLazyQuery = (promise: any): any[] => {
 
   const execute = (...args: any) => {
     setLoading(true);
+    setError(null);
     promise(...args)
       .then((data: any) => {
 
