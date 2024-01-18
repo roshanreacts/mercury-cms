@@ -46,18 +46,18 @@ const BlogsList = ({
           />
 
           <div className="p-4">
-            <h2 className="tracking-widest text-xs title-font font-bold text-green-400 mb-1 uppercase ">
+            <h2 className="tracking-widest text-md title-font font-bold text-green-400 mb-1 uppercase ">
               {heading}
             </h2>
-            <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+            <h1 className="title-font text-xs font-medium text-gray-900 mb-3">
               {description}
             </h1>
             <div className="flex items-center flex-wrap ">
               <Link
                 href={`blogs/${slug}`}
-                className="inline-block mt-2 text-blue-500 underline hover:text-blue-400"
+                className="inline-block mt-2"
               >
-                <button className="bg-white">Read more</button>
+                <button className="bg-white text-blue-500 hover:text-blue-400 hover:underline">Read more</button>
               </Link>
               <span className="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
                 <svg
