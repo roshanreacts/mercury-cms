@@ -11,6 +11,7 @@ import {
   ToastSuccessMessage,
 } from "@/components/ToastMessage";
 import { useRouter, useSearchParams } from "next/navigation";
+import { compressBase64ToJson, compressJsonToBase64 } from "@/utils/methods";
 
 const UpdateBlogContainer = () => {
   const [getBlog, { data, loading, error }] = useLazyQuery(serverFetch);
@@ -52,7 +53,7 @@ const UpdateBlogContainer = () => {
       console.log(values);
       updateBlog(UPDATE_BLOG, {
         input: {
-          content: values.content,
+          content: compressJsonToBase64(mdxEditorRef.current?.getMarkdown()),
           description: values.description,
           heading: values.heading,
           id: blogId,
@@ -140,9 +141,9 @@ const UpdateBlogContainer = () => {
 
             <div className="p-2">
               <ForwardRefEditor
-                markdown={`Hello **world**!`}
+                markdown={compressBase64ToJson(data.getBlog?.content) ?? `Hello **world**!`}
                 ref={mdxEditorRef}
-                //   onChange={() => console.log(mdxEditorRef.current?.getMarkdown())}
+              //   onChange={() => console.log(mdxEditorRef.current?.getMarkdown())}
               />
             </div>
             <button
