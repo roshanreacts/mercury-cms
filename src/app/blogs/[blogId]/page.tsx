@@ -1,6 +1,7 @@
 import { serverFetch } from "@/app/action";
 import BlogListCard from "@/components/BlogListCard";
 import BlogViewerComponent from "@/components/BlogViewerComponent";
+import { compressBase64ToJson } from "@/utils/methods";
 import { GET_BLOG } from "@/utils/queries";
 import React from "react";
 
@@ -29,7 +30,7 @@ const page = async ({ params }: any) => {
         description={blogData?.getBlog?.description}
         created={blogData?.getBlog?.createdOn}
         id={blogData?.getBlog?.id}
-        content={blogData?.getBlog?.content}
+        content={compressBase64ToJson(blogData?.getBlog?.content)}
       />
     </div>
   );

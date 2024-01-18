@@ -1,7 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RiArrowGoBackFill, RiTimer2Line } from "react-icons/ri";
+import serialize  from 'next-mdx-remote'
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 const BlogViewerComponent = ({
   imgSrc,
@@ -12,6 +14,19 @@ const BlogViewerComponent = ({
   content,
 }: any) => {
   const router = useRouter();
+
+  const [mdx, setMdx] = useState<MDXRemoteSerializeResult>()
+  useEffect(() => {
+    (async () => {
+      try {
+        const mdxContent = await serialize(content);
+        setMdx(mdxContent);
+      } catch (error) {
+        console.error('Error serializing MDX content:', error);
+      }
+    })();
+  }, [content]);
+  
   return (
     <div className="mt-8">
       <div className="relative flex flex-col gap-6">
@@ -64,8 +79,9 @@ const BlogViewerComponent = ({
               </div>
             </div>
           </div>
+          {mdx && <MDXRemote {...mdx} />}
 
-          <div className="px-4 lg:px-0 mt-12 text-gray-700 max-w-screen-md mx-auto text-lg leading-relaxed">
+          {/* <div className="px-4 lg:px-0 mt-12 text-gray-700 max-w-screen-md mx-auto text-lg leading-relaxed">
             <p className="pb-6">
               Advantage old had otherwise sincerity dependent additions. It in
               adapted natural hastily is justice. Six draw you him full not mean
@@ -115,7 +131,7 @@ const BlogViewerComponent = ({
               marry among. Delightful remarkably new assistance saw literature
               mrs favourable.
             </p>
-          </div>
+          </div> */}
         </main>
       </div>
     </div>
