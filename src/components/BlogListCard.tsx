@@ -6,11 +6,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
-import readTime from "@/utils/methods";
 import { LiaReadme } from "react-icons/lia";
 import { RiTimer2Line } from "react-icons/ri";
 import { ToastErrorMessage, ToastSuccessMessage } from "./ToastMessage";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import { compressBase64ToJson, getBlogReadTime } from "@/utils/methods";
 
 
 const BlogListCard = ({
@@ -19,8 +19,15 @@ const BlogListCard = ({
   description,
   created,
   id,
-  content,
-}: any) => {
+  content
+}: {
+  imgSrc: string | undefined,
+  heading: string | undefined,
+  description: string | undefined,
+  created: string,
+  id: string | undefined,
+  content: string | undefined
+}) => {
   const [deleteBlog, { data, loading, error }] = useLazyQuery(serverFetch);
 
   const router = useRouter();
@@ -39,7 +46,7 @@ const BlogListCard = ({
     if (error) {
       ToastErrorMessage(error.message);
     }
-  }, [data,loading,error]);
+  }, [data, loading, error]);
   return (
     <div className="relative group hover:scale-105 ease-in duration-300">
       <div className="mx-auto h-[480px] w-80 bg-white shadow-md border border-gray-200 rounded-lg mb-5">
@@ -48,7 +55,7 @@ const BlogListCard = ({
             <Link href="#" className="">
               <Image
                 className="rounded-t-lg w-80 h-60 object-cover"
-                src={imgSrc}
+                src={imgSrc ? imgSrc : 'https://assets-global.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png'}
                 alt="image"
                 height={1000}
                 width={1000}
@@ -85,8 +92,9 @@ const BlogListCard = ({
                 {new Date(created).toDateString().split(" ").slice(1).join(" ")}
               </h6>
               <p className="flex justify-center items-center gap-1">
-                <LiaReadme className="w-5 h-5" />
-                {readTime(content)}
+                {/* <LiaReadme className="w-5 h-5" /> */}
+                {/* {getBlogReadTime(content ? content : "Hello ** world **")} */}
+
               </p>
             </div>
             <div className="overflow-hidden w-full h-full">

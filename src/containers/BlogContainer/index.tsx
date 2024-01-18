@@ -27,7 +27,7 @@ const BlogContainer = () => {
     if (error) {
       ToastErrorMessage(error.message);
     }
-  
+
   }, [data, loading, error]);
 
 
@@ -46,16 +46,17 @@ const BlogContainer = () => {
             <DotLoader color="#007bea" />
           </StyledBox>
         ) : (
-            data?.listBlogs?.docs.map((item: any, index: any) => (
-            <BlogListCard
-              imgSrc={item.thumbnail}
-              heading={item.heading}
-              description={item.description}
-              created={item.createdOn}
-              id={item.id}
-              content={compressBase64ToJson(item.content)}
-              key={index}
-            />
+          data?.listBlogs?.docs.map((item: any, index: any) => (
+            <div key={index}>
+              <BlogListCard
+                imgSrc={item.thumbnail}
+                heading={item.heading}
+                description={item.description}
+                created={item.createdOn}
+                id={item.id}
+                content={compressBase64ToJson(item.content)}
+              />
+            </div>
           ))
         )}
       </div>

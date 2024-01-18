@@ -4,6 +4,7 @@ import { GET_ALL_BLOGS } from "@/utils/queries";
 import BlogListCard from "@/components/BlogListCard";
 import { redirect } from "next/navigation";
 import BlogsList from "@/components/BlogsList";
+import { compressBase64ToJson } from "@/utils/methods";
 
 const page = async () => {
   const data = await serverFetch(
@@ -29,7 +30,7 @@ const page = async () => {
             description={item.description}
             created={item.createdOn}
             id={item.id}
-            content={item.content}
+            content={compressBase64ToJson(item.content)}
             slug={item.slug}
             key={index}
           />
