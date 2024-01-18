@@ -17,7 +17,7 @@ const UpdateBlogContainer = () => {
   const [getBlog, { data, loading, error }] = useLazyQuery(serverFetch);
   const [updateBlog, updateBlogResponse] = useLazyQuery(serverFetch);
   const blogId = useSearchParams().get("id");
-  const router = useRouter()
+  const router = useRouter();
   console.log(blogId, "client");
 
   const [initialValues, setInitialValues] = useState({
@@ -66,7 +66,7 @@ const UpdateBlogContainer = () => {
   useEffect(() => {
     if (updateBlogResponse.data) {
       ToastSuccessMessage("Updated Blog successfully");
-      router.push("/admin/blog")
+      router.push("/admin/blog");
     }
     if (updateBlogResponse.error) {
       ToastErrorMessage(error.message);
@@ -141,17 +141,22 @@ const UpdateBlogContainer = () => {
 
             <div className="p-2">
               <ForwardRefEditor
-                markdown={compressBase64ToJson(data.getBlog?.content) ?? `Hello **world**!`}
+                markdown={
+                  compressBase64ToJson(data.getBlog?.content) ??
+                  `Hello **world**!`
+                }
                 ref={mdxEditorRef}
-              //   onChange={() => console.log(mdxEditorRef.current?.getMarkdown())}
+                //   onChange={() => console.log(mdxEditorRef.current?.getMarkdown())}
               />
             </div>
-            <button
-              type="submit"
-              className="px-4 py-1 bg-blue-500 text-white text-md rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-            >
-              Update
-            </button>
+            <div className="text-center mt-1 mb-2">
+              <button
+                type="submit"
+                className="px-4 py-1 bg-blue-500 text-white text-md rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+              >
+                Update
+              </button>
+            </div>
           </form>
         </div>
       )}

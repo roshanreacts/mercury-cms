@@ -6,11 +6,9 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
-import { LiaReadme } from "react-icons/lia";
 import { RiTimer2Line } from "react-icons/ri";
 import { ToastErrorMessage, ToastSuccessMessage } from "./ToastMessage";
 import { MdOutlineDeleteOutline } from "react-icons/md";
-import { compressBase64ToJson, getBlogReadTime } from "@/utils/methods";
 
 
 const BlogListCard = ({

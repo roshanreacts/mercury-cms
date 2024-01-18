@@ -51,11 +51,15 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
   return (
     <div className="p-2 flex justify-center items-center w-full">
       <div className="bg-white rounded-lg shadow-sm p-10 w-[90%]">
-        <h2 className="text-2xl font-semibold mb-4">{edit ? "Update" : "Add New Blog"}</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          {edit ? "Update" : "Add New Blog"}
+        </h2>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid grid-cols-2 gap-2">
             <div>
-              <label htmlFor="slug" className="font-semibold mb-2">Slug</label>
+              <label htmlFor="slug" className="font-semibold mb-2">
+                Slug
+              </label>
               <input
                 type="text"
                 name="slug"
@@ -66,7 +70,9 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
               />
             </div>
             <div>
-              <label htmlFor="slug" className="font-semibold mb-2">Heading</label>
+              <label htmlFor="slug" className="font-semibold mb-2">
+                Heading
+              </label>
               <input
                 type="text"
                 name="heading"
@@ -77,7 +83,9 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
               />
             </div>
           </div>
-          <label htmlFor="slug" className="font-semibold mb-2">Description</label>
+          <label htmlFor="slug" className="font-semibold mb-2">
+            Description
+          </label>
           <textarea
             rows={3}
             name="description"
@@ -96,23 +104,32 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
             className="border border-gray-300 rounded-md px-3 py-2 w-full mb-1 focus:outline-none focus:ring focus:border-blue-400"
           />
           <div className="flex justify-center items-center my-2 rounded-md">
-
-            <img src={formik.values.thumbnail ? formik.values.thumbnail : "https://assets-global.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"} alt="Preview" className="object-cover h-52 w-52" />
+            <img
+              src={
+                formik.values.thumbnail
+                  ? formik.values.thumbnail
+                  : "https://assets-global.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
+              }
+              alt="Preview"
+              className="object-cover h-52 w-52"
+            />
           </div>
 
-          <div className="z-20">
+          <div className="shadow-md">
             <ForwardRefEditor
               markdown={`Hello **world**!`}
               ref={mdxEditorRef}
-            //   onChange={() => console.log(mdxEditorRef.current?.getMarkdown())}
+              //   onChange={() => console.log(mdxEditorRef.current?.getMarkdown())}
             />
           </div>
-          <button
-            type="submit"
-            className="px-4 py-1 bg-blue-500 text-white text-md rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-          >
-            Add
-          </button>
+          <div className="text-center mt-20 mb-1">
+            <button
+              type="submit"
+              className="px-4 py-1 bg-blue-500 text-white text-md rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+            >
+              Add
+            </button>
+          </div>
         </form>
       </div>
     </div>
