@@ -18,8 +18,6 @@ export async function generateMetadata({ params }: { params: { blogSlug: string 
       cache: "no-store"
     }
   )
-
-  console.log(blog);
   
 
   if (blog.error || !blog || blog?.getBlog <= 0) {
