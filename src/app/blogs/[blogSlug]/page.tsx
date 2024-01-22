@@ -3,10 +3,34 @@ import BlogViewerComponent from "@/components/BlogViewerComponent";
 import { compressBase64ToJson } from "@/utils/methods";
 import { GET_BLOG } from "@/utils/queries";
 import React from "react";
-import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import { Metadata } from "next";
 
+export async function generateMetadata({ params }: { params: { blogSlug: string } }): Promise<Metadata> {
+  const slug = `${params?.blogSlug}`
+  const blog = await serverFetch(GET_BLOG,
+    {
+      where: {
+        slug: { is: slug }
+      }
+    },
+    {
+      cache: "no-store"
+    }
+  )
 
+  console.log(blog);
+  
+
+  if (blog.error || !blog || blog?.getBlog <= 0) {
+    
+  }
+
+  return {
+    title: blog?.getBlog?.metaTitle,
+    description: blog?.getBlog?.metaDescription,
+  }
+}
 const Page = async ({ params }: any) => {
   const blogSlug = params?.blogSlug
 

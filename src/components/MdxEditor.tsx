@@ -2,25 +2,15 @@
 import type { ForwardedRef } from 'react'
 import '@mdxeditor/editor/style.css'
 import {
-    ButtonWithTooltip,
-    ChangeAdmonitionType,
-    DialogButton,
-    InsertFrontmatter,
-    InsertTable,
-    InsertThematicBreak,
-    jsxPlugin,
     type MDXEditorMethods,
     type MDXEditorProps
 } from '@mdxeditor/editor'
 
 import {
-    AdmonitionDirectiveDescriptor,
     MDXEditor,
-    UndoRedo,
     codeBlockPlugin,
     codeMirrorPlugin,
     diffSourcePlugin,
-    directivesPlugin,
     frontmatterPlugin,
     headingsPlugin,
     imagePlugin,
@@ -33,13 +23,6 @@ import {
     tablePlugin,
     thematicBreakPlugin,
     toolbarPlugin,
-    Separator,
-    BlockTypeSelect,
-    BoldItalicUnderlineToggles,
-    CreateLink,
-    DiffSourceToggleWrapper,
-    InsertImage,
-    ListsToggle,
     KitchenSinkToolbar
 
 } from '@mdxeditor/editor'
@@ -60,38 +43,21 @@ export default function InitializedMDXEditor({
         thematicBreakPlugin(),
         frontmatterPlugin(),
         codeBlockPlugin({ defaultCodeBlockLanguage: 'txt' }),
-        sandpackPlugin({sandpackConfig: {
-            defaultPreset: "Hello world",
-            presets: []
-        }}),
+        sandpackPlugin({
+            sandpackConfig: {
+                defaultPreset: "Hello world",
+                presets: []
+            }
+        }),
         codeMirrorPlugin({ codeBlockLanguages: { js: 'JavaScript', css: 'CSS', txt: 'text', tsx: 'TypeScript' } }),
-        // directivesPlugin({ directiveDescriptors: [ AdmonitionDirectiveDescriptor] }),
         diffSourcePlugin({ viewMode: 'rich-text', diffMarkdown: 'boo' }),
         markdownShortcutPlugin()
-      ]
+    ]
 
-    if(!props.readOnly){
+    if (!props.readOnly) {
         pluginOptions.push(toolbarPlugin({
             toolbarContents: () => (
                 <>
-                    {/* {' '}
-                    <UndoRedo />
-                    <BoldItalicUnderlineToggles />
-                    <ListsToggle />
-                    <BlockTypeSelect />
-                    <InsertImage />
-                    <CreateLink />
-                    <Separator />
-                    <InsertFrontmatter />
-                    <InsertTable />
-                    <InsertThematicBreak /> */}
-                    {/* <DialogButton onSubmit={function (value: string): void {
-                        throw new Error('Function not implemented.')
-                    }} tooltipTitle={'Title'} dialogInputPlaceholder={'Here'} submitButtonTitle={'Hello World'} />
-
-                    <ButtonWithTooltip title={'Click Me'} /> */}
-                    {/* <DiffSourceToggleWrapper children={undefined} /> */}
-                    {/* <KitchenSinkToolbar /> */}
                     <KitchenSinkToolbar />
                 </>
             )
