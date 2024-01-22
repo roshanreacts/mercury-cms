@@ -68,7 +68,7 @@ const validationSchema = Yup.object({
 
   return (
     <div className="p-2 flex justify-center items-center w-full">
-      <div className="bg-white rounded-lg shadow-sm p-10 w-[90%]">
+      <div className="bg-white rounded-lg shadow-sm p-10 w-[95%]">
         <h2 className="text-2xl font-semibold mb-4">
           Add New Blog
         </h2>
