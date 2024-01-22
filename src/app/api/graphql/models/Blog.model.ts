@@ -23,6 +23,12 @@ export const Blog = mercury.createModel(
         slug: {
             type: "string",
             unique: true
+        },
+        metaTitle: {
+            type: "string"
+        },
+        metaDescription: {
+            type: "string"
         }
     },
     {}
