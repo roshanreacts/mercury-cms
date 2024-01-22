@@ -1,13 +1,15 @@
 import { serverFetch } from "@/app/action";
-import BlogListCard from "@/components/BlogListCard";
 import BlogViewerComponent from "@/components/BlogViewerComponent";
 import { compressBase64ToJson } from "@/utils/methods";
 import { GET_BLOG } from "@/utils/queries";
 import React from "react";
+import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote } from 'next-mdx-remote/rsc'
 
-const page = async ({ params }: any) => {
-  const blogSlug = params.blogId;
-  
+
+const Page = async ({ params }: any) => {
+  const blogSlug = params?.blogSlug
+
   const blogData = await serverFetch(
     GET_BLOG,
     {
@@ -21,7 +23,6 @@ const page = async ({ params }: any) => {
       cache: "no-store",
     }
   );
-
   return (
     <div>
       <BlogViewerComponent
@@ -32,8 +33,25 @@ const page = async ({ params }: any) => {
         id={blogData?.getBlog?.id}
         content={compressBase64ToJson(blogData?.getBlog?.content)}
       />
+
+      <div className="px-4 lg:px-0 mt-12 text-gray-700 max-w-screen-md mx-auto text-lg leading-relaxed">
+        <MDXRemote source={compressBase64ToJson(blogData?.getBlog?.content)} />
+      </div>
+
     </div>
   );
 };
 
-export default page;
+export default Page;
+
+
+
+// export async function getStaticProps() {
+//   const source = 'Some **mdx** text, with a component <Test />';
+//   const mdxSource = await serialize(source);
+//   console.log(mdxSource);
+
+//   return {
+//     revalidate: 60, // In seconds. Adjust as needed based on how frequently data changes.
+//   };
+// }

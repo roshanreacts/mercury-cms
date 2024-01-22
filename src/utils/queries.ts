@@ -116,6 +116,17 @@ query Query {
   }
 }`
 
+export const GET_ALL_BLOGS_SLUGS =`
+query Query {
+  listBlogs {
+    docs {
+      id
+      slug
+    }
+  }
+}`
+
+
 
 export const GET_BLOG = `
 query GetBlog($where: whereBlogInput!) {
