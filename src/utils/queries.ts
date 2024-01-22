@@ -110,6 +110,8 @@ query Query {
       description
       content
       slug
+      metaDescription
+      metaTitle
       createdOn
       updatedOn
     }
@@ -137,6 +139,8 @@ query GetBlog($where: whereBlogInput!) {
     description
     content
     slug
+    metaDescription
+    metaTitle
     createdOn
     updatedOn
   }

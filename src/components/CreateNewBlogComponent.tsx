@@ -23,8 +23,12 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
       thumbnail: "",
       slug: "",
       content: "",
+      metaDescription:"",
+      metaTitle:"",
     },
     onSubmit: (values: any) => {
+      console.log(values);
+      
       createBlog(CREATE_BLOG, {
         input: {
           heading: values.heading,
@@ -32,6 +36,8 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
           thumbnail: values.thumbnail,
           slug: values.slug,
           content: compressJsonToBase64(mdxEditorRef.current?.getMarkdown()),
+          metaDescription:values.metaDescription,
+          metaTitle:values.metaTitle
         },
       });
     },
@@ -83,7 +89,35 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
               />
             </div>
           </div>
-          <label htmlFor="slug" className="font-semibold mb-2">
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label htmlFor="metaTitle" className="font-semibold mb-2">
+              Meta Title
+              </label>
+              <input
+                type="text"
+                name="metaTitle"
+                onChange={formik.handleChange}
+                value={formik.values.metaTitle}
+                className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4 focus:outline-none focus:ring focus:border-blue-400"
+                placeholder="Enter Meta Title"
+              />
+            </div>
+            <div>
+              <label htmlFor="metaDescription" className="font-semibold mb-2">
+              Meta Description
+              </label>
+              <input
+                type="text"
+                name="metaDescription"
+                onChange={formik.handleChange}
+                value={formik.values.metaDescription}
+                className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4 focus:outline-none focus:ring focus:border-blue-400"
+                placeholder="Enter Meta Description"
+              />
+            </div>
+          </div>
+          <label htmlFor="description" className="font-semibold mb-2">
             Description
           </label>
           <textarea
@@ -127,7 +161,7 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
               type="submit"
               className="px-4 py-1 bg-blue-500 text-white text-md rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
             >
-              Add
+              {loading ? "Loading..." : "Add"}
             </button>
           </div>
         </form>
