@@ -51,7 +51,7 @@ const Page = async ({ params }: any) => {
         imgSrc={blogData?.getBlog?.thumbnail}
         heading={blogData?.getBlog?.heading}
         description={blogData?.getBlog?.description}
-        created={blogData?.getBlog?.createdOn}
+        created={blogData?.getBlog?.createdOn} 
         id={blogData?.getBlog?.id}
         content={compressBase64ToJson(blogData?.getBlog?.content)}
       />

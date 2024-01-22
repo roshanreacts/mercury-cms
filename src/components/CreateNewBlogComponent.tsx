@@ -10,11 +10,22 @@ import { CREATE_BLOG } from "@/utils/queries";
 import dynamic from "next/dynamic";
 import { MDXEditorMethods, MDXEditorProps } from "@mdxeditor/editor";
 import { compressJsonToBase64 } from "@/utils/methods";
+import * as Yup from 'yup';
 
 const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
   const router = useRouter();
   const [createBlog, { data, loading, error }] = useLazyQuery(serverFetch);
   const mdxEditorRef = React.useRef<MDXEditorMethods>(null);
+
+
+const validationSchema = Yup.object({
+  slug: Yup.string().required('Slug is required'),
+  heading: Yup.string().required('Heading is required'),
+  metaTitle: Yup.string().required('Meta Title is required'),
+  metaDescription: Yup.string().required('Meta Description is required'),
+  description: Yup.string().required('Description is required'),
+  thumbnail: Yup.string().url('Invalid URL').required('Thumbnail URL is required'),
+});
 
   const formik = useFormik({
     initialValues: {
@@ -26,6 +37,7 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
       metaDescription:"",
       metaTitle:"",
     },
+    validationSchema: validationSchema, 
     onSubmit: (values: any) => {
       console.log(values);
       
@@ -58,7 +70,7 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
     <div className="p-2 flex justify-center items-center w-full">
       <div className="bg-white rounded-lg shadow-sm p-10 w-[90%]">
         <h2 className="text-2xl font-semibold mb-4">
-          {edit ? "Update" : "Add New Blog"}
+          Add New Blog
         </h2>
         <form onSubmit={formik.handleSubmit}>
           <div className="grid grid-cols-2 gap-2">
@@ -70,6 +82,7 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
                 type="text"
                 name="slug"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.slug}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4 focus:outline-none focus:ring focus:border-blue-400"
                 placeholder="Enter Slug"
@@ -83,6 +96,7 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
                 type="text"
                 name="heading"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.heading}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4 focus:outline-none focus:ring focus:border-blue-400"
                 placeholder="Enter heading"
@@ -98,6 +112,7 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
                 type="text"
                 name="metaTitle"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.metaTitle}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4 focus:outline-none focus:ring focus:border-blue-400"
                 placeholder="Enter Meta Title"
@@ -111,6 +126,7 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
                 type="text"
                 name="metaDescription"
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 value={formik.values.metaDescription}
                 className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4 focus:outline-none focus:ring focus:border-blue-400"
                 placeholder="Enter Meta Description"
@@ -124,6 +140,7 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
             rows={3}
             name="description"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.description}
             className="border border-gray-300 rounded-md px-3 py-2 w-full mb-4 focus:outline-none focus:ring focus:border-blue-400"
             placeholder="Enter Description"
@@ -133,6 +150,7 @@ const CreateNewBlogComponent: React.FC = ({ edit }: any) => {
             type="text"
             name="thumbnail"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.thumbnail}
             placeholder="Thumbnail Image URL"
             className="border border-gray-300 rounded-md px-3 py-2 w-full mb-1 focus:outline-none focus:ring focus:border-blue-400"
