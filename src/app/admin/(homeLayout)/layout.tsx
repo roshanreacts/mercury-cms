@@ -17,7 +17,9 @@ export default function layout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className} style={{
+        overflow: 'hidden'
+      }}>
         <div style={{
           width: "100%",
           zIndex: "10",
@@ -27,7 +29,7 @@ export default function layout({
         </div>
         <div style={{
           display: "flex",
-          // flexWrap: "wrap",
+          height: "100%"
         }}>
           <div>
             <SideBar />
@@ -36,8 +38,10 @@ export default function layout({
             flex: 1,
             backgroundColor: "#F2F2F2",
             maxWidth: "100%",
-            height: "100%",
+            height: "calc(100vh - 50px)",
             padding: "40px",
+            overflowY: "scroll",
+            overflowX: "auto"
           }}>
             {children}
           </div>

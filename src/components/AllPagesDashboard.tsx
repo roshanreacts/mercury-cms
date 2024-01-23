@@ -15,6 +15,8 @@ const MainDiv = styled.div`
   background-color: white;
   min-height: 90vh;
   padding: 20px 30px;
+  width: calc(100vw - 310px);
+  overflow-x: auto;
 `;
 
 const Heading = styled.p`
@@ -97,7 +99,7 @@ const AllPagesDashboard = () => {
                         <Th>Version</Th>
                         <Th>Created On</Th>
                         <Th>Updated On</Th>
-                        <th>Action</th>
+                        <Th>Action</Th>
                     </tr>
                 </thead>
                 <tbody>
